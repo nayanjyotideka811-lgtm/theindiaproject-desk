@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>theindiaproject.world — Back Office</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#0b0b0c;--ink-2:#111114;--ink-3:#17171b;--bone:#e9e3d6;--bone-dim:#a49d8d;--bone-faint:#6f6a5e;
+    --gold:#c2a15a;--gold-dim:#8f7738;--wax:#7c2427;--green:#4f7a52;
+    --rule:rgba(233,227,214,0.13);--rule-strong:rgba(233,227,214,0.26);
+    --serif:"Cormorant Garamond",Georgia,serif;--body:"EB Garamond",Georgia,serif;--mono:"Space Mono",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--ink);color:var(--bone);font-family:var(--body);font-size:15.5px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  ::selection{background:var(--wax);color:var(--bone)}
+  a{color:inherit;text-decoration:none}
+  .mono{font-family:var(--mono)}
+  .lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--bone-faint)}
+  input,textarea,select{font-family:var(--body);font-size:14.5px}
+  button{cursor:pointer;font-family:var(--mono)}
+
+  /* layout */
+  .app{display:grid;grid-template-columns:236px 1fr;min-height:100vh}
+  aside{background:var(--ink-2);border-right:1px solid var(--rule);position:sticky;top:0;height:100vh;overflow-y:auto;padding:22px 0}
+  .brand{padding:0 22px 20px;border-bottom:1px solid var(--rule);margin-bottom:14px;display:flex;gap:12px;align-items:center}
+  .brand svg{width:38px;height:38px;flex:0 0 auto}
+  .brand .t{font-family:var(--mono);font-size:9.5px;letter-spacing:.04em;line-height:1.6;text-transform:uppercase;word-break:break-word}
+  .brand .t b{color:var(--gold);font-weight:400}
+  nav.side a{display:flex;align-items:center;gap:10px;padding:11px 22px;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;color:var(--bone-dim);border-left:2px solid transparent;transition:all .2s}
+  nav.side a:hover{color:var(--bone);background:rgba(233,227,214,.03)}
+  nav.side a.active{color:var(--gold);border-left-color:var(--gold);background:rgba(194,161,90,.05)}
+  nav.side a .ic{width:15px;text-align:center;opacity:.8}
+  .side-foot{padding:18px 22px;margin-top:14px;border-top:1px solid var(--rule)}
+  .side-foot .coords{font-family:var(--mono);font-size:9.5px;color:var(--bone-faint);letter-spacing:.12em}
+
+  main{padding:28px 40px 80px;max-width:1180px}
+  .top{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:28px;border-bottom:1px solid var(--rule);padding-bottom:20px}
+  .top h1{font-family:var(--serif);font-weight:300;font-size:2.3rem;line-height:1.05}
+  .top .sub{color:var(--bone-dim);font-style:italic;font-family:var(--serif);font-size:1.15rem;margin-top:4px}
+  .top .stamp{font-family:var(--mono);font-size:9px;letter-spacing:.22em;color:var(--wax);border:1px solid rgba(124,36,39,.5);padding:5px 9px;text-transform:uppercase;border-radius:2px}
+
+  section.view{display:none}
+  section.view.on{display:block;animation:fade .4s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+  /* tiles */
+  .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin-bottom:30px}
+  .tile{background:var(--ink);padding:22px}
+  .tile .k{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--bone-faint)}
+  .tile .v{font-family:var(--serif);font-size:2.4rem;font-weight:300;margin-top:8px;line-height:1}
+  .tile .v small{font-size:1rem;color:var(--gold)}
+  .tile .d{font-size:12.5px;color:var(--bone-dim);margin-top:6px}
+
+  .card{border:1px solid var(--rule);background:var(--ink-2);padding:24px 26px;margin-bottom:22px}
+  .card h3{font-family:var(--serif);font-weight:400;font-size:1.5rem;margin-bottom:4px}
+  .card .ch{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:18px;border-bottom:1px solid var(--rule);padding-bottom:12px}
+  .card .ch p{color:var(--bone-dim);font-size:13px}
+
+  /* tables */
+  table{width:100%;border-collapse:collapse}
+  th{font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--bone-faint);text-align:left;padding:10px 12px;border-bottom:1px solid var(--rule-strong)}
+  td{padding:12px;border-bottom:1px solid var(--rule);font-size:14px;vertical-align:top}
+  tr:hover td{background:rgba(233,227,214,.02)}
+  .pill{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border:1px solid var(--rule-strong);border-radius:2px;color:var(--bone-dim);white-space:nowrap}
+  .pill.gold{color:var(--gold);border-color:var(--gold-dim)}
+  .pill.wax{color:#c97b7e;border-color:rgba(124,36,39,.6)}
+  .pill.green{color:#8fb892;border-color:rgba(79,122,82,.6)}
+
+  /* buttons + forms */
+  .btn{background:none;border:1px solid var(--rule-strong);color:var(--bone);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;padding:10px 16px;transition:all .25s}
+  .btn:hover{border-color:var(--gold);color:#fff;background:rgba(194,161,90,.06)}
+  .btn.gold{border-color:var(--gold-dim)}
+  .btn.gold:hover{background:var(--gold);color:var(--ink)}
+  .btn.sm{padding:6px 11px;font-size:9.5px}
+  .btn.ghost{border-color:transparent;color:var(--bone-faint)}
+  .btn.ghost:hover{color:var(--wax);background:none;border-color:transparent}
+  .row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  .field{margin-bottom:14px}
+  .field label{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--bone-faint);margin-bottom:6px}
+  .field input,.field textarea,.field select{width:100%;background:var(--ink);border:1px solid var(--rule-strong);color:var(--bone);padding:9px 11px;border-radius:2px}
+  .field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--gold)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+  @media(max-width:820px){.grid2{grid-template-columns:1fr}.app{grid-template-columns:1fr}aside{position:static;height:auto}}
+
+  /* template library */
+  .tpl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+  .tpl{border:1px solid var(--rule);background:var(--ink-2);padding:18px;cursor:pointer;transition:all .25s;min-height:120px;display:flex;flex-direction:column;justify-content:space-between}
+  .tpl:hover{border-color:var(--gold-dim);transform:translateY(-2px)}
+  .tpl .cat{font-family:var(--mono);font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-dim)}
+  .tpl h4{font-family:var(--serif);font-weight:400;font-size:1.3rem;margin:10px 0 6px;line-height:1.1}
+  .tpl p{font-size:12px;color:var(--bone-dim)}
+
+  /* modal */
+  .modal{position:fixed;inset:0;background:rgba(6,6,7,.82);display:none;align-items:center;justify-content:center;z-index:100;padding:30px}
+  .modal.on{display:flex}
+  .modal .box{background:var(--ink-2);border:1px solid var(--rule-strong);max-width:820px;width:100%;max-height:88vh;overflow-y:auto;padding:30px 34px}
+  .modal .box h3{font-family:var(--serif);font-weight:300;font-size:1.9rem;margin-bottom:4px}
+  .memo-out{background:var(--ink);border:1px solid var(--rule);padding:24px;margin-top:16px;white-space:pre-wrap;font-family:var(--body);font-size:14.5px;line-height:1.7;color:var(--bone);min-height:120px}
+  .close-x{float:right;background:none;border:none;color:var(--bone-faint);font-size:22px;line-height:1;cursor:pointer}
+  .close-x:hover{color:var(--wax)}
+
+  /* visiting card render */
+  .vcard{width:420px;max-width:100%;height:240px;background:var(--ink);border:1px solid var(--gold-dim);position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;margin-bottom:16px}
+  .vcard .fr{position:absolute;inset:12px;border:1px solid var(--rule)}
+  .vcard .nm{font-family:var(--serif);font-size:1.5rem;font-weight:300;margin-top:6px}
+  .vcard .rl{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--bone-dim);margin-top:6px}
+  .vcard .wm{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-transform:uppercase;margin-top:14px}
+  .vcard .wm b{color:var(--gold)}
+  .vcard .sig{font-family:var(--mono);font-size:8px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-top:4px}
+
+  .accordion .ac{border:1px solid var(--rule);margin-bottom:10px}
+  .accordion .ac summary{padding:16px 20px;font-family:var(--serif);font-size:1.25rem;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center}
+  .accordion .ac summary::-webkit-details-marker{display:none}
+  .accordion .ac summary::after{content:"+";color:var(--gold);font-family:var(--mono)}
+  .accordion .ac[open] summary::after{content:"–"}
+  .accordion .ac .body{padding:0 20px 20px;color:var(--bone-dim);font-size:14px;line-height:1.7;white-space:pre-line}
+
+  .note{font-size:12.5px;color:var(--bone-faint);margin-top:10px}
+  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--gold);color:var(--ink);font-family:var(--mono);font-size:11px;letter-spacing:.1em;padding:12px 22px;border-radius:2px;opacity:0;transition:all .3s;text-transform:uppercase;z-index:200}
+  .toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+  .manual h4{font-family:var(--serif);font-size:1.4rem;font-weight:400;margin:20px 0 8px;color:var(--bone)}
+  .manual p,.manual li{color:var(--bone-dim);font-size:14.5px;line-height:1.7}
+  .manual ul{margin:8px 0 8px 20px}
+  .cadence{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:10px}
+  .cadence .c{border:1px solid var(--rule);padding:18px}
+  .cadence .c .h{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:8px}
+  .cadence .c ul{margin-left:16px}
+
+  .rays{transform-origin:100px 100px;animation:sunspin 70s linear infinite}
+  @keyframes sunspin{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<div class="app">
+  <!-- SIDEBAR -->
+  <aside>
+    <div class="brand">
+      <svg viewBox="0 0 200 200" aria-hidden="true">
+        <circle cx="100" cy="100" r="88" fill="none" stroke="#8f7738" stroke-width="3"/>
+        <circle cx="100" cy="100" r="78" fill="none" stroke="#c2a15a" stroke-width="1.5"/>
+        <g class="rays" stroke="#c2a15a" stroke-width="2.5" stroke-linecap="round"><line x1="160.0" y1="100.0" x2="182.0" y2="100.0"/><line x1="158.0" y1="115.5" x2="171.5" y2="119.2"/><line x1="152.0" y1="130.0" x2="171.0" y2="141.0"/><line x1="142.4" y1="142.4" x2="152.3" y2="152.3"/><line x1="130.0" y1="152.0" x2="141.0" y2="171.0"/><line x1="115.5" y1="158.0" x2="119.2" y2="171.5"/><line x1="100.0" y1="160.0" x2="100.0" y2="182.0"/><line x1="84.5" y1="158.0" x2="80.8" y2="171.5"/><line x1="70.0" y1="152.0" x2="59.0" y2="171.0"/><line x1="57.6" y1="142.4" x2="47.7" y2="152.3"/><line x1="48.0" y1="130.0" x2="29.0" y2="141.0"/><line x1="42.0" y1="115.5" x2="28.5" y2="119.2"/><line x1="40.0" y1="100.0" x2="18.0" y2="100.0"/><line x1="42.0" y1="84.5" x2="28.5" y2="80.8"/><line x1="48.0" y1="70.0" x2="29.0" y2="59.0"/><line x1="57.6" y1="57.6" x2="47.7" y2="47.7"/><line x1="70.0" y1="48.0" x2="59.0" y2="29.0"/><line x1="84.5" y1="42.0" x2="80.8" y2="28.5"/><line x1="100.0" y1="40.0" x2="100.0" y2="18.0"/><line x1="115.5" y1="42.0" x2="119.2" y2="28.5"/><line x1="130.0" y1="48.0" x2="141.0" y2="29.0"/><line x1="142.4" y1="57.6" x2="152.3" y2="47.7"/><line x1="152.0" y1="70.0" x2="171.0" y2="59.0"/><line x1="158.0" y1="84.5" x2="171.5" y2="80.8"/></g><circle cx="100" cy="100" r="11" fill="#c2a15a"/>
+      </svg>
+      <div class="t">theindiaproject<b>.world</b><br/>Back Office</div>
+    </div>
+    <nav class="side" id="nav">
+      <a data-v="overview" class="active"><span class="ic">◈</span> Overview</a>
+      <a data-v="commissions"><span class="ic">▤</span> Commissions</a>
+      <a data-v="templates"><span class="ic">❋</span> Templates</a>
+      <a data-v="drafts"><span class="ic">✎</span> Correspondence</a>
+      <a data-v="cards"><span class="ic">▭</span> Visiting Card</a>
+      <a data-v="network"><span class="ic">◇</span> Network &amp; Portfolios</a>
+      <a data-v="ledger"><span class="ic">₹</span> Ledger</a>
+      <a data-v="legal"><span class="ic">§</span> Legal Vault</a>
+      <a data-v="manual"><span class="ic">☞</span> Manual</a>
+    </nav>
+    <div class="side-foot">
+      <div class="coords" id="coords">LAT 8°–37° N · LON 68°–97° E</div>
+      <div class="coords" style="margin-top:8px" id="savestate">Storage: checking…</div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main>
+    <!-- OVERVIEW -->
+    <section class="view on" id="v-overview">
+      <div class="top">
+        <div><h1>theindiaproject.world</h1><div class="sub">Surveyed, sealed, assigned — and accounted for.</div></div>
+        <div class="stamp" id="today">— —</div>
+      </div>
+      <div class="tiles" id="kpis"></div>
+      <div class="card">
+        <div class="ch"><div><h3>Today's priorities</h3><p>Revenue-bearing first. theindiaproject.world does not waste daylight.</p></div><button class="btn sm" onclick="addTask()">+ Task</button></div>
+        <table><thead><tr><th style="width:60%">Task</th><th>Front</th><th>Status</th><th></th></tr></thead><tbody id="tasks"></tbody></table>
+      </div>
+      <div class="card">
+        <div class="ch"><div><h3>The Six-Pass gate</h3><p>No route leaves the house until all six are struck.</p></div></div>
+        <table><thead><tr><th style="width:55%">Pass</th><th>Purpose</th></tr></thead><tbody id="sixpass"></tbody></table>
+      </div>
+    </section>
+
+    <!-- COMMISSIONS -->
+    <section class="view" id="v-commissions">
+      <div class="top"><div><h1>Commissions</h1><div class="sub">Front 01 domestic · Front 02 white-label.</div></div></div>
+      <div class="card">
+        <div class="ch"><div><h3>Pipeline</h3><p>Enquiry → Assessment → Sealed Memo → Confirmed → In Transit → Closed.</p></div><button class="btn sm gold" onclick="openCommForm()">+ Commission</button></div>
+        <table><thead><tr><th>Client</th><th>Portfolio</th><th>Front</th><th>Stage</th><th>Value</th><th>Next action</th><th></th></tr></thead><tbody id="comms"></tbody></table>
+      </div>
+    </section>
+
+    <!-- TEMPLATES -->
+    <section class="view" id="v-templates">
+      <div class="top"><div><h1>Templates</h1><div class="sub">Every commitment written as an experience — never a regular email.</div></div></div>
+      <div class="card">
+        <div class="ch"><div><h3>The library</h3><p>Select a template, fill the coordinates, generate a sealed draft.</p></div></div>
+        <div class="tpl-grid" id="tplGrid"></div>
+      </div>
+    </section>
+
+    <!-- DRAFTS -->
+    <section class="view" id="v-drafts">
+      <div class="top"><div><h1>Correspondence</h1><div class="sub">The multilingual butler. Native register, never machine.</div></div></div>
+      <div class="grid2">
+        <div class="card">
+          <div class="ch"><div><h3>Compose</h3><p>Draft in the house's voice.</p></div></div>
+          <div class="field"><label>To</label><input id="d-to" placeholder="Recipient" /></div>
+          <div class="row"><div class="field" style="flex:1"><label>Subject</label><input id="d-sub" placeholder="Re: your enquiry" /></div>
+          <div class="field" style="width:130px"><label>Language</label><select id="d-lang"><option>EN</option><option>FR</option><option>हिं</option><option>ES</option><option>DE</option><option>ع</option></select></div></div>
+          <div class="field"><label>Body</label><textarea id="d-body" rows="7" placeholder="theindiaproject.world has received your enquiry…"></textarea></div>
+          <div class="row"><button class="btn gold sm" onclick="saveDraft()">Save draft</button><button class="btn sm" onclick="insertGreeting()">Insert greeting</button><button class="btn sm" onclick="copyDraft()">Copy</button></div>
+        </div>
+        <div class="card">
+          <div class="ch"><div><h3>Saved drafts</h3><p>Held under seal.</p></div></div>
+          <div id="draftList"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CARDS -->
+    <section class="view" id="v-cards">
+      <div class="top"><div><h1>Digital Visiting Card</h1><div class="sub">Assigned, not handed out.</div></div></div>
+      <div class="grid2">
+        <div class="card">
+          <div class="ch"><div><h3>The card</h3><p>Live preview.</p></div></div>
+          <div class="vcard">
+            <div class="fr"></div>
+            <svg width="60" height="60" viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="88" fill="none" stroke="#c2a15a" stroke-width="2.5"/><g class="rays" stroke="#c2a15a" stroke-width="2.5" stroke-linecap="round"><line x1="160.0" y1="100.0" x2="182.0" y2="100.0"/><line x1="158.0" y1="115.5" x2="171.5" y2="119.2"/><line x1="152.0" y1="130.0" x2="171.0" y2="141.0"/><line x1="142.4" y1="142.4" x2="152.3" y2="152.3"/><line x1="130.0" y1="152.0" x2="141.0" y2="171.0"/><line x1="115.5" y1="158.0" x2="119.2" y2="171.5"/><line x1="100.0" y1="160.0" x2="100.0" y2="182.0"/><line x1="84.5" y1="158.0" x2="80.8" y2="171.5"/><line x1="70.0" y1="152.0" x2="59.0" y2="171.0"/><line x1="57.6" y1="142.4" x2="47.7" y2="152.3"/><line x1="48.0" y1="130.0" x2="29.0" y2="141.0"/><line x1="42.0" y1="115.5" x2="28.5" y2="119.2"/><line x1="40.0" y1="100.0" x2="18.0" y2="100.0"/><line x1="42.0" y1="84.5" x2="28.5" y2="80.8"/><line x1="48.0" y1="70.0" x2="29.0" y2="59.0"/><line x1="57.6" y1="57.6" x2="47.7" y2="47.7"/><line x1="70.0" y1="48.0" x2="59.0" y2="29.0"/><line x1="84.5" y1="42.0" x2="80.8" y2="28.5"/><line x1="100.0" y1="40.0" x2="100.0" y2="18.0"/><line x1="115.5" y1="42.0" x2="119.2" y2="28.5"/><line x1="130.0" y1="48.0" x2="141.0" y2="29.0"/><line x1="142.4" y1="57.6" x2="152.3" y2="47.7"/><line x1="152.0" y1="70.0" x2="171.0" y2="59.0"/><line x1="158.0" y1="84.5" x2="171.5" y2="80.8"/></g><circle cx="100" cy="100" r="11" fill="#c2a15a"/></svg>
+            <div class="nm" id="vc-name">—— ——</div>
+            <div class="rl" id="vc-role">Coordinating Desk</div>
+            <div class="wm">theindiaproject<b>.world</b></div>
+            <div class="sig">surveyed · sealed · assigned</div>
+          </div>
+          <div class="row"><button class="btn gold sm" onclick="downloadVcf()">Download vCard (.vcf)</button><button class="btn sm" onclick="copyCardText()">Copy share text</button></div>
+        </div>
+        <div class="card">
+          <div class="ch"><div><h3>Details</h3><p>Edited fields update the card and the vCard.</p></div></div>
+          <div class="field"><label>Name</label><input id="c-name" oninput="renderCard()" placeholder="Correspondent name" /></div>
+          <div class="field"><label>Title</label><input id="c-role" oninput="renderCard()" value="Coordinating Desk" /></div>
+          <div class="field"><label>Secure line</label><input id="c-tel" placeholder="+91 ·· ···· ····" /></div>
+          <div class="field"><label>Correspondence</label><input id="c-mail" value="commission@theindiaproject.world" /></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NETWORK -->
+    <section class="view" id="v-network">
+      <div class="top"><div><h1>Network &amp; Portfolios</h1><div class="sub">The proprietary asset — mapped, tiered, verified.</div></div></div>
+      <div class="card">
+        <div class="ch"><div><h3>The eight portfolios</h3><p>Every asset is filed against one.</p></div></div>
+        <div class="tpl-grid" id="portList"></div>
+      </div>
+      <div class="card">
+        <div class="ch"><div><h3>Trusted network</h3><p>Transporters, hotels, rotor &amp; rail — nothing on a supplier's word.</p></div><button class="btn sm gold" onclick="openNetForm()">+ Asset</button></div>
+        <table><thead><tr><th>Asset</th><th>Type</th><th>Corridor</th><th>Portfolio</th><th>Tier</th><th>Status</th><th></th></tr></thead><tbody id="netRows"></tbody></table>
+      </div>
+    </section>
+
+    <!-- LEDGER -->
+    <section class="view" id="v-ledger">
+      <div class="top"><div><h1>Ledger</h1><div class="sub">The financial controller. Profit, tracked leg by leg.</div></div></div>
+      <div class="tiles" id="ledgerKpis"></div>
+      <div class="card">
+        <div class="ch"><div><h3>Movements</h3><p>Income &amp; expense against each commission.</p></div><button class="btn sm gold" onclick="openLedgerForm()">+ Entry</button></div>
+        <table><thead><tr><th>Date</th><th>Reference</th><th>Detail</th><th>Type</th><th style="text-align:right">Amount (₹)</th><th></th></tr></thead><tbody id="ledgerRows"></tbody></table>
+      </div>
+    </section>
+
+    <!-- LEGAL -->
+    <section class="view" id="v-legal">
+      <div class="top"><div><h1>Legal Vault</h1><div class="sub">The desk protected. Publish these to the site's footer.</div></div></div>
+      <div class="card accordion" id="legalDocs"></div>
+      <p class="note">These are working templates, not legal advice. Have counsel review before publishing or relying on them.</p>
+    </section>
+
+    <!-- MANUAL -->
+    <section class="view" id="v-manual">
+      <div class="top"><div><h1>Manual</h1><div class="sub">How the desk runs — and keeps running.</div></div></div>
+      <div class="card manual">
+        <h4>What this console is</h4>
+        <p>A single, self-contained back office. It holds your commissions pipeline, a template library, a multilingual drafts composer, your digital visiting card, the proprietary network &amp; portfolio database, a ledger, and the legal vault. Nothing leaves this file; when you host it, your entries persist in the browser on your machine.</p>
+        <h4>How to get going — five minutes</h4>
+        <ul>
+          <li><b>Commissions:</b> add each live enquiry, set its Front and Stage. This is the heartbeat.</li>
+          <li><b>Templates:</b> open a memo, fill the coordinates, generate, copy into your channel of choice.</li>
+          <li><b>Network:</b> load your trusted transporters and hotels, tag each to a portfolio and a corridor — this is the asset no competitor holds.</li>
+          <li><b>Ledger:</b> log the value and the costs of each commission; the margin computes itself.</li>
+          <li><b>Visiting card:</b> set your details, export the vCard, send it where a card is warranted.</li>
+        </ul>
+        <h4>The cadence that keeps it sustaining</h4>
+        <div class="cadence">
+          <div class="c"><div class="h">Daily</div><ul><li>Clear Today's priorities, revenue first</li><li>Acknowledge every new enquiry within the hour</li><li>Advance one commission a stage</li></ul></div>
+          <div class="c"><div class="h">Weekly</div><ul><li>Send two Trojan-Horse memos (Front 01)</li><li>Open one trade file (Front 02)</li><li>Reconcile the ledger; confirm margin</li></ul></div>
+          <div class="c"><div class="h">Monthly</div><ul><li>Verify five network assets afresh</li><li>Review portfolio balance &amp; tiering</li><li>Publish one Journal field note</li></ul></div>
+        </div>
+        <h4>Persistence &amp; privacy</h4>
+        <p>Host this file in a password-protected directory (Hostinger → Files → Password Protect Directories) — never on the public site. Your data is stored only in your own browser; clearing site data clears it. Export important memos and ledgers as you go.</p>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal"><div class="box" id="modalBox"></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ---------- safe storage ---------- */
+var MEM={};
+var STORE=(function(){
+  try{var k="__desk_test__";localStorage.setItem(k,"1");localStorage.removeItem(k);
+    return {get:function(k){return localStorage.getItem(k)},set:function(k,v){localStorage.setItem(k,v)},ok:true};
+  }catch(e){return {get:function(k){return MEM[k]||null},set:function(k,v){MEM[k]=v},ok:false};}
+})();
+function load(k,def){try{var r=STORE.get("desk_"+k);return r?JSON.parse(r):def;}catch(e){return def;}}
+function save(k,v){STORE.set("desk_"+k,JSON.stringify(v));}
+
+/* ---------- seed data ---------- */
+var db={
+  tasks: load("tasks",[
+    {t:"Unseal route memo for the Rathore commission",f:"Domestic",s:"Due"},
+    {t:"Trade file — Maison Voyage, Paris (Front 02)",f:"White-label",s:"Open"},
+    {t:"Confirm rotor slot, Leh corridor, 14–16 Aug",f:"Domestic",s:"Hold"}
+  ]),
+  comms: load("comms",[
+    {c:"Rathore Family Office",p:"The Master Portfolio",f:"Domestic",s:"Sealed Memo",v:4200000,n:"Await counter-signature"},
+    {c:"A. Mehta (solo)",p:"Solo Wanderlust",f:"Domestic",s:"Assessment",v:960000,n:"Send questionnaire"},
+    {c:"Maison Voyage (Paris)",p:"Seamless Transit",f:"White-label",s:"Enquiry",v:0,n:"Open trade file"},
+    {c:"The Kohli Anniversary",p:"Commemorative Isolation",f:"Domestic",s:"Confirmed",v:2750000,n:"Lock final 48h pinnacle"}
+  ]),
+  drafts: load("drafts",[
+    {to:"Rathore Family Office",sub:"Re: Why now",lang:"EN",body:"Your enquiry has been received and is held in confidence.\n\nA single question remains before a route is drawn: why now? Your answer sets the tempo of everything that follows.\n\ntheindiaproject.world"}
+  ]),
+  net: load("net",[
+    {n:"Suryagarh, Jaisalmer",t:"Hotel",c:"Rajputana",p:"Master · Conscious Luxury",tier:"Pinnacle",st:"Verified"},
+    {n:"Himalayan Rotor Co.",t:"Helicopter",c:"High-Altitude",p:"Seamless Transit",tier:"Critical",st:"Verified"},
+    {n:"Deccan Odyssey (rail)",t:"Rail",c:"Deccan & South",p:"Seamless Transit",tier:"Premier",st:"Pending"},
+    {n:"Frontier Fixer — Tawang",t:"Transporter",c:"Sacred East",p:"Tribal Heritage & Frontier",tier:"Critical",st:"Verified"}
+  ]),
+  ledger: load("ledger",[
+    {d:"2026-07-10",r:"Rathore",dt:"Commission deposit",ty:"Income",a:2100000},
+    {d:"2026-07-12",r:"Rathore",dt:"Suryagarh block — advance",ty:"Expense",a:640000},
+    {d:"2026-07-18",r:"Kohli",dt:"Commission deposit",ty:"Income",a:1375000},
+    {d:"2026-07-20",r:"Kohli",dt:"Rotor deposit, Leh",ty:"Expense",a:290000}
+  ]),
+  card: load("card",{name:"",role:"Coordinating Desk",tel:"",mail:"commission@theindiaproject.world"})
+};
+
+/* ---------- nav ---------- */
+document.querySelectorAll("#nav a").forEach(function(a){
+  a.addEventListener("click",function(){
+    document.querySelectorAll("#nav a").forEach(function(x){x.classList.remove("active")});
+    a.classList.add("active");
+    document.querySelectorAll(".view").forEach(function(v){v.classList.remove("on")});
+    document.getElementById("v-"+a.dataset.v).classList.add("on");
+  });
+});
+
+/* ---------- coords ticker + date ---------- */
+(function(){var el=document.getElementById("coords");var t=0;setInterval(function(){t++;var f=(Math.sin(t/3)*3+68).toFixed(2);el.textContent="LAT 8°–37° N · LON "+f+"°–97° E";},1500);})();
+document.getElementById("savestate").textContent = STORE.ok ? "Storage: local · persisted" : "Storage: preview · in-memory";
+(function(){try{var d=new Date();var m=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];document.getElementById("today").textContent=String(d.getDate()).padStart(2,"0")+" "+m[d.getMonth()]+" "+d.getFullYear()+" · Sealed";}catch(e){document.getElementById("today").textContent="Sealed";}})();
+
+/* ---------- toast ---------- */
+function toast(m){var t=document.getElementById("toast");t.textContent=m;t.classList.add("on");setTimeout(function(){t.classList.remove("on")},1900);}
+function esc(s){return (s==null?"":String(s)).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+function money(n){return "₹"+Number(n||0).toLocaleString("en-IN");}
+
+/* ---------- overview ---------- */
+var SIXPASS=[
+  ["01 · The Surveyor's Audit","Topography walked, not mapped."],
+  ["02 · The Five-Hour Rule","No road leg over five hours."],
+  ["03 · The Contingency Stress-Test","What fails first, answered in advance."],
+  ["04 · The Permit &amp; Bureaucracy Check","Inner Line &amp; Protected Area cleared."],
+  ["05 · The Client Interrogation","Every question answered before it is asked."],
+  ["06 · Fact &amp; Source Verification","Nothing confirmed on assumption."]
+];
+function renderOverview(){
+  var active=db.comms.filter(function(c){return c.s!=="Closed"}).length;
+  var pipe=db.comms.reduce(function(a,c){return a+(+c.v||0)},0);
+  var inc=db.ledger.filter(function(x){return x.ty==="Income"}).reduce(function(a,x){return a+(+x.a||0)},0);
+  var exp=db.ledger.filter(function(x){return x.ty==="Expense"}).reduce(function(a,x){return a+(+x.a||0)},0);
+  var margin=inc>0?Math.round((inc-exp)/inc*100):0;
+  var k=[
+    ["Active commissions",active,""],
+    ["Pipeline value",money(pipe),"all fronts"],
+    ["Revenue booked",money(inc),"this cycle"],
+    ["Net margin",margin+"%","after ground costs"],
+    ["Network assets",db.net.length,db.net.filter(function(n){return n.st==="Verified"}).length+" verified"],
+    ["Tasks due",db.tasks.length,"today"]
+  ];
+  document.getElementById("kpis").innerHTML=k.map(function(x){return '<div class="tile"><div class="k">'+x[0]+'</div><div class="v">'+x[1]+'</div><div class="d">'+x[2]+'</div></div>'}).join("");
+  document.getElementById("tasks").innerHTML=db.tasks.map(function(t,i){return '<tr><td>'+esc(t.t)+'</td><td><span class="pill '+(t.f==="White-label"?"gold":"")+'">'+esc(t.f)+'</span></td><td><span class="pill '+(t.s==="Due"?"wax":"")+'">'+esc(t.s)+'</span></td><td style="text-align:right"><button class="btn ghost sm" onclick="delTask('+i+')">✕</button></td></tr>'}).join("")||'<tr><td colspan="4" style="color:var(--bone-faint)">Clear.</td></tr>';
+  document.getElementById("sixpass").innerHTML=SIXPASS.map(function(p){return '<tr><td style="font-family:var(--serif);font-size:1.15rem">'+p[0]+'</td><td style="color:var(--bone-dim)">'+p[1]+'</td></tr>'}).join("");
+}
+function addTask(){var t=prompt("Task (revenue-bearing first):");if(!t)return;db.tasks.push({t:t,f:"Domestic",s:"Open"});save("tasks",db.tasks);renderOverview();}
+function delTask(i){db.tasks.splice(i,1);save("tasks",db.tasks);renderOverview();}
+
+/* ---------- commissions ---------- */
+var STAGES=["Enquiry","Assessment","Sealed Memo","Confirmed","In Transit","Closed"];
+function renderComms(){
+  document.getElementById("comms").innerHTML=db.comms.map(function(c,i){
+    return '<tr><td style="font-family:var(--serif);font-size:1.1rem">'+esc(c.c)+'</td><td>'+esc(c.p)+'</td><td><span class="pill '+(c.f==="White-label"?"gold":"")+'">'+esc(c.f)+'</span></td><td><span class="pill '+(c.s==="Confirmed"||c.s==="In Transit"?"green":"")+'">'+esc(c.s)+'</span></td><td>'+money(c.v)+'</td><td style="color:var(--bone-dim);font-size:13px">'+esc(c.n)+'</td><td style="text-align:right;white-space:nowrap"><button class="btn ghost sm" onclick="advance('+i+')">▸</button><button class="btn ghost sm" onclick="delComm('+i+')">✕</button></td></tr>';
+  }).join("");
+}
+function advance(i){var c=db.comms[i];var idx=STAGES.indexOf(c.s);if(idx<STAGES.length-1){c.s=STAGES[idx+1];save("comms",db.comms);renderComms();renderOverview();toast("Advanced to "+c.s);}}
+function delComm(i){db.comms.splice(i,1);save("comms",db.comms);renderComms();renderOverview();}
+function openCommForm(){
+  modal('<button class="close-x" onclick="closeModal()">×</button><h3>New commission</h3>'+
+  '<div class="field"><label>Client</label><input id="nc-c"></div>'+
+  '<div class="grid2"><div class="field"><label>Portfolio</label><input id="nc-p" value="The Master Portfolio"></div>'+
+  '<div class="field"><label>Front</label><select id="nc-f"><option>Domestic</option><option>White-label</option></select></div></div>'+
+  '<div class="grid2"><div class="field"><label>Stage</label><select id="nc-s">'+STAGES.map(function(s){return '<option>'+s+'</option>'}).join("")+'</select></div>'+
+  '<div class="field"><label>Value (₹)</label><input id="nc-v" type="number" value="0"></div></div>'+
+  '<div class="field"><label>Next action</label><input id="nc-n"></div>'+
+  '<button class="btn gold" onclick="saveComm()">Seal into pipeline</button>');
+}
+function saveComm(){db.comms.push({c:val("nc-c")||"Unnamed",p:val("nc-p"),f:val("nc-f"),s:val("nc-s"),v:+val("nc-v")||0,n:val("nc-n")});save("comms",db.comms);closeModal();renderComms();renderOverview();toast("Commission sealed");}
+
+/* ---------- templates ---------- */
+var TEMPLATES=[
+  {cat:"Sealed Memo",name:"Sealed Route Memo",desc:"The route, revealed under seal.",fields:["client","reference","corridor","days"],
+   body:"MEMORANDUM — SEALED\nFor: {{client}}   ·   Reference: {{reference}}\n\nThe route below has been surveyed and assigned. It has passed six audits. Nothing within reaches you on a supplier's word.\n\nCorridor: {{corridor}}\nDuration: {{days}} days, rising in tier to a sealed pinnacle in the final 48 hours.\n\nParticulars follow under separate seal. This memo is held in confidence and discussed with no one.\n\nsurveyed, sealed, assigned.\ntheindiaproject.world"},
+  {cat:"Front 01",name:"Trojan-Horse Memo",desc:"Theoretical route for a UHNW prospect.",fields:["name","corridor"],
+   body:"Prepared without obligation, for {{name}}.\n\nA theoretical route across {{corridor}} — drawn only to show what zero-friction time across the subcontinent looks like when the ground is handled in full, and discussed with no one.\n\nNo stay named here is advertised. Should the coordinates interest you, the particulars will be unsealed.\n\ntheindiaproject.world · theindiaproject.world"},
+  {cat:"Front 02",name:"White-Label Trade Note",desc:"Structural safety for a trade partner.",fields:["agency","market"],
+   body:"To the desk of {{agency}} — {{market}}.\n\nWe do not sell you a destination. It sells you structural safety across India, delivered under your own name: permits cleared, terrain surveyed, contingency answered before arrival.\n\nEvery route is audited six times before a client's name touches it. Enquiries answered within 24 hours. Credentials under NDA.\n\ntheindiaproject.world"},
+  {cat:"Correspondence",name:"Commission Acknowledgement",desc:"Received, and held in confidence.",fields:["client"],
+   body:"{{client}} —\n\nYour enquiry has reached the house and is held in confidence, read by one house only.\n\nA single question begins everything: why now? Your answer sets the tempo.\n\ntheindiaproject.world"},
+  {cat:"Correspondence",name:"Assessment Questionnaire",desc:"The quiet interrogation.",fields:["client"],
+   body:"For the assessment of {{client}}.\n\nSo that nothing is left to the day itself, the house asks:\n\n1. Why now — what is this journey for?\n2. Who travels, and who must never be inconvenienced?\n3. What may not be compromised, at any cost?\n4. What would make the final 48 hours unforgettable?\n5. What must be discussed with no one?\n\nReturn at your leisure. A reply will follow.\ntheindiaproject.world"},
+  {cat:"Experiential",name:"Digital Postcard",desc:"A commitment written as an experience.",fields:["destination","detail","client","dates"],
+   body:"From the house — {{destination}}.\n\nWhere {{detail}}.\n\nSealed for {{client}}, {{dates}}. Surveyed before your wheels touch tarmac; assigned to no one else.\n\ntheindiaproject.world"}
+];
+function renderTemplates(){
+  document.getElementById("tplGrid").innerHTML=TEMPLATES.map(function(t,i){return '<div class="tpl" onclick="openTpl('+i+')"><div><div class="cat">'+t.cat+'</div><h4>'+esc(t.name)+'</h4><p>'+esc(t.desc)+'</p></div></div>'}).join("");
+}
+function openTpl(i){
+  var t=TEMPLATES[i];
+  var fields=t.fields.map(function(f){return '<div class="field"><label>'+f+'</label><input data-f="'+f+'" oninput="mergeTpl('+i+')" placeholder="'+f+'"></div>'}).join("");
+  modal('<button class="close-x" onclick="closeModal()">×</button><div class="cat lbl" style="color:var(--gold-dim)">'+t.cat+'</div><h3>'+esc(t.name)+'</h3>'+
+    '<div class="grid2">'+fields+'</div>'+
+    '<div class="memo-out" id="memoOut">'+esc(t.body)+'</div>'+
+    '<div class="row" style="margin-top:14px"><button class="btn gold sm" onclick="copyMemo()">Copy memo</button><button class="btn sm" onclick="memoToDraft()">Send to Correspondence</button></div>');
+  window.__tpl=i;
+}
+function mergeTpl(i){
+  var t=TEMPLATES[i];var out=t.body;
+  document.querySelectorAll("#modalBox input[data-f]").forEach(function(inp){
+    var v=inp.value||("{{"+inp.dataset.f+"}}");
+    out=out.split("{{"+inp.dataset.f+"}}").join(v);
+  });
+  document.getElementById("memoOut").textContent=out;
+}
+function copyMemo(){navigator.clipboard&&navigator.clipboard.writeText(document.getElementById("memoOut").textContent);toast("Memo copied");}
+function memoToDraft(){db.drafts.push({to:"",sub:TEMPLATES[window.__tpl].name,lang:"EN",body:document.getElementById("memoOut").textContent});save("drafts",db.drafts);closeModal();toast("Saved to Correspondence");renderDrafts();}
+
+/* ---------- drafts ---------- */
+var GREET={EN:"Your enquiry has been received and is held in confidence.",FR:"Votre demande a bien été reçue et conservée en toute confidentialité.","हिं":"आपका अनुरोध प्राप्त कर लिया गया है और उसे पूर्ण गोपनीयता में रखा गया है।",ES:"Su solicitud ha sido recibida y se conserva con total discreción.",DE:"Ihre Anfrage ist eingegangen und wird vertraulich behandelt.","ع":"لقد تم استلام استفساركم، وهو محفوظ لدينا بكل سرية."};
+function insertGreeting(){var l=val("d-lang");var b=document.getElementById("d-body");b.value=(GREET[l]||GREET.EN)+"\n\n"+b.value;}
+function saveDraft(){db.drafts.push({to:val("d-to"),sub:val("d-sub"),lang:val("d-lang"),body:val("d-body")});save("drafts",db.drafts);renderDrafts();document.getElementById("d-to").value="";document.getElementById("d-sub").value="";document.getElementById("d-body").value="";toast("Draft sealed");}
+function copyDraft(){navigator.clipboard&&navigator.clipboard.writeText(val("d-body"));toast("Copied");}
+function renderDrafts(){
+  document.getElementById("draftList").innerHTML=db.drafts.map(function(d,i){return '<div style="border:1px solid var(--rule);padding:14px;margin-bottom:10px"><div class="lbl" style="margin-bottom:6px">'+esc(d.lang)+' · '+esc(d.to||"—")+'</div><div style="font-family:var(--serif);font-size:1.15rem;margin-bottom:6px">'+esc(d.sub||"Untitled")+'</div><div style="color:var(--bone-dim);font-size:13px;white-space:pre-line;max-height:90px;overflow:hidden">'+esc(d.body)+'</div><div class="row" style="margin-top:10px"><button class="btn ghost sm" onclick="loadDraft('+i+')">Edit</button><button class="btn ghost sm" onclick="delDraft('+i+')">✕</button></div></div>'}).join("")||'<p class="note">No drafts held.</p>';
+}
+function loadDraft(i){var d=db.drafts[i];document.getElementById("d-to").value=d.to;document.getElementById("d-sub").value=d.sub;document.getElementById("d-lang").value=d.lang;document.getElementById("d-body").value=d.body;toast("Loaded into composer");}
+function delDraft(i){db.drafts.splice(i,1);save("drafts",db.drafts);renderDrafts();}
+
+/* ---------- cards ---------- */
+function renderCard(){
+  db.card={name:val("c-name"),role:val("c-role"),tel:val("c-tel"),mail:val("c-mail")};
+  save("card",db.card);
+  document.getElementById("vc-name").textContent=db.card.name||"—— ——";
+  document.getElementById("vc-role").textContent=db.card.role||"Coordinating Desk";
+}
+function downloadVcf(){
+  var c=db.card;
+  var v="BEGIN:VCARD\nVERSION:3.0\nN:;"+(c.name||"")+";;;\nFN:"+(c.name||"theindiaproject.world")+"\nORG:theindiaproject.world — theindiaproject.world\nTITLE:"+(c.role||"Coordinating Desk")+"\nTEL;TYPE=VOICE:"+(c.tel||"")+"\nEMAIL:"+(c.mail||"commission@theindiaproject.world")+"\nURL:https://theindiaproject.world\nNOTE:Surveyed, sealed, assigned.\nEND:VCARD";
+  var blob=new Blob([v],{type:"text/vcard"});var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=(c.name||"the-desk").replace(/\s+/g,"-").toLowerCase()+".vcf";a.click();toast("vCard downloaded");
+}
+function copyCardText(){var c=db.card;var s=(c.name||"theindiaproject.world")+" — "+(c.role||"Coordinating Desk")+"\ntheindiaproject.world\n"+(c.mail||"")+" "+(c.tel||"")+"\nsurveyed, sealed, assigned.";navigator.clipboard&&navigator.clipboard.writeText(s);toast("Share text copied");}
+
+/* ---------- network + portfolios ---------- */
+var PORTFOLIOS=["The Master Portfolio","Commemorative Isolation","The Solo Wanderlust Collection","Conscious Luxury","Holistic Health & Lifestyle","The Domestic Traveller Collection","Tribal Heritage & Frontier Circuit","The Seamless Transit Network"];
+function renderNetwork(){
+  document.getElementById("portList").innerHTML=PORTFOLIOS.map(function(p,i){var n=db.net.filter(function(x){return x.p.indexOf(p.split(" ")[1]||p)>-1}).length;return '<div class="tpl"><div><div class="cat">'+String(i+1).padStart(2,"0")+'</div><h4 style="font-size:1.15rem">'+esc(p)+'</h4></div></div>'}).join("");
+  document.getElementById("netRows").innerHTML=db.net.map(function(a,i){return '<tr><td style="font-family:var(--serif);font-size:1.1rem">'+esc(a.n)+'</td><td><span class="pill">'+esc(a.t)+'</span></td><td>'+esc(a.c)+'</td><td style="color:var(--bone-dim);font-size:13px">'+esc(a.p)+'</td><td>'+esc(a.tier)+'</td><td><span class="pill '+(a.st==="Verified"?"green":"wax")+'">'+esc(a.st)+'</span></td><td style="text-align:right"><button class="btn ghost sm" onclick="toggleVer('+i+')">⟳</button><button class="btn ghost sm" onclick="delNet('+i+')">✕</button></td></tr>'}).join("");
+}
+function toggleVer(i){db.net[i].st=db.net[i].st==="Verified"?"Pending":"Verified";save("net",db.net);renderNetwork();renderOverview();}
+function delNet(i){db.net.splice(i,1);save("net",db.net);renderNetwork();renderOverview();}
+function openNetForm(){
+  modal('<button class="close-x" onclick="closeModal()">×</button><h3>New network asset</h3>'+
+  '<div class="grid2"><div class="field"><label>Name</label><input id="na-n"></div><div class="field"><label>Type</label><select id="na-t"><option>Hotel</option><option>Transporter</option><option>Helicopter</option><option>Rail</option><option>Fixer</option></select></div></div>'+
+  '<div class="grid2"><div class="field"><label>Corridor</label><input id="na-c" placeholder="Rajputana / High-Altitude / Deccan / Sacred East"></div><div class="field"><label>Tier</label><select id="na-tier"><option>Pinnacle</option><option>Premier</option><option>Critical</option><option>Standard</option></select></div></div>'+
+  '<div class="field"><label>Portfolio tags</label><input id="na-p" placeholder="Master · Conscious Luxury"></div>'+
+  '<button class="btn gold" onclick="saveNet()">File the asset</button>');
+}
+function saveNet(){db.net.push({n:val("na-n")||"Unnamed",t:val("na-t"),c:val("na-c"),p:val("na-p"),tier:val("na-tier"),st:"Pending"});save("net",db.net);closeModal();renderNetwork();renderOverview();toast("Asset filed — verify before use");}
+
+/* ---------- ledger ---------- */
+function renderLedger(){
+  var inc=db.ledger.filter(function(x){return x.ty==="Income"}).reduce(function(a,x){return a+(+x.a||0)},0);
+  var exp=db.ledger.filter(function(x){return x.ty==="Expense"}).reduce(function(a,x){return a+(+x.a||0)},0);
+  var net=inc-exp;var m=inc>0?Math.round(net/inc*100):0;
+  document.getElementById("ledgerKpis").innerHTML=[
+    ["Income",money(inc),""],["Ground costs",money(exp),""],["Net",money(net),""],["Margin",m+"%",""]
+  ].map(function(x){return '<div class="tile"><div class="k">'+x[0]+'</div><div class="v">'+x[1]+'</div></div>'}).join("");
+  document.getElementById("ledgerRows").innerHTML=db.ledger.slice().reverse().map(function(x){var i=db.ledger.indexOf(x);return '<tr><td class="mono" style="font-size:12px">'+esc(x.d)+'</td><td>'+esc(x.r)+'</td><td style="color:var(--bone-dim)">'+esc(x.dt)+'</td><td><span class="pill '+(x.ty==="Income"?"green":"wax")+'">'+esc(x.ty)+'</span></td><td style="text-align:right;font-family:var(--mono)">'+money(x.a)+'</td><td style="text-align:right"><button class="btn ghost sm" onclick="delLedger('+i+')">✕</button></td></tr>'}).join("");
+}
+function delLedger(i){db.ledger.splice(i,1);save("ledger",db.ledger);renderLedger();renderOverview();}
+function openLedgerForm(){
+  modal('<button class="close-x" onclick="closeModal()">×</button><h3>New ledger entry</h3>'+
+  '<div class="grid2"><div class="field"><label>Date</label><input id="le-d" placeholder="2026-07-23"></div><div class="field"><label>Reference (client)</label><input id="le-r"></div></div>'+
+  '<div class="field"><label>Detail</label><input id="le-dt"></div>'+
+  '<div class="grid2"><div class="field"><label>Type</label><select id="le-ty"><option>Income</option><option>Expense</option></select></div><div class="field"><label>Amount (₹)</label><input id="le-a" type="number"></div></div>'+
+  '<button class="btn gold" onclick="saveLedger()">Post entry</button>');
+}
+function saveLedger(){db.ledger.push({d:val("le-d")||"—",r:val("le-r"),dt:val("le-dt"),ty:val("le-ty"),a:+val("le-a")||0});save("ledger",db.ledger);closeModal();renderLedger();renderOverview();toast("Posted");}
+
+/* ---------- legal ---------- */
+var LEGAL=[
+  ["Terms of Engagement","theindiaproject.world provides private coordination services across India. An enquiry creates no obligation on either party. A commission is confirmed only upon written acceptance and receipt of the stated deposit. Routes, stays and suppliers are assigned at the house's discretion and held in confidence. The client agrees that all coordinates, memos and materials are the property of the house and are shared under an expectation of confidentiality.\n\n[Working template — have counsel adapt to your jurisdiction before publishing.]"],
+  ["Force Majeure & Liability","theindiaproject.world coordinates independent third-party suppliers (transport, accommodation, permits, aviation and rail). While every leg is audited six times, the house is not liable for acts of God, weather, seismic or road events, acts of government, permit withdrawal, strikes, or the negligence or default of any third-party supplier. Where a leg fails, the house will deploy its pre-identified contingency at no additional coordination fee; third-party costs remain the client's responsibility. Total liability is limited to the coordination fee received.\n\n[Working template — not legal advice.]"],
+  ["Privacy & Confidentiality","Client information is read by one desk only and is never sold, published or shared beyond the suppliers strictly necessary to deliver a confirmed route. theindiaproject.world does not advertise its clients, their stays, or their movements. Data is retained only as long as required to coordinate and account for a commission, and is released on written request.\n\n[Working template — align with applicable data-protection law.]"],
+  ["Intellectual Property","The name 'theindiaproject.world', the mark, the six-pass method, the portfolio taxonomy, and all route memos and materials are the intellectual property of theindiaproject.world and are protected under the Indian Copyright Act, 1957, and applicable law. No reproduction, resale or white-label use is permitted except under written agreement.\n\n[Working template — register marks where possible.]"]
+];
+function renderLegal(){document.getElementById("legalDocs").innerHTML=LEGAL.map(function(l){return '<details class="ac"><summary>'+esc(l[0])+'</summary><div class="body">'+esc(l[1])+'</div></details>'}).join("");}
+
+/* ---------- modal helpers ---------- */
+function modal(html){document.getElementById("modalBox").innerHTML=html;document.getElementById("modal").classList.add("on");}
+function closeModal(){document.getElementById("modal").classList.remove("on");}
+document.getElementById("modal").addEventListener("click",function(e){if(e.target===this)closeModal();});
+function val(id){var e=document.getElementById(id);return e?e.value:"";}
+
+/* ---------- init ---------- */
+document.getElementById("c-name").value=db.card.name;document.getElementById("c-role").value=db.card.role;document.getElementById("c-tel").value=db.card.tel;document.getElementById("c-mail").value=db.card.mail;
+renderCard();renderOverview();renderComms();renderTemplates();renderDrafts();renderNetwork();renderLedger();renderLegal();
+</script>
+</body>
+</html>
