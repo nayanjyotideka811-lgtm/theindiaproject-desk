@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>theindiaproject.world — Visiting Card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#0b0b0c;--bone:#e9e3d6;--bone-dim:#a49d8d;--bone-faint:#6f6a5e;
+    --gold:#c2a15a;--gold-dim:#8f7738;--wax:#7c2427;--rule:rgba(233,227,214,0.16);
+    --serif:"Cormorant Garamond",Georgia,serif;--mono:"Space Mono",monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#161616;color:var(--bone);font-family:var(--mono);padding:48px 20px;display:flex;flex-direction:column;align-items:center;gap:14px}
+  .note{font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--bone-faint);text-align:center;margin-bottom:16px}
+  .cards{display:flex;flex-wrap:wrap;gap:40px;justify-content:center}
+  .cap{font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--bone-faint);text-align:center;margin-top:12px}
+  /* 3.5in x 2in at 96dpi = 336 x 192; scaled up x1.6 for viewing => 538 x 307 */
+  .card{
+    width:538px;height:307px;background:var(--ink);position:relative;overflow:hidden;
+    box-shadow:0 30px 60px rgba(0,0,0,.55);
+  }
+  .card .frame{position:absolute;inset:14px;border:1px solid var(--rule)}
+  /* FRONT */
+  .front{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+  .seal{width:96px;height:96px;margin-bottom:18px}
+  .front .wm{font-size:11px;letter-spacing:.24em;text-transform:uppercase}
+  .front .wm b{color:var(--gold);font-weight:400}
+  .front .desk{font-family:var(--serif);font-size:1.5rem;font-weight:300;letter-spacing:.06em;margin:8px 0 12px}
+  .front .sig{font-size:9px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold)}
+  .front .co{position:absolute;bottom:26px;font-size:8.5px;letter-spacing:.2em;color:var(--bone-faint)}
+  /* BACK */
+  .back{padding:44px 46px;display:flex;flex-direction:column;justify-content:space-between}
+  .back .doctrine{font-family:var(--serif);font-size:1.45rem;font-weight:300;line-height:1.25;max-width:22ch}
+  .back .doctrine em{font-style:italic;color:var(--gold)}
+  .back .teamline{font-family:var(--serif);font-style:italic;font-size:0.98rem;color:var(--bone-dim);margin-top:9px;max-width:30ch;line-height:1.3}
+  .back .rows{display:flex;flex-direction:column;gap:7px}
+  .back .row{display:flex;gap:12px;font-size:10px;letter-spacing:.08em;color:var(--bone-dim)}
+  .back .row .k{color:var(--bone-faint);min-width:92px;text-transform:uppercase;letter-spacing:.16em;font-size:9px}
+  .back .row .v{color:var(--bone)}
+  .hair{position:absolute;left:46px;right:46px;height:1px;background:var(--rule);top:50%}
+  /* spec sheet */
+  .spec{max-width:560px;width:100%;border:1px solid var(--rule);padding:22px 24px;margin-top:26px}
+  .spec h4{font-family:var(--serif);font-size:1.2rem;font-weight:400;color:var(--bone);margin-bottom:12px;letter-spacing:.04em}
+  .spec table{width:100%;border-collapse:collapse}
+  .spec td{padding:7px 0;border-bottom:1px solid var(--rule);font-size:11px;letter-spacing:.05em;color:var(--bone-dim);vertical-align:top}
+  .spec td:first-child{color:var(--bone-faint);text-transform:uppercase;letter-spacing:.14em;font-size:9.5px;width:38%}
+  @media print{body{background:#fff;padding:0}.note,.cap,.spec{display:none}.cards{gap:0}.card{box-shadow:none;page-break-after:always}}
+
+  .rays{transform-origin:100px 100px;animation:sunspin 70s linear infinite}
+  @keyframes sunspin{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+  <div class="note">theindiaproject.world · Visiting Card · Front &amp; Reverse</div>
+  <div class="cards">
+    <div>
+      <div class="card front">
+        <div class="frame"></div>
+        <svg class="seal" viewBox="0 0 200 200" aria-label="seal">
+          <circle cx="100" cy="100" r="88" fill="none" stroke="#8f7738" stroke-width="1.4"/>
+          <circle cx="100" cy="100" r="80" fill="none" stroke="#c2a15a" stroke-width="0.8"/>
+          <g class="rays" stroke="#c2a15a" stroke-width="2.5" stroke-linecap="round"><line x1="160.0" y1="100.0" x2="182.0" y2="100.0"/><line x1="158.0" y1="115.5" x2="171.5" y2="119.2"/><line x1="152.0" y1="130.0" x2="171.0" y2="141.0"/><line x1="142.4" y1="142.4" x2="152.3" y2="152.3"/><line x1="130.0" y1="152.0" x2="141.0" y2="171.0"/><line x1="115.5" y1="158.0" x2="119.2" y2="171.5"/><line x1="100.0" y1="160.0" x2="100.0" y2="182.0"/><line x1="84.5" y1="158.0" x2="80.8" y2="171.5"/><line x1="70.0" y1="152.0" x2="59.0" y2="171.0"/><line x1="57.6" y1="142.4" x2="47.7" y2="152.3"/><line x1="48.0" y1="130.0" x2="29.0" y2="141.0"/><line x1="42.0" y1="115.5" x2="28.5" y2="119.2"/><line x1="40.0" y1="100.0" x2="18.0" y2="100.0"/><line x1="42.0" y1="84.5" x2="28.5" y2="80.8"/><line x1="48.0" y1="70.0" x2="29.0" y2="59.0"/><line x1="57.6" y1="57.6" x2="47.7" y2="47.7"/><line x1="70.0" y1="48.0" x2="59.0" y2="29.0"/><line x1="84.5" y1="42.0" x2="80.8" y2="28.5"/><line x1="100.0" y1="40.0" x2="100.0" y2="18.0"/><line x1="115.5" y1="42.0" x2="119.2" y2="28.5"/><line x1="130.0" y1="48.0" x2="141.0" y2="29.0"/><line x1="142.4" y1="57.6" x2="152.3" y2="47.7"/><line x1="152.0" y1="70.0" x2="171.0" y2="59.0"/><line x1="158.0" y1="84.5" x2="171.5" y2="80.8"/></g><circle cx="100" cy="100" r="11" fill="#c2a15a"/>
+          <line x1="66" y1="118" x2="134" y2="118" stroke="#8f7738" stroke-width="0.8"/>
+          <text x="100" y="140" text-anchor="middle" font-family="Space Mono,monospace" font-size="8" letter-spacing="2.5" fill="#a49d8d">UNDER SEAL</text>
+        </svg>
+        <div class="wm">theindiaproject<b>.world</b></div>
+        <div class="desk">A Private Coordination Desk</div>
+        <div class="sig">surveyed · sealed · assigned</div>
+        <div class="co">LAT 8°–37° N · LON 68°–97° E</div>
+      </div>
+      <div class="cap">Front</div>
+    </div>
+    <div>
+      <div class="card back">
+        <div class="frame"></div>
+        <div>
+          <div class="doctrine">We do not advertise stays. <em>We assign them.</em></div>
+          <div class="teamline">Not a name — a house. Surveyors, fixers and coordinators, held to a single standard.</div>
+        </div>
+        <div class="rows">
+          <div class="row"><span class="k">Correspondence</span><span class="v">contact@theindiaproject.world</span></div>
+          <div class="row"><span class="k">In writing</span><span class="v">Every commitment, confirmed by email</span></div>
+          <div class="row"><span class="k">Response</span><span class="v">Within 24 hours · without fail</span></div>
+        </div>
+      </div>
+      <div class="cap">Reverse</div>
+    </div>
+  </div>
+
+  <div class="spec">
+    <h4>Print specification</h4>
+    <table>
+      <tr><td>Trim size</td><td>89 × 51 mm (3.5 × 2 in) — standard</td></tr>
+      <tr><td>Bleed</td><td>3 mm all sides · safe margin 4 mm from trim</td></tr>
+      <tr><td>Stock</td><td>600 gsm cotton or GF Smith Colorplan "Ebony", duplexed</td></tr>
+      <tr><td>Finish</td><td>Ink base uncoated · seal in gold foil · optional blind deboss of frame</td></tr>
+      <tr><td>Emphasis</td><td>Reverse "assign" line may be struck in wax-red foil (one hit only)</td></tr>
+      <tr><td>Colour build</td><td>Ink #0B0B0C · Bone #E9E3D6 · Gold foil (PMS 872/873) · Wax #7C2427</td></tr>
+      <tr><td>Export</td><td>Use browser Print → Save as PDF at 100%; or request a press-ready CMYK PDF with crop marks</td></tr>
+    </table>
+  </div>
+</body>
+</html>
