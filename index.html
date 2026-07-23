@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>theindiaproject.world · The Desk — Private Coordination Across India</title>
+<title>theindiaproject.world — Private Coordination Across India</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 <meta name="description" content="A private coordination desk that surveys, seals, and assigns routes across India. We do not advertise stays. We assign them." />
 
@@ -12,7 +12,7 @@
 {
   "@context": "https://schema.org",
   "@type": "TravelAgency",
-  "name": "The Desk — theindiaproject.world",
+  "name": "theindiaproject.world",
   "url": "https://theindiaproject.world",
   "description": "A private coordination desk that surveys, seals, and assigns routes across India.",
   "areaServed": { "@type": "Country", "name": "India" },
@@ -75,7 +75,7 @@
     backdrop-filter:blur(3px);
   }
   .brand{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--bone)}
-  .brand span{color:var(--gold)}
+  .brand .wm{font-family:var(--mono)}
   .coords{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:var(--bone-faint);display:none}
   @media(min-width:960px){.coords{display:block}}
   nav.top{display:flex;align-items:center;gap:22px}
@@ -259,12 +259,21 @@
   .reveal.in{opacity:1;transform:none}
 
   [dir="rtl"]{direction:rtl}
+  /* rotating sun seal */
+  .sunmark{display:inline-block;vertical-align:middle;overflow:visible}
+  .sunmark .rays{transform-origin:100px 100px;animation:sunspin 70s linear infinite}
+  @keyframes sunspin{to{transform:rotate(360deg)}}
+  .brand{display:flex;align-items:center;gap:11px}
+  .brand .sunmark{width:26px;height:26px;flex:0 0 auto}
+  .brand b{color:var(--gold);font-weight:inherit}
+  .hero-sun{position:absolute;right:-8%;top:44%;transform:translateY(-50%);width:min(48vw,600px);height:min(48vw,600px);opacity:.14;z-index:1;pointer-events:none}
+  @media(max-width:760px){.hero-sun{opacity:.08;right:-30%}}
 </style>
 </head>
 <body>
 
 <header>
-  <div class="brand">theindiaproject<span>.world</span> · The Desk</div>
+  <div class="brand"><svg class="sunmark" viewBox="0 0 200 200" aria-hidden="true"><g class="rays" stroke="#c2a15a" stroke-width="3" stroke-linecap="round"><line x1="160.0" y1="100.0" x2="182.0" y2="100.0"/><line x1="158.0" y1="115.5" x2="171.5" y2="119.2"/><line x1="152.0" y1="130.0" x2="171.0" y2="141.0"/><line x1="142.4" y1="142.4" x2="152.3" y2="152.3"/><line x1="130.0" y1="152.0" x2="141.0" y2="171.0"/><line x1="115.5" y1="158.0" x2="119.2" y2="171.5"/><line x1="100.0" y1="160.0" x2="100.0" y2="182.0"/><line x1="84.5" y1="158.0" x2="80.8" y2="171.5"/><line x1="70.0" y1="152.0" x2="59.0" y2="171.0"/><line x1="57.6" y1="142.4" x2="47.7" y2="152.3"/><line x1="48.0" y1="130.0" x2="29.0" y2="141.0"/><line x1="42.0" y1="115.5" x2="28.5" y2="119.2"/><line x1="40.0" y1="100.0" x2="18.0" y2="100.0"/><line x1="42.0" y1="84.5" x2="28.5" y2="80.8"/><line x1="48.0" y1="70.0" x2="29.0" y2="59.0"/><line x1="57.6" y1="57.6" x2="47.7" y2="47.7"/><line x1="70.0" y1="48.0" x2="59.0" y2="29.0"/><line x1="84.5" y1="42.0" x2="80.8" y2="28.5"/><line x1="100.0" y1="40.0" x2="100.0" y2="18.0"/><line x1="115.5" y1="42.0" x2="119.2" y2="28.5"/><line x1="130.0" y1="48.0" x2="141.0" y2="29.0"/><line x1="142.4" y1="57.6" x2="152.3" y2="47.7"/><line x1="152.0" y1="70.0" x2="171.0" y2="59.0"/><line x1="158.0" y1="84.5" x2="171.5" y2="80.8"/></g><circle cx="100" cy="100" r="50" fill="none" stroke="#8f7738" stroke-width="2"/><circle cx="100" cy="100" r="42" fill="none" stroke="#c2a15a" stroke-width="2"/><circle cx="100" cy="100" r="11" fill="#c2a15a"/></svg><span class="wm">theindiaproject<b>.world</b></span></div>
   <div class="coords mono" id="coords">LAT 8°–37° N · LON 68°–97° E</div>
   <nav class="top">
     <div class="langs" id="langs">
@@ -281,6 +290,7 @@
 
 <!-- ===================== HERO ===================== -->
 <section class="hero" id="top">
+  <svg class="sunmark hero-sun" viewBox="0 0 200 200" aria-hidden="true"><g class="rays" stroke="#c2a15a" stroke-width="1.4" stroke-linecap="round"><line x1="160.0" y1="100.0" x2="182.0" y2="100.0"/><line x1="158.0" y1="115.5" x2="171.5" y2="119.2"/><line x1="152.0" y1="130.0" x2="171.0" y2="141.0"/><line x1="142.4" y1="142.4" x2="152.3" y2="152.3"/><line x1="130.0" y1="152.0" x2="141.0" y2="171.0"/><line x1="115.5" y1="158.0" x2="119.2" y2="171.5"/><line x1="100.0" y1="160.0" x2="100.0" y2="182.0"/><line x1="84.5" y1="158.0" x2="80.8" y2="171.5"/><line x1="70.0" y1="152.0" x2="59.0" y2="171.0"/><line x1="57.6" y1="142.4" x2="47.7" y2="152.3"/><line x1="48.0" y1="130.0" x2="29.0" y2="141.0"/><line x1="42.0" y1="115.5" x2="28.5" y2="119.2"/><line x1="40.0" y1="100.0" x2="18.0" y2="100.0"/><line x1="42.0" y1="84.5" x2="28.5" y2="80.8"/><line x1="48.0" y1="70.0" x2="29.0" y2="59.0"/><line x1="57.6" y1="57.6" x2="47.7" y2="47.7"/><line x1="70.0" y1="48.0" x2="59.0" y2="29.0"/><line x1="84.5" y1="42.0" x2="80.8" y2="28.5"/><line x1="100.0" y1="40.0" x2="100.0" y2="18.0"/><line x1="115.5" y1="42.0" x2="119.2" y2="28.5"/><line x1="130.0" y1="48.0" x2="141.0" y2="29.0"/><line x1="142.4" y1="57.6" x2="152.3" y2="47.7"/><line x1="152.0" y1="70.0" x2="171.0" y2="59.0"/><line x1="158.0" y1="84.5" x2="171.5" y2="80.8"/></g><circle cx="100" cy="100" r="50" fill="none" stroke="#8f7738" stroke-width="1"/><circle cx="100" cy="100" r="42" fill="none" stroke="#c2a15a" stroke-width="1.2"/><circle cx="100" cy="100" r="9" fill="#c2a15a"/></svg>
   <svg class="contours" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
     <g fill="none" stroke="#c2a15a" stroke-width="0.6" opacity="0.22">
       <path d="M-50,720 C300,640 520,780 760,700 1000,620 1220,760 1500,680"/>
@@ -409,7 +419,7 @@
     <div class="comm-grid">
       <div>
         <div class="sec-head reveal"><span class="sec-idx">VII</span><span class="label">The Commission</span></div>
-        <p class="comm-lead reveal">The Desk accepts a limited number of commissions. Begin with a single question. <em>Why now?</em></p>
+        <p class="comm-lead reveal">A limited number of commissions are accepted each season. Begin with a single question. <em>Why now?</em></p>
         <p class="comm-sub reveal">No obligation is created by an enquiry. Your intent is held in confidence and read by one desk only.</p>
       </div>
       <form class="reveal" onsubmit="return sealForm(event)">
@@ -463,7 +473,7 @@
         <p>A private coordination desk. Surveyed, sealed, assigned. Discussed with no one.</p>
       </div>
       <div class="foot-col">
-        <h6>The Desk</h6>
+        <h6>The House</h6>
         <a href="#doctrine">Doctrine</a>
         <a href="#method">The Method</a>
         <a href="#atlas">The Atlas</a>
@@ -474,9 +484,9 @@
         <h6>Correspondence</h6>
         <a href="#commission">Commission a Route</a>
         <a href="#trade">Trade Desk</a>
-        <a href="#">Terms of Engagement</a>
-        <a href="#">Privacy &amp; Confidentiality</a>
-        <a href="#">Force Majeure &amp; Liability</a>
+        <a href="/legal.html#terms">Terms of Engagement</a>
+        <a href="/legal.html#privacy">Privacy &amp; Confidentiality</a>
+        <a href="/legal.html#force-majeure">Force Majeure &amp; Liability</a>
       </div>
     </div>
     <div class="foot-base">
@@ -534,7 +544,7 @@
   function sealForm(e){
     e.preventDefault();
     var b=document.getElementById('submitBtn');
-    b.textContent='Sealed. The Desk will respond.';
+    b.textContent='Sealed. A reply will follow.';
     b.style.borderColor='#c2a15a';b.style.color='#c2a15a';
     return false;
   }

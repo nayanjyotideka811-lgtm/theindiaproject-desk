@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>The Desk — Visiting Card</title>
+<title>theindiaproject.world — Visiting Card</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
@@ -48,10 +48,13 @@
   .spec td{padding:7px 0;border-bottom:1px solid var(--rule);font-size:11px;letter-spacing:.05em;color:var(--bone-dim);vertical-align:top}
   .spec td:first-child{color:var(--bone-faint);text-transform:uppercase;letter-spacing:.14em;font-size:9.5px;width:38%}
   @media print{body{background:#fff;padding:0}.note,.cap,.spec{display:none}.cards{gap:0}.card{box-shadow:none;page-break-after:always}}
+
+  .rays{transform-origin:100px 100px;animation:sunspin 70s linear infinite}
+  @keyframes sunspin{to{transform:rotate(360deg)}}
 </style>
 </head>
 <body>
-  <div class="note">The Desk · Visiting Card · Front &amp; Reverse</div>
+  <div class="note">theindiaproject.world · Visiting Card · Front &amp; Reverse</div>
   <div class="cards">
     <div>
       <div class="card front">
@@ -59,12 +62,12 @@
         <svg class="seal" viewBox="0 0 200 200" aria-label="seal">
           <circle cx="100" cy="100" r="88" fill="none" stroke="#8f7738" stroke-width="1.4"/>
           <circle cx="100" cy="100" r="80" fill="none" stroke="#c2a15a" stroke-width="0.8"/>
-          <text x="100" y="94" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="52" fill="#e9e3d6" font-weight="300">T·D</text>
+          <g class="rays" stroke="#c2a15a" stroke-width="2.5" stroke-linecap="round"><line x1="160.0" y1="100.0" x2="182.0" y2="100.0"/><line x1="158.0" y1="115.5" x2="171.5" y2="119.2"/><line x1="152.0" y1="130.0" x2="171.0" y2="141.0"/><line x1="142.4" y1="142.4" x2="152.3" y2="152.3"/><line x1="130.0" y1="152.0" x2="141.0" y2="171.0"/><line x1="115.5" y1="158.0" x2="119.2" y2="171.5"/><line x1="100.0" y1="160.0" x2="100.0" y2="182.0"/><line x1="84.5" y1="158.0" x2="80.8" y2="171.5"/><line x1="70.0" y1="152.0" x2="59.0" y2="171.0"/><line x1="57.6" y1="142.4" x2="47.7" y2="152.3"/><line x1="48.0" y1="130.0" x2="29.0" y2="141.0"/><line x1="42.0" y1="115.5" x2="28.5" y2="119.2"/><line x1="40.0" y1="100.0" x2="18.0" y2="100.0"/><line x1="42.0" y1="84.5" x2="28.5" y2="80.8"/><line x1="48.0" y1="70.0" x2="29.0" y2="59.0"/><line x1="57.6" y1="57.6" x2="47.7" y2="47.7"/><line x1="70.0" y1="48.0" x2="59.0" y2="29.0"/><line x1="84.5" y1="42.0" x2="80.8" y2="28.5"/><line x1="100.0" y1="40.0" x2="100.0" y2="18.0"/><line x1="115.5" y1="42.0" x2="119.2" y2="28.5"/><line x1="130.0" y1="48.0" x2="141.0" y2="29.0"/><line x1="142.4" y1="57.6" x2="152.3" y2="47.7"/><line x1="152.0" y1="70.0" x2="171.0" y2="59.0"/><line x1="158.0" y1="84.5" x2="171.5" y2="80.8"/></g><circle cx="100" cy="100" r="11" fill="#c2a15a"/>
           <line x1="66" y1="118" x2="134" y2="118" stroke="#8f7738" stroke-width="0.8"/>
           <text x="100" y="140" text-anchor="middle" font-family="Space Mono,monospace" font-size="8" letter-spacing="2.5" fill="#a49d8d">UNDER SEAL</text>
         </svg>
         <div class="wm">theindiaproject<b>.world</b></div>
-        <div class="desk">The Desk</div>
+        <div class="desk">Private Coordination</div>
         <div class="sig">surveyed · sealed · assigned</div>
         <div class="co">LAT 8°–37° N · LON 68°–97° E</div>
       </div>
@@ -76,9 +79,9 @@
         <div class="doctrine">We do not advertise stays. <em>We assign them.</em></div>
         <div class="rows">
           <div class="row"><span class="k">Correspondent</span><span class="v">—— ——</span></div>
-          <div class="row"><span class="k">Title</span><span class="v">Coordinating Desk</span></div>
+          <div class="row"><span class="k">Title</span><span class="v">Private Coordination</span></div>
           <div class="row"><span class="k">Secure line</span><span class="v">+91 ·· ···· ····</span></div>
-          <div class="row"><span class="k">Correspondence</span><span class="v">desk@theindiaproject.world</span></div>
+          <div class="row"><span class="k">Correspondence</span><span class="v">commission@theindiaproject.world</span></div>
         </div>
       </div>
       <div class="cap">Reverse</div>
