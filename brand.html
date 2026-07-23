@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Desk — Brand System &amp; Seal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=EB+Garamond:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#0b0b0c;--ink-2:#111114;--bone:#e9e3d6;--bone-dim:#a49d8d;--bone-faint:#6f6a5e;
+    --gold:#c2a15a;--gold-dim:#8f7738;--wax:#7c2427;--rule:rgba(233,227,214,0.14);--rule-strong:rgba(233,227,214,0.28);
+    --serif:"Cormorant Garamond",Georgia,serif;--body:"EB Garamond",Georgia,serif;--mono:"Space Mono",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--ink);color:var(--bone);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1120px;margin:0 auto;padding:70px 44px}
+  .label{font-family:var(--mono);font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--bone-dim)}
+  .idx{font-family:var(--mono);font-size:11px;color:var(--gold-dim);letter-spacing:.2em}
+  h1{font-family:var(--serif);font-weight:300;font-size:clamp(2.2rem,5vw,3.6rem);line-height:1.08;margin:22px 0 8px}
+  h2{font-family:var(--serif);font-weight:400;font-size:1.9rem;margin-bottom:26px}
+  .sub{color:var(--bone-dim);font-style:italic;font-family:var(--serif);font-size:1.3rem}
+  section{padding:56px 0;border-top:1px solid var(--rule)}
+  .head{display:flex;gap:14px;align-items:baseline;margin-bottom:30px}
+  .grid2{display:grid;grid-template-columns:1fr;gap:40px}
+  @media(min-width:780px){.grid2{grid-template-columns:1fr 1fr}}
+  /* seal */
+  .seal-stage{display:flex;flex-wrap:wrap;gap:50px;align-items:center}
+  .seal-lg{width:190px;height:190px;flex:0 0 auto}
+  .seal-desc p{color:var(--bone-dim);margin-bottom:12px;max-width:44ch}
+  .wordmark{font-family:var(--mono);font-size:13px;letter-spacing:.24em;text-transform:uppercase}
+  .wordmark b{color:var(--gold);font-weight:400}
+  /* palette */
+  .sw{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:2px;border:1px solid var(--rule)}
+  .chip{padding:26px 18px;min-height:130px;display:flex;flex-direction:column;justify-content:flex-end;border-right:1px solid var(--rule)}
+  .chip .n{font-family:var(--mono);font-size:11px;letter-spacing:.1em}
+  .chip .h{font-family:var(--mono);font-size:11px;color:rgba(255,255,255,.55);margin-top:4px}
+  /* type */
+  .spec{border:1px solid var(--rule);padding:30px;margin-bottom:20px}
+  .spec .big{font-family:var(--serif);font-weight:300;font-size:2.6rem;line-height:1.05}
+  .spec .meta{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--bone-faint);margin-top:16px;text-transform:uppercase}
+  .mono-spec .big{font-family:var(--mono);font-weight:400;font-size:1.7rem;letter-spacing:.06em}
+  /* voice */
+  .rulecard{border:1px solid var(--rule);padding:24px 26px}
+  .rulecard h4{font-family:var(--serif);font-size:1.4rem;font-weight:500;margin-bottom:10px}
+  .rulecard p{color:var(--bone-dim);font-size:15px}
+  .do-dont{display:grid;grid-template-columns:1fr;gap:16px}
+  @media(min-width:680px){.do-dont{grid-template-columns:1fr 1fr}}
+  .dd{border:1px solid var(--rule);padding:22px}
+  .dd .t{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:14px}
+  .dd.do .t{color:var(--gold)}.dd.dont .t{color:var(--wax)}
+  .dd ul{list-style:none}.dd li{padding:7px 0;border-bottom:1px solid var(--rule);font-size:15px;color:var(--bone-dim)}
+  .dd li:last-child{border-bottom:none}
+  .sig{font-family:var(--serif);font-weight:300;font-size:clamp(1.8rem,4vw,2.8rem);text-align:center;padding:36px 0}
+  .sig em{font-style:italic;color:var(--gold)}
+  .foot{border-top:1px solid var(--rule);padding-top:26px;margin-top:20px}
+  .foot p{font-family:var(--mono);font-size:10.5px;color:var(--bone-faint);letter-spacing:.06em}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="label">theindiaproject.world · Brand Instrument · Vol. I</span>
+  <h1>The Desk</h1>
+  <p class="sub">The seal, the palette, the voice — the instrument every asset is cut from.</p>
+
+  <!-- SEAL -->
+  <section>
+    <div class="head"><span class="idx">I</span><span class="label">The Seal</span></div>
+    <div class="seal-stage">
+      <svg class="seal-lg" viewBox="0 0 200 200" aria-label="The Desk seal">
+        <defs>
+          <path id="circ" d="M100,100 m-66,0 a66,66 0 1,1 132,0 a66,66 0 1,1 -132,0"/>
+        </defs>
+        <circle cx="100" cy="100" r="88" fill="none" stroke="#8f7738" stroke-width="1"/>
+        <circle cx="100" cy="100" r="82" fill="none" stroke="#c2a15a" stroke-width="0.6"/>
+        <circle cx="100" cy="100" r="60" fill="none" stroke="#c2a15a" stroke-width="0.6"/>
+        <text font-family="Space Mono,monospace" font-size="9.5" letter-spacing="3.5" fill="#c2a15a">
+          <textPath href="#circ" startOffset="0%">· SURVEYED · SEALED · ASSIGNED · THE DESK </textPath>
+        </text>
+        <text x="100" y="92" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="46" fill="#e9e3d6" font-weight="300">T·D</text>
+        <text x="100" y="118" text-anchor="middle" font-family="Space Mono,monospace" font-size="8" letter-spacing="2" fill="#a49d8d">EST · UNDER SEAL</text>
+        <line x1="70" y1="128" x2="130" y2="128" stroke="#8f7738" stroke-width="0.6"/>
+      </svg>
+      <div class="seal-desc">
+        <div class="wordmark" style="margin-bottom:18px">theindiaproject<b>.world</b> · The Desk</div>
+        <p>The seal is the mark — a coordinate stamp, not a logo. It reads as a document that has been closed and authorised, never as a brand competing for attention.</p>
+        <p>Primary use: gold-on-ink. It may be pressed blind (tone-on-tone) on stationery, or struck once in wax-red for a single point of emphasis. It is never stretched, recoloured beyond these three, or set on a photograph.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PALETTE -->
+  <section>
+    <div class="head"><span class="idx">II</span><span class="label">The Palette</span></div>
+    <div class="sw">
+      <div class="chip" style="background:#0b0b0c"><span class="n" style="color:#e9e3d6">Ink</span><span class="h">#0B0B0C</span></div>
+      <div class="chip" style="background:#111114"><span class="n" style="color:#e9e3d6">Ink II</span><span class="h">#111114</span></div>
+      <div class="chip" style="background:#e9e3d6"><span class="n" style="color:#0b0b0c">Bone</span><span class="h" style="color:rgba(0,0,0,.5)">#E9E3D6</span></div>
+      <div class="chip" style="background:#a49d8d"><span class="n" style="color:#0b0b0c">Bone Dim</span><span class="h" style="color:rgba(0,0,0,.5)">#A49D8D</span></div>
+      <div class="chip" style="background:#c2a15a"><span class="n" style="color:#0b0b0c">Gold</span><span class="h" style="color:rgba(0,0,0,.5)">#C2A15A</span></div>
+      <div class="chip" style="background:#7c2427"><span class="n" style="color:#e9e3d6">Wax</span><span class="h">#7C2427</span></div>
+    </div>
+    <p style="color:var(--bone-dim);margin-top:18px;max-width:60ch">Ink carries everything. Bone is the voice. Gold is the single hairline of authority — used sparingly, never as fill. Wax is struck once per surface, for the one thing that must be sealed.</p>
+  </section>
+
+  <!-- TYPE -->
+  <section>
+    <div class="head"><span class="idx">III</span><span class="label">The Type</span></div>
+    <div class="spec">
+      <div class="big">India is not a destination.<br/>It is a route.</div>
+      <div class="meta">Cormorant Garamond · Light 300 / Italic · Display &amp; voice</div>
+    </div>
+    <div class="spec mono-spec">
+      <div class="big">LAT 8°–37° N · LON 68°–97° E</div>
+      <div class="meta">Space Mono · 400 / 700 · Coordinates, labels, the instrument register</div>
+    </div>
+    <p style="color:var(--bone-dim);max-width:60ch">Two typefaces, two jobs. The serif speaks; the mono measures. Body copy is set in EB Garamond for long-form legibility. Nothing else is admitted.</p>
+  </section>
+
+  <!-- VOICE -->
+  <section>
+    <div class="head"><span class="idx">IV</span><span class="label">The Voice</span></div>
+    <div class="grid2" style="margin-bottom:26px">
+      <div class="rulecard"><h4>The Desk speaks, never a person.</h4><p>Correspondence never uses "I". The Desk assigns, surveys, confirms. Authority is institutional, quiet, and absolute.</p></div>
+      <div class="rulecard"><h4>We assign — we do not advertise.</h4><p>Stays are revealed in sealed memos, never displayed. Language evokes; it never sells. Every commitment reads as an experience, not an offer.</p></div>
+    </div>
+    <div class="do-dont">
+      <div class="dd do"><div class="t">Struck this way</div><ul>
+        <li>"Every coordinate is walked before it is offered."</li>
+        <li>"The frontier is not closed. It is coordinated."</li>
+        <li>"Discussed with no one."</li>
+        <li>Numbers only when sourced.</li>
+      </ul></div>
+      <div class="dd dont"><div class="t">Never this way</div><ul>
+        <li>"We offer luxury tour packages!"</li>
+        <li>"Book now — limited availability."</li>
+        <li>"I'd love to help you plan…"</li>
+        <li>Unsourced statistics of any kind.</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <!-- SIGNATURE -->
+  <section>
+    <div class="head"><span class="idx">V</span><span class="label">The Signature — one form, everywhere</span></div>
+    <div class="sig">surveyed, <em>sealed,</em> assigned</div>
+    <p style="text-align:center;color:var(--bone-faint);font-family:var(--mono);font-size:11px;letter-spacing:.14em">NO SERIAL "AND". THREE WORDS. IDENTICAL IN META, HERO, FOOTER, SEAL, CARD, AND SOCIAL.</p>
+  </section>
+
+  <div class="foot">
+    <p>© 2026 theindiaproject.world · Marks &amp; method protected under the Indian Copyright Act, 1957. · Brand Instrument Vol. I</p>
+  </div>
+</div>
+</body>
+</html>

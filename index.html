@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>theindiaproject.world · The Desk — Private Coordination Across India</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<meta name="description" content="A private coordination desk that surveys, seals, and assigns routes across India. We do not advertise stays. We assign them." />
+
+<!-- Entity clarity: declared explicitly as a travel service, not real estate -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TravelAgency",
+  "name": "The Desk — theindiaproject.world",
+  "url": "https://theindiaproject.world",
+  "description": "A private coordination desk that surveys, seals, and assigns routes across India.",
+  "areaServed": { "@type": "Country", "name": "India" },
+  "knowsLanguage": ["en","fr","hi","es","de","ar"],
+  "sameAs": []
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+<style>
+  :root{
+    --ink:#0b0b0c;
+    --ink-2:#111114;
+    --bone:#e9e3d6;
+    --bone-dim:#a49d8d;
+    --bone-faint:#6f6a5e;
+    --gold:#c2a15a;
+    --gold-dim:#8f7738;
+    --wax:#7c2427;
+    --rule:rgba(233,227,214,0.14);
+    --rule-strong:rgba(233,227,214,0.28);
+    --serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+    --body:"EB Garamond",Georgia,serif;
+    --mono:"Space Mono",ui-monospace,"Courier New",monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--ink);
+    color:var(--bone);
+    font-family:var(--body);
+    font-size:18px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--wax);color:var(--bone)}
+  a{color:inherit;text-decoration:none}
+  .mono{font-family:var(--mono)}
+  .label{
+    font-family:var(--mono);
+    font-size:10.5px;
+    letter-spacing:.32em;
+    text-transform:uppercase;
+    color:var(--bone-dim);
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 40px}
+  section{position:relative}
+  .rule{height:1px;background:var(--rule);width:100%}
+
+  /* ---------- Top bar ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 40px;
+    background:linear-gradient(to bottom,rgba(11,11,12,.92),rgba(11,11,12,0));
+    backdrop-filter:blur(3px);
+  }
+  .brand{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--bone)}
+  .brand span{color:var(--gold)}
+  .coords{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:var(--bone-faint);display:none}
+  @media(min-width:960px){.coords{display:block}}
+  nav.top{display:flex;align-items:center;gap:22px}
+  .langs{display:flex;gap:12px}
+  .langs button{
+    background:none;border:none;cursor:pointer;
+    font-family:var(--mono);font-size:11px;letter-spacing:.1em;
+    color:var(--bone-faint);padding:2px 0;transition:color .3s;
+  }
+  .langs button:hover{color:var(--bone-dim)}
+  .langs button.active{color:var(--gold)}
+  .commission-link{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--bone);border-bottom:1px solid var(--gold-dim);padding-bottom:3px;transition:border-color .3s
+  }
+  .commission-link:hover{border-color:var(--gold)}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+    padding:120px 40px 80px;position:relative;overflow:hidden;
+  }
+  .contours{position:absolute;inset:0;z-index:0;opacity:.5;pointer-events:none}
+  .hero .wrap{position:relative;z-index:2;width:100%;padding:0}
+  .hero-kicker{margin-bottom:34px}
+  .hero h1{
+    font-family:var(--serif);font-weight:300;
+    font-size:clamp(2.5rem,6.2vw,5.4rem);line-height:1.06;letter-spacing:-.01em;
+    max-width:16ch;margin-bottom:30px;
+  }
+  .hero h1 em{font-style:italic;color:var(--gold)}
+  .hero-sub{font-family:var(--serif);font-weight:300;font-size:clamp(1.1rem,2.1vw,1.5rem);color:var(--bone-dim);max-width:44ch;font-style:italic;margin-bottom:46px}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:18px;align-items:center}
+  .seal-btn{
+    display:inline-flex;align-items:center;gap:14px;
+    background:none;border:1px solid var(--rule-strong);color:var(--bone);cursor:pointer;
+    font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+    padding:16px 26px;transition:all .35s;
+  }
+  .seal-btn:hover{border-color:var(--gold);color:#fff;background:rgba(194,161,90,.06)}
+  .ghost-btn{
+    font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--bone-dim);
+    border-bottom:1px solid transparent;padding-bottom:4px;transition:all .3s;cursor:pointer;background:none;border-top:none;border-left:none;border-right:none;
+  }
+  .ghost-btn:hover{color:var(--bone);border-bottom-color:var(--rule-strong)}
+  .hero-foot{position:absolute;left:40px;right:40px;bottom:34px;z-index:2;display:flex;justify-content:space-between;align-items:end}
+  .scrollcue{writing-mode:vertical-rl;font-family:var(--mono);font-size:10px;letter-spacing:.3em;color:var(--bone-faint);text-transform:uppercase}
+
+  /* ---------- Section scaffold ---------- */
+  .band{padding:130px 0}
+  .sec-head{display:flex;gap:16px;align-items:baseline;margin-bottom:56px}
+  .sec-idx{font-family:var(--mono);font-size:11px;color:var(--gold-dim);letter-spacing:.2em}
+  .sec-title{font-family:var(--serif);font-weight:300;font-size:clamp(1.8rem,3.6vw,2.9rem);line-height:1.1}
+
+  /* Doctrine */
+  .doctrine .statement{font-family:var(--serif);font-weight:300;font-size:clamp(2rem,5vw,3.8rem);line-height:1.14;max-width:20ch;margin-bottom:40px}
+  .doctrine .statement em{font-style:italic;color:var(--gold)}
+  .doctrine .cols{display:grid;grid-template-columns:1fr;gap:34px;max-width:760px}
+  @media(min-width:760px){.doctrine .cols{grid-template-columns:1fr 1fr}}
+  .doctrine .cols p{color:var(--bone-dim);font-size:17px}
+
+  /* Six passes */
+  .passes{display:grid;grid-template-columns:1fr;border-top:1px solid var(--rule)}
+  @media(min-width:720px){.passes{grid-template-columns:1fr 1fr}}
+  .pass{
+    border-bottom:1px solid var(--rule);padding:34px 30px 34px 0;position:relative;
+    display:flex;gap:24px;align-items:flex-start;
+  }
+  @media(min-width:720px){.pass:nth-child(odd){padding-right:44px;border-right:1px solid var(--rule)}
+  .pass:nth-child(even){padding-left:44px}}
+  .pass .num{font-family:var(--mono);font-size:12px;color:var(--gold);letter-spacing:.1em;padding-top:6px;min-width:32px}
+  .pass .body h4{font-family:var(--serif);font-weight:500;font-size:1.5rem;margin-bottom:8px;letter-spacing:.005em}
+  .pass .body p{color:var(--bone-dim);font-size:15.5px;line-height:1.5}
+  .pass .stamp{
+    position:absolute;right:0;top:30px;font-family:var(--mono);font-size:9px;letter-spacing:.24em;
+    color:var(--wax);border:1px solid rgba(124,36,39,.55);padding:3px 7px;border-radius:2px;
+    transform:rotate(-7deg);opacity:0;transition:opacity .7s ease;text-transform:uppercase;
+  }
+  @media(min-width:720px){.pass:nth-child(even) .stamp{right:0}}
+  .pass.verified .stamp{opacity:1}
+
+  /* Atlas */
+  .atlas-row{
+    display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:center;
+    border-bottom:1px solid var(--rule);padding:26px 0;cursor:default;transition:padding-left .4s;
+  }
+  .atlas-row:first-child{border-top:1px solid var(--rule)}
+  .atlas-row:hover{padding-left:14px}
+  .atlas-row .rn{font-family:var(--mono);font-size:11px;color:var(--gold-dim)}
+  .atlas-row .rt{font-family:var(--serif);font-size:clamp(1.3rem,2.6vw,2rem);font-weight:300}
+  .atlas-row .rc{font-family:var(--mono);font-size:10.5px;color:var(--bone-faint);letter-spacing:.12em;text-align:right}
+
+  /* Escalation */
+  .escalation{background:var(--ink-2)}
+  .esc-graph{width:100%;height:auto;margin-top:20px}
+  .esc-note{color:var(--bone-dim);max-width:52ch;margin-top:26px;font-size:16px}
+
+  /* Portfolios */
+  .ports{display:grid;grid-template-columns:1fr;gap:0;border-top:1px solid var(--rule)}
+  @media(min-width:640px){.ports{grid-template-columns:1fr 1fr}}
+  @media(min-width:980px){.ports{grid-template-columns:1fr 1fr 1fr 1fr}}
+  .port{
+    border-bottom:1px solid var(--rule);border-right:1px solid var(--rule);
+    padding:30px 24px;min-height:210px;display:flex;flex-direction:column;justify-content:space-between;
+    position:relative;overflow:hidden;cursor:pointer;
+  }
+  .port .pn{font-family:var(--mono);font-size:11px;color:var(--gold-dim)}
+  .port h5{font-family:var(--serif);font-weight:400;font-size:1.5rem;line-height:1.12;margin-top:auto}
+  .port .desc{
+    font-size:14px;color:var(--bone-dim);margin-top:12px;max-height:0;opacity:0;overflow:hidden;
+    transition:max-height .5s ease,opacity .4s ease,margin-top .4s;
+  }
+  .port:hover .desc,.port:focus-within .desc{max-height:120px;opacity:1}
+  .port .seal-mark{position:absolute;top:22px;right:22px;width:26px;height:26px;opacity:.5;transition:opacity .4s,transform .5s}
+  .port:hover .seal-mark{opacity:1;transform:rotate(20deg)}
+  .ports-note{margin-top:22px;color:var(--bone-faint);font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase}
+
+  /* Journal */
+  .journal{display:grid;grid-template-columns:1fr;gap:0;border-top:1px solid var(--rule)}
+  @media(min-width:820px){.journal{grid-template-columns:1fr 1fr 1fr}}
+  .jent{border-bottom:1px solid var(--rule);padding:32px 26px 40px 0;transition:padding-left .35s}
+  .jent:hover{padding-left:10px}
+  .jent .jk{color:var(--gold-dim)}
+  .jent h6{font-family:var(--serif);font-weight:400;font-size:1.4rem;margin:14px 0 10px}
+  .jent p{color:var(--bone-dim);font-size:15px}
+  .jent .more{display:inline-block;margin-top:18px;font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--bone-faint);text-transform:uppercase}
+
+  /* Commission */
+  .commission{background:var(--ink-2)}
+  .comm-grid{display:grid;grid-template-columns:1fr;gap:60px}
+  @media(min-width:900px){.comm-grid{grid-template-columns:1fr 1fr}}
+  .comm-lead{font-family:var(--serif);font-weight:300;font-size:clamp(1.9rem,4vw,3rem);line-height:1.15}
+  .comm-lead em{font-style:italic;color:var(--gold)}
+  .comm-sub{color:var(--bone-dim);margin-top:22px;max-width:40ch}
+  .intents{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:26px}
+  .intent{
+    font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--bone-dim);
+    border:1px solid var(--rule);padding:11px 15px;cursor:pointer;transition:all .3s;background:none;
+  }
+  .intent:hover{border-color:var(--rule-strong);color:var(--bone)}
+  .intent.sel{border-color:var(--gold);color:var(--gold);background:rgba(194,161,90,.05)}
+  .field{margin-bottom:20px}
+  .field label{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--bone-faint);margin-bottom:9px}
+  .field input,.field textarea{
+    width:100%;background:transparent;border:none;border-bottom:1px solid var(--rule-strong);
+    color:var(--bone);font-family:var(--body);font-size:17px;padding:8px 0;
+  }
+  .field input:focus,.field textarea:focus{outline:none;border-bottom-color:var(--gold)}
+  .submit{
+    margin-top:12px;background:none;border:1px solid var(--gold-dim);color:var(--bone);cursor:pointer;
+    font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;padding:16px 30px;transition:all .35s;
+  }
+  .submit:hover{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+
+  /* Trade desk */
+  .trade{border-top:1px solid var(--rule-strong)}
+  .trade-inner{display:grid;grid-template-columns:1fr;gap:40px;align-items:center}
+  @media(min-width:860px){.trade-inner{grid-template-columns:1.3fr 1fr}}
+  .trade h3{font-family:var(--serif);font-weight:300;font-size:clamp(1.6rem,3vw,2.4rem);line-height:1.15;margin:14px 0 18px}
+  .trade p{color:var(--bone-dim);max-width:48ch}
+  .trade-meta{display:flex;gap:40px;margin-top:30px}
+  .trade-meta .m .n{font-family:var(--serif);font-size:2.2rem;color:var(--gold)}
+  .trade-meta .m .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--bone-faint);margin-top:4px}
+  .trade-cta{border:1px solid var(--rule);padding:40px 34px}
+  .trade-cta .label{margin-bottom:14px;display:block}
+
+  /* Footer */
+  footer{border-top:1px solid var(--rule);padding:70px 0 50px}
+  .foot-grid{display:grid;grid-template-columns:1fr;gap:40px}
+  @media(min-width:760px){.foot-grid{grid-template-columns:2fr 1fr 1fr}}
+  .foot-brand .mark{font-family:var(--serif);font-size:1.6rem;font-weight:300}
+  .foot-brand p{color:var(--bone-faint);font-size:14px;margin-top:14px;max-width:34ch}
+  .foot-col h6{font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--bone-faint);margin-bottom:16px}
+  .foot-col a{display:block;color:var(--bone-dim);font-size:15px;padding:5px 0;transition:color .3s}
+  .foot-col a:hover{color:var(--bone)}
+  .foot-base{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;margin-top:56px;padding-top:26px;border-top:1px solid var(--rule)}
+  .foot-base p{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--bone-faint)}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity 1s ease,transform 1s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  [dir="rtl"]{direction:rtl}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">theindiaproject<span>.world</span> · The Desk</div>
+  <div class="coords mono" id="coords">LAT 8°–37° N · LON 68°–97° E</div>
+  <nav class="top">
+    <div class="langs" id="langs">
+      <button data-l="en" class="active">EN</button>
+      <button data-l="fr">FR</button>
+      <button data-l="hi">हिं</button>
+      <button data-l="es">ES</button>
+      <button data-l="de">DE</button>
+      <button data-l="ar">ع</button>
+    </div>
+    <a href="#commission" class="commission-link">Commission →</a>
+  </nav>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="top">
+  <svg class="contours" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <g fill="none" stroke="#c2a15a" stroke-width="0.6" opacity="0.22">
+      <path d="M-50,720 C300,640 520,780 760,700 1000,620 1220,760 1500,680"/>
+      <path d="M-50,640 C300,560 540,700 780,620 1020,540 1240,680 1500,600"/>
+      <path d="M-50,560 C320,500 560,620 800,540 1040,460 1260,600 1500,520"/>
+      <path d="M-50,480 C340,430 580,540 820,470 1060,400 1280,520 1500,450"/>
+      <path d="M-50,400 C360,360 600,460 840,400 1080,340 1300,440 1500,390"/>
+      <path d="M-50,320 C380,290 620,380 860,330 1100,280 1320,360 1500,330"/>
+      <path d="M-50,240 C400,220 640,300 880,260 1120,220 1340,290 1500,270"/>
+    </g>
+  </svg>
+  <div class="wrap">
+    <div class="hero-kicker label">A Private Coordination Desk · Est. under seal</div>
+    <h1 id="heroLine">India is not a destination. It is a route — <em>surveyed, sealed, assigned.</em></h1>
+    <p class="hero-sub">For those who require the subcontinent handled in full, and discussed with no one.</p>
+    <div class="hero-actions">
+      <button class="seal-btn" onclick="document.getElementById('commission').scrollIntoView()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c2a15a" stroke-width="1.4"><circle cx="12" cy="12" r="9"/><path d="M8 12l2.5 2.5L16 9"/></svg>
+        Request an Assessment
+      </button>
+      <button class="ghost-btn" onclick="document.getElementById('doctrine').scrollIntoView()">Enter the Doctrine</button>
+    </div>
+  </div>
+  <div class="hero-foot">
+    <div class="label">No. 001 / Sealed</div>
+    <div class="scrollcue">Scroll · Descend</div>
+  </div>
+</section>
+
+<!-- ===================== DOCTRINE ===================== -->
+<section class="band doctrine" id="doctrine">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="sec-idx">I</span><span class="label">The Doctrine</span></div>
+    <p class="statement reveal">We do not advertise stays. <em>We assign them.</em></p>
+    <div class="cols">
+      <p class="reveal">Every coordinate is walked before it is offered. Nothing reaches you on a supplier's word — distance, terrain and timing are checked against our own matrix before a single leg is confirmed.</p>
+      <p class="reveal">The stays we assign are unlisted. Access is held through lineage and private agreement, never through availability. What we hold, we do not publish. What we publish, we do not sell.</p>
+    </div>
+  </div>
+</section>
+<div class="wrap"><div class="rule"></div></div>
+
+<!-- ===================== SIX PASSES ===================== -->
+<section class="band" id="method">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="sec-idx">II</span><span class="label">The Method — Six Passes</span></div>
+    <p class="statement reveal" style="font-size:clamp(1.6rem,3.4vw,2.6rem);max-width:26ch;margin-bottom:50px">Six passes stand between a route and <em>your name on it.</em></p>
+    <div class="passes" id="passes">
+      <div class="pass"><div class="num">01</div><div class="body"><h4>The Surveyor's Audit</h4><p>Actual topography — not straight lines on a map. Gradient, turning radius and ground clearance, verified in person.</p></div><div class="stamp">Verified</div></div>
+      <div class="pass"><div class="num">02</div><div class="body"><h4>The Five-Hour Rule</h4><p>No driving leg exceeds five hours. Where terrain insists otherwise, the journey leaves the road — rail, rotor or wing.</p></div><div class="stamp">Verified</div></div>
+      <div class="pass"><div class="num">03</div><div class="body"><h4>The Contingency Stress-Test</h4><p>What fails first is identified, and answered, before you arrive. Every route carries its own second route.</p></div><div class="stamp">Verified</div></div>
+      <div class="pass"><div class="num">04</div><div class="body"><h4>The Permit &amp; Bureaucracy Check</h4><p>Inner Line and Protected Area requirements cleared in advance. The frontier is not closed — it is coordinated.</p></div><div class="stamp">Verified</div></div>
+      <div class="pass"><div class="num">05</div><div class="body"><h4>The Client Interrogation</h4><p>Every question a guest could raise, answered before it is asked. Nothing is left to the day itself.</p></div><div class="stamp">Verified</div></div>
+      <div class="pass"><div class="num">06</div><div class="body"><h4>Fact &amp; Source Verification</h4><p>Nothing confirmed on assumption. Everything confirmed at source. This is the discipline you never see.</p></div><div class="stamp">Verified</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ATLAS ===================== -->
+<section class="band" id="atlas">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="sec-idx">III</span><span class="label">The Atlas — Surveyed Corridors</span></div>
+    <div class="reveal">
+      <div class="atlas-row"><span class="rn">01</span><span class="rt">The Royal Rajputana Route</span><span class="rc">27°N · Desert Forts &amp; Marble</span></div>
+      <div class="atlas-row"><span class="rn">02</span><span class="rt">The High-Altitude Sanctuary</span><span class="rc">34°N · Ladakh &amp; The Roof</span></div>
+      <div class="atlas-row"><span class="rn">03</span><span class="rt">Deccan &amp; Southern Spice Trail</span><span class="rc">11°N · Backwater &amp; Plantation</span></div>
+      <div class="atlas-row"><span class="rn">04</span><span class="rt">The Sacred East &amp; Cloud Forest</span><span class="rc">26°N · Frontier &amp; Rain</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ESCALATION ===================== -->
+<section class="band escalation" id="escalation">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="sec-idx">IV</span><span class="label">The Ascent — Escalation Protocol</span></div>
+    <p class="statement reveal" style="font-size:clamp(1.6rem,3.4vw,2.5rem);max-width:24ch">Every route climbs. The pinnacle is <em>held for the end.</em></p>
+    <svg class="esc-graph reveal" viewBox="0 0 1100 300" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <line x1="40" y1="260" x2="1060" y2="260" stroke="rgba(233,227,214,0.18)" stroke-width="1"/>
+      <polyline points="60,240 300,205 540,165 780,110 1000,40" fill="none" stroke="#c2a15a" stroke-width="1.4"/>
+      <g font-family="'Space Mono',monospace" font-size="11" fill="#a49d8d" letter-spacing="1">
+        <circle cx="60" cy="240" r="3.5" fill="#7c2427"/><text x="60" y="285" text-anchor="middle">IMMERSION</text>
+        <circle cx="300" cy="205" r="3.5" fill="#8f7738"/><text x="300" y="285" text-anchor="middle">CULTURE</text>
+        <circle cx="540" cy="165" r="3.5" fill="#8f7738"/><text x="540" y="285" text-anchor="middle">SECLUSION</text>
+        <circle cx="780" cy="110" r="3.5" fill="#c2a15a"/><text x="780" y="285" text-anchor="middle">RARITY</text>
+        <circle cx="1000" cy="40" r="5" fill="#c2a15a"/><text x="1000" y="285" text-anchor="middle" fill="#c2a15a">THE PINNACLE</text>
+      </g>
+      <text x="1000" y="28" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="15" fill="#e9e3d6" font-style="italic">final 24–48 hrs</text>
+    </svg>
+    <p class="esc-note reveal">A route begins in the culturally rich and the immersive. It rises — tier by tier, never falling back — and reserves the absolute summit of the assignment for the closing hours, so the journey ends not with departure, but with elevation.</p>
+  </div>
+</section>
+
+<!-- ===================== PORTFOLIOS ===================== -->
+<section class="band" id="portfolios">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="sec-idx">V</span><span class="label">The Portfolios — Eight, Sealed</span></div>
+    <div class="ports reveal">
+      <div class="port" tabindex="0"><span class="pn">i</span><div><h5>The Master Portfolio</h5><div class="desc">The full instrument. Nothing withheld, nothing standard.</div></div><svg class="seal-mark" viewBox="0 0 24 24" fill="none" stroke="#c2a15a" stroke-width="1"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/></svg></div>
+      <div class="port" tabindex="0"><span class="pn">ii</span><div><h5>Commemorative Isolation</h5><div class="desc">A single occasion, sealed off from the world entirely.</div></div><svg class="seal-mark" viewBox="0 0 24 24" fill="none" stroke="#c2a15a" stroke-width="1"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/></svg></div>
+      <div class="port" tabindex="0"><span class="pn">iii</span><div><h5>The Solo Wanderlust Collection</h5><div class="desc">One traveller, the whole apparatus, complete discretion.</div></div><svg class="seal-mark" viewBox="0 0 24 24" fill="none" stroke="#c2a15a" stroke-width="1"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/></svg></div>
+      <div class="port" tabindex="0"><span class="pn">iv</span><div><h5>Conscious Luxury</h5><div class="desc">Provenance verified. Every stay answerable for its ground.</div></div><svg class="seal-mark" viewBox="0 0 24 24" fill="none" stroke="#c2a15a" stroke-width="1"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/></svg></div>
+      <div class="port" tabindex="0"><span class="pn">v</span><div><h5>Holistic Health &amp; Lifestyle</h5><div class="desc">Leave heavier. Return lighter. Restoration, coordinated.</div></div><svg class="seal-mark" viewBox="0 0 24 24" fill="none" stroke="#c2a15a" stroke-width="1"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/></svg></div>
+      <div class="port" tabindex="0"><span class="pn">vi</span><div><h5>The Domestic Traveller Collection</h5><div class="desc">The subcontinent, for those who already know it well.</div></div><svg class="seal-mark" viewBox="0 0 24 24" fill="none" stroke="#c2a15a" stroke-width="1"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/></svg></div>
+      <div class="port" tabindex="0"><span class="pn">vii</span><div><h5>Tribal Heritage &amp; Frontier Circuit</h5><div class="desc">Where fences do not exist and access is arranged.</div></div><svg class="seal-mark" viewBox="0 0 24 24" fill="none" stroke="#c2a15a" stroke-width="1"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/></svg></div>
+      <div class="port" tabindex="0"><span class="pn">viii</span><div><h5>The Seamless Transit Network</h5><div class="desc">Rail, rotor and wing — the road refused where it must be.</div></div><svg class="seal-mark" viewBox="0 0 24 24" fill="none" stroke="#c2a15a" stroke-width="1"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/></svg></div>
+    </div>
+    <p class="ports-note reveal">Each portfolio is opened only on commission. Contents are disclosed under seal.</p>
+  </div>
+</section>
+
+<!-- ===================== JOURNAL ===================== -->
+<section class="band" id="journal">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="sec-idx">VI</span><span class="label">The Journal — Field Notes</span></div>
+    <div class="journal reveal">
+      <div class="jent"><span class="jk label">Timing</span><h6>The Season No One Books</h6><p>Dismantling the October–March myth. Why the monsoon in Kerala and high summer in Ladakh are India's most exclusive windows.</p><span class="more">Read the note →</span></div>
+      <div class="jent"><span class="jk label">Wilderness</span><h6>The Reserves We Hold</h6><p>Where the predator and the herdsman share the slope — and how access is arranged where fences do not exist.</p><span class="more">Read the note →</span></div>
+      <div class="jent"><span class="jk label">Access</span><h6>The Permit Pipeline</h6><p>Inner Line and Protected Area clearances, explained. The frontier is not closed. It is coordinated.</p><span class="more">Read the note →</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== COMMISSION ===================== -->
+<section class="band commission" id="commission">
+  <div class="wrap">
+    <div class="comm-grid">
+      <div>
+        <div class="sec-head reveal"><span class="sec-idx">VII</span><span class="label">The Commission</span></div>
+        <p class="comm-lead reveal">The Desk accepts a limited number of commissions. Begin with a single question. <em>Why now?</em></p>
+        <p class="comm-sub reveal">No obligation is created by an enquiry. Your intent is held in confidence and read by one desk only.</p>
+      </div>
+      <form class="reveal" onsubmit="return sealForm(event)">
+        <div class="field">
+          <label>The shape of it</label>
+          <div class="intents" id="intents">
+            <button type="button" class="intent">A weekend, the two of us</button>
+            <button type="button" class="intent">Time the family will keep</button>
+            <button type="button" class="intent">To mark an occasion</button>
+            <button type="button" class="intent">To disappear entirely</button>
+            <button type="button" class="intent">To go where few are permitted</button>
+            <button type="button" class="intent">To restore body and mind</button>
+          </div>
+        </div>
+        <div class="field"><label>Name</label><input type="text" required placeholder="—" /></div>
+        <div class="field"><label>A line of contact</label><input type="email" required placeholder="name@correspondence" /></div>
+        <div class="field"><label>Why now?</label><textarea rows="2" placeholder="One sentence is enough."></textarea></div>
+        <button class="submit" type="submit" id="submitBtn">Begin the Assessment →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TRADE DESK ===================== -->
+<section class="band trade" id="trade">
+  <div class="wrap trade-inner">
+    <div class="reveal">
+      <span class="label">Front 02 · The White-Label Trade Desk</span>
+      <h3>For the designer and the concierge who cannot afford to be wrong about the ground.</h3>
+      <p>We do not sell you a destination. We sell you structural safety — control over permits, terrain and contingency across the subcontinent, delivered under your own name.</p>
+      <div class="trade-meta">
+        <div class="m"><div class="n">24h</div><div class="l">SLA on trade enquiry</div></div>
+        <div class="m"><div class="n">100%</div><div class="l">Routes audited six times</div></div>
+        <div class="m"><div class="n">NDA</div><div class="l">Credentials on request</div></div>
+      </div>
+    </div>
+    <div class="trade-cta reveal">
+      <span class="label">Open a Trade File</span>
+      <p style="color:var(--bone-dim);font-size:15px;margin-bottom:22px">Boutique travel designers and private concierges in the US, UK and France. Applications reviewed individually.</p>
+      <button class="submit" style="width:100%" onclick="document.getElementById('commission').scrollIntoView()">Apply to the Desk →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="mark">theindiaproject.world</div>
+        <p>A private coordination desk. Surveyed, sealed, assigned. Discussed with no one.</p>
+      </div>
+      <div class="foot-col">
+        <h6>The Desk</h6>
+        <a href="#doctrine">Doctrine</a>
+        <a href="#method">The Method</a>
+        <a href="#atlas">The Atlas</a>
+        <a href="#portfolios">Portfolios</a>
+        <a href="#journal">Journal</a>
+      </div>
+      <div class="foot-col">
+        <h6>Correspondence</h6>
+        <a href="#commission">Commission a Route</a>
+        <a href="#trade">Trade Desk</a>
+        <a href="#">Terms of Engagement</a>
+        <a href="#">Privacy &amp; Confidentiality</a>
+        <a href="#">Force Majeure &amp; Liability</a>
+      </div>
+    </div>
+    <div class="foot-base">
+      <p>© 2026 theindiaproject.world · All rights reserved.</p>
+      <p>Marks &amp; method protected under the Indian Copyright Act, 1957.</p>
+      <p>EN · FR · हिं · ES · DE · ع</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // --- Coordinate ticker (subtle life in the header) ---
+  (function(){
+    var el=document.getElementById('coords');
+    var base="LAT 8°–37° N · LON 68°–97° E";
+    var t=0;
+    setInterval(function(){
+      t+=1;
+      var flick=(Math.sin(t/3)*3+68).toFixed(2);
+      el.textContent="LAT 8°–37° N · LON "+flick+"°–97° E";
+    },1400);
+  })();
+
+  // --- Multilingual hero (demonstration of the multilingual desk) ---
+  var HERO={
+    en:{t:'India is not a destination. It is a route — <em>surveyed, sealed, assigned.</em>',dir:'ltr'},
+    fr:{t:"L'Inde n'est pas une destination. C'est un itinéraire — <em>relevé, scellé, assigné.</em>",dir:'ltr'},
+    hi:{t:'भारत कोई गंतव्य नहीं। यह एक मार्ग है — <em>सर्वेक्षित, मुद्रांकित, नियत।</em>',dir:'ltr'},
+    es:{t:'La India no es un destino. Es una ruta — <em>trazada, sellada, asignada.</em>',dir:'ltr'},
+    de:{t:'Indien ist kein Reiseziel. Es ist eine Route — <em>vermessen, versiegelt, zugewiesen.</em>',dir:'ltr'},
+    ar:{t:'الهند ليست وجهةً، بل مسارٌ — <em>مُسِحَ، وخُتِمَ، وخُصِّص.</em>',dir:'rtl'}
+  };
+  var heroLine=document.getElementById('heroLine');
+  document.querySelectorAll('#langs button').forEach(function(b){
+    b.addEventListener('click',function(){
+      document.querySelectorAll('#langs button').forEach(function(x){x.classList.remove('active')});
+      b.classList.add('active');
+      var d=HERO[b.dataset.l];
+      heroLine.style.opacity=0;
+      setTimeout(function(){
+        heroLine.innerHTML=d.t;
+        heroLine.setAttribute('dir',d.dir);
+        heroLine.style.opacity=1;
+      },260);
+    });
+  });
+  heroLine.style.transition='opacity .3s ease';
+
+  // --- Intent chips ---
+  document.querySelectorAll('#intents .intent').forEach(function(c){
+    c.addEventListener('click',function(){c.classList.toggle('sel')});
+  });
+
+  // --- Form (mock capture) ---
+  function sealForm(e){
+    e.preventDefault();
+    var b=document.getElementById('submitBtn');
+    b.textContent='Sealed. The Desk will respond.';
+    b.style.borderColor='#c2a15a';b.style.color='#c2a15a';
+    return false;
+  }
+
+  // --- Reveal on scroll ---
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(en){ if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);} });
+  },{threshold:.14});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
+
+  // --- Six-pass "stamping" as they enter view ---
+  var pio=new IntersectionObserver(function(es){
+    es.forEach(function(en){
+      if(en.isIntersecting){
+        var passes=Array.prototype.slice.call(document.querySelectorAll('#passes .pass'));
+        passes.forEach(function(p,i){ setTimeout(function(){p.classList.add('verified')}, 260*i); });
+        pio.disconnect();
+      }
+    });
+  },{threshold:.2});
+  var pn=document.getElementById('passes'); if(pn){pio.observe(pn);}
+</script>
+</body>
+</html>

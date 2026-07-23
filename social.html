@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Desk — Social Launch Kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=EB+Garamond:ital,wght@0,400;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#0b0b0c;--ink-2:#111114;--bone:#e9e3d6;--bone-dim:#a49d8d;--bone-faint:#6f6a5e;
+    --gold:#c2a15a;--gold-dim:#8f7738;--wax:#7c2427;--rule:rgba(233,227,214,0.15);--rule-strong:rgba(233,227,214,0.28);
+    --serif:"Cormorant Garamond",Georgia,serif;--body:"EB Garamond",Georgia,serif;--mono:"Space Mono",monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#161616;color:var(--bone);font-family:var(--body);padding:44px 20px;display:flex;flex-direction:column;align-items:center}
+  .khead{text-align:center;margin-bottom:44px}
+  .khead .l{font-family:var(--mono);font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--bone-faint)}
+  .khead h1{font-family:var(--serif);font-weight:300;font-size:2.6rem;margin-top:12px}
+  .block{width:100%;max-width:1120px;margin-bottom:52px}
+  .btitle{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:16px;border-bottom:1px solid var(--rule);padding-bottom:10px}
+  .cap{font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--bone-faint);margin-top:10px}
+  .row{display:flex;flex-wrap:wrap;gap:30px;align-items:flex-start}
+  .label{font-family:var(--mono);font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--bone-dim)}
+
+  /* avatar */
+  .avatar{width:200px;height:200px;border-radius:50%;background:var(--ink);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,.5)}
+  .avatar svg{width:150px;height:150px}
+
+  /* cover banner 1584x396 -> scale .66 => 1045x261 */
+  .cover{width:1045px;max-width:100%;height:261px;background:var(--ink);position:relative;overflow:hidden;box-shadow:0 24px 50px rgba(0,0,0,.5)}
+  .cover .contours{position:absolute;inset:0;opacity:.4}
+  .cover .inner{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:0 60px;z-index:2}
+  .cover h2{font-family:var(--serif);font-weight:300;font-size:2rem;line-height:1.1;max-width:22ch}
+  .cover h2 em{font-style:italic;color:var(--gold)}
+  .cover .sig{font-family:var(--mono);font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--bone-dim);margin-top:16px}
+  .cover .seal-mini{position:absolute;right:54px;top:50%;transform:translateY(-50%);width:120px;height:120px;opacity:.9;z-index:2}
+
+  /* square posts 1080 -> .42 => 454 */
+  .posts{display:flex;flex-wrap:wrap;gap:26px}
+  .post{width:454px;height:454px;background:var(--ink);position:relative;overflow:hidden;box-shadow:0 20px 44px rgba(0,0,0,.5)}
+  .post .frame{position:absolute;inset:22px;border:1px solid var(--rule)}
+  .post .pad{position:absolute;inset:52px;display:flex;flex-direction:column}
+  .post .kick{font-family:var(--mono);font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
+  .post .mid{margin:auto 0}
+  .post .big{font-family:var(--serif);font-weight:300;font-size:2rem;line-height:1.14}
+  .post .big em{font-style:italic;color:var(--gold)}
+  .post .foot{font-family:var(--mono);font-size:8.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--bone-faint);display:flex;justify-content:space-between}
+  .post.center{align-items:center;text-align:center}
+  .post.center .pad{align-items:center;justify-content:center}
+  .post .seal-s{width:74px;height:74px;margin-bottom:20px}
+  .contours-svg path{fill:none;stroke:#c2a15a;stroke-width:.6}
+
+  /* captions/copy */
+  .copy{border:1px solid var(--rule);padding:26px 28px;margin-top:8px}
+  .copy h4{font-family:var(--serif);font-size:1.3rem;font-weight:400;margin-bottom:6px}
+  .copy .plat{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:14px}
+  .copy p{color:var(--bone-dim);font-size:15.5px;line-height:1.6;margin-bottom:12px;white-space:pre-line}
+  .copy .tags{font-family:var(--mono);font-size:12px;color:var(--bone-faint);letter-spacing:.04em}
+  .copy + .copy{margin-top:20px}
+</style>
+</head>
+<body>
+  <div class="khead">
+    <div class="l">theindiaproject.world · Social Launch Kit</div>
+    <h1>The Desk, in the open — on its own terms.</h1>
+  </div>
+
+  <!-- AVATAR + COVER -->
+  <div class="block">
+    <div class="btitle">01 · Profile Mark &amp; Cover</div>
+    <div class="row">
+      <div>
+        <div class="avatar">
+          <svg viewBox="0 0 200 200" aria-label="avatar seal">
+            <circle cx="100" cy="100" r="90" fill="none" stroke="#8f7738" stroke-width="1.2"/>
+            <circle cx="100" cy="100" r="82" fill="none" stroke="#c2a15a" stroke-width="0.7"/>
+            <text x="100" y="94" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="60" fill="#e9e3d6" font-weight="300">T·D</text>
+            <line x1="64" y1="120" x2="136" y2="120" stroke="#8f7738" stroke-width="0.7"/>
+            <text x="100" y="142" text-anchor="middle" font-family="Space Mono,monospace" font-size="8.5" letter-spacing="2.5" fill="#a49d8d">THE DESK</text>
+          </svg>
+        </div>
+        <div class="cap">Avatar · 400×400 · export as PNG</div>
+      </div>
+      <div>
+        <div class="cover">
+          <svg class="contours" viewBox="0 0 1045 261" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <g fill="none" stroke="#c2a15a" stroke-width="0.6" opacity="0.5">
+              <path d="M-20,210 C220,180 380,240 560,205 740,170 900,225 1080,195"/>
+              <path d="M-20,170 C220,140 400,200 580,165 760,130 920,185 1080,155"/>
+              <path d="M-20,130 C240,105 420,160 600,125 780,90 940,145 1080,120"/>
+              <path d="M-20,90 C260,70 440,120 620,88 800,56 960,105 1080,85"/>
+            </g>
+          </svg>
+          <div class="inner">
+            <span class="label" style="margin-bottom:12px">A Private Coordination Desk · India</span>
+            <h2>India is not a destination. It is a route — <em>surveyed, sealed, assigned.</em></h2>
+            <div class="sig">We do not advertise stays. We assign them.</div>
+          </div>
+          <svg class="seal-mini" viewBox="0 0 200 200" aria-hidden="true">
+            <circle cx="100" cy="100" r="88" fill="none" stroke="#c2a15a" stroke-width="0.9"/>
+            <text x="100" y="112" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="46" fill="#e9e3d6" font-weight="300">T·D</text>
+          </svg>
+        </div>
+        <div class="cap">Cover · 1584×396 (LinkedIn) · crops safely to 1500×500 (X)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- POSTS -->
+  <div class="block">
+    <div class="btitle">02 · Feed Templates · 1080×1080</div>
+    <div class="posts">
+      <div>
+        <div class="post center">
+          <div class="frame"></div>
+          <div class="pad">
+            <svg class="seal-s" viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="88" fill="none" stroke="#c2a15a" stroke-width="1.1"/><circle cx="100" cy="100" r="78" fill="none" stroke="#8f7738" stroke-width="0.6"/><text x="100" y="118" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="46" fill="#e9e3d6" font-weight="300">T·D</text></svg>
+            <div class="big">The Desk<br/>is <em>open.</em></div>
+            <div style="font-family:var(--mono);font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:var(--bone-faint);margin-top:22px">Applications by commission only</div>
+          </div>
+        </div>
+        <div class="cap">Announcement</div>
+      </div>
+      <div>
+        <div class="post">
+          <div class="frame"></div>
+          <div class="pad">
+            <div class="kick">The Doctrine</div>
+            <div class="mid"><div class="big">We do not advertise stays.<br/><em>We assign them.</em></div></div>
+            <div class="foot"><span>theindiaproject.world</span><span>No. 001</span></div>
+          </div>
+        </div>
+        <div class="cap">Doctrine quote</div>
+      </div>
+      <div>
+        <div class="post">
+          <div class="frame"></div>
+          <div class="pad">
+            <div class="kick">The Method · Pass 02</div>
+            <div class="mid"><div class="big">No leg exceeds <em>five hours</em> by road.<br/>Where terrain insists — rail, rotor, wing.</div></div>
+            <div class="foot"><span>Surveyed · Sealed · Assigned</span><span>LAT 8°–37°N</span></div>
+          </div>
+        </div>
+        <div class="cap">Method tease</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CAPTIONS -->
+  <div class="block">
+    <div class="btitle">03 · Launch Copy — ready to paste</div>
+
+    <div class="copy">
+      <h4>Launch — the announcement</h4>
+      <div class="plat">Instagram · Facebook</div>
+      <p>India is not a destination. It is a route — surveyed, sealed, assigned.
+
+The Desk is a private coordination service for those who require the subcontinent handled in full, and discussed with no one. We do not advertise stays. We assign them.
+
+Six passes stand between a route and your name on it. The rest is silence.
+
+Applications, by commission only. Link in bio.</p>
+      <div class="tags">#PrivateTravel #India #BespokeTravel #TheDesk #SealedRoutes #LuxuryTravelDesign</div>
+    </div>
+
+    <div class="copy">
+      <h4>Launch — the trade note</h4>
+      <div class="plat">LinkedIn</div>
+      <p>We are opening a limited number of white-label files.
+
+The Desk coordinates routes across India that most itineraries cannot safely promise — high-altitude sanctuaries, frontier permits, seamless transit where the road runs out. For boutique travel designers and private concierges, we deliver one thing above all: structural safety, under your own name.
+
+Every route is audited six times before a client's name touches it. Credentials shared under NDA.
+
+Enquiries answered within 24 hours. theindiaproject.world</p>
+      <div class="tags">#TravelTrade #LuxuryTravel #DMC #India #TravelAdvisors #WhiteLabel</div>
+    </div>
+
+    <div class="copy">
+      <h4>The doctrine post</h4>
+      <div class="plat">Instagram · caption for the quote tile</div>
+      <p>Access is held through lineage and private agreement — never through availability. What we hold, we do not publish. What we publish, we do not sell.
+
+Why now?</p>
+      <div class="tags">#Discretion #PrivateTravel #India #TheDesk</div>
+    </div>
+  </div>
+</body>
+</html>
