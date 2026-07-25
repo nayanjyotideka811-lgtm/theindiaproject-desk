@@ -1,0 +1,8 @@
+{
+  "firestore": {
+    "databaseId": "ai-studio-theindiaprojectw-1f52d520-13d3-4af3-8c1b-62ee7fb2b970",
+    "rules": "firestore.rules",
+    "edition": "ENTERPRISE",
+    "dataAccessMode": "FIRESTORE_NATIVE"
+  }
+}
