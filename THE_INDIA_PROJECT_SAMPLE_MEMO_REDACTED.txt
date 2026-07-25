@@ -1,0 +1,62 @@
+CASE BRIEF: THE CORONATION ROAD (REDACTED)
+Registered Journey File No: TIP-2026-0814 // Strictly Confidential
+------------------------------------------------------------------
+
+1. JOURNEY METRIC SYNOPSIS
+* CORRIDOR: Royal Rajputana Corridor (Jaipur -> Shekhawati -> Jawai -> Udaipur)
+* PARTY: 2 Adults (Anonymized: HNW couple, Zurich)
+* SECTOR STATUS: SECURED // ALL PASSES CLEAR
+* DESK COORDINATOR: GURGAON DESK (Operator ID: Desk-09)
+* SURVEYOR SIGN-OFF: SV-RAJ-02 (Topography & Obstacle Vetting complete)
+
+------------------------------------------------------------------
+
+2. TOPOGRAPHIC & GRID ROUTING MATRIX
+
+* Leg 01: Jaipur Terminal Hangar -> [REDACTED CASTLE STAY]
+  Transit Mode: Private SUV Convoy | Duration: 2h 45m | Road Status: Vetted (No grades > 18 deg)
+  
+* Leg 02: [REDACTED CASTLE STAY] -> Shekhawati Fresco Haveli
+  Transit Mode: Private SUV Convoy | Duration: 3h 10m | Road Status: Heavy gravel; clearance verified
+  
+* Leg 03: Shekhawati Haveli -> Jawai Wilderness Camp
+  Transit Mode: Private Helicopter Transfer | Duration: 1h 05m | Wind profile: STABLE
+  
+* Leg 04: Jawai Wilderness Camp -> Udaipur Private Airstrip
+  Transit Mode: Private SUV Convoy | Duration: 2h 20m | Road Status: Highway sector; minor construction
+
+------------------------------------------------------------------
+
+3. SURVEYOR SAFETY VETTING LOGS (THE 6-PASSES)
+
+[PASS 01] THE SURVEYOR'S AUDIT
+* Audit Target: Road segment between Jawai and [REDACTED PALACE UDAIPUR].
+* Vetting Log: Road surveyed by SV-RAJ-02 on July 10, 2026. Avoided standard highway bypass (severe truck congestion). Custom path mapped via secondary country lanes. All culverts inspected; maximum vehicle weight threshold calculated to 3.5 tons. Verified.
+
+[PASS 02] THE 5-HOUR TRANSIT RULE
+* Leg 03 Exception: Land transit between Shekhawati and Jawai was calculated to 5h 45m due to highway repairs.
+* Logistics Pivot: Substituted land transit with private helicopter charter. Landing zone coordinate locked at 25.1092 N, 73.1256 E (verified field).
+
+[PASS 03] EMERGENCY MEDICAL DE-RISKING
+* Primary Landing Zone (LZ-01): Jawai Camp Field 25.1100 N, 73.1240 E
+* Trauma Center Destination: Fortis Hospital, Udaipur (Heli-transit time: 24 mins).
+* Secondary Safehouse: Rajasthan State Forestry Outpost (Armed security, Sat-comms active).
+
+[PASS 04] BORDER PERMITS & LEGALITIES
+* Checkpoints: Forest Department checkpoints cleared under registration SF-RAJ-998.
+
+[PASS 05] CLIENT PHYSIOLOGICAL BRIEFING
+* Special Instructions: Guest files indicate high-sensitivity lactose intolerance. Kitchen crew at Jawai Camp and [REDACTED PALACE] locked on custom milk-substitutes. Vetted.
+
+[PASS 06] INTEGRITY SUMMARY
+* Itinerary SHA-256 Hash: 331141fa92676c6f12e392211f056fd3
+* Status: IMMUTABLE & VERIFIED
+
+------------------------------------------------------------------
+
+4. SECURE DISPATCH CONTACT
+All operational coordinates are managed exclusively via Gurgaon operations.
+
+* Gurgaon Desk Email: contact@theindiaproject.world
+* GSTIN Reference: 18BFVPD7109E1ZB
+* Web: theindiaproject.world
