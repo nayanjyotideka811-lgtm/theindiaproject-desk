@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+:root {
+  --ink: #0b0b0c;
+  --ink-2: #111114;
+  --ink-3: #17171b;
+  --bone: #e9e3d6;
+  --bone-dim: #a49d8d;
+  --bone-faint: #6f6a5e;
+  --gold: #c2a15a;
+  --gold-dim: #8f7738;
+  --wax: #7c2427;
+  --green: #4f7a52;
+  --rule: rgba(233, 227, 214, 0.13);
+  --rule-strong: rgba(233, 227, 214, 0.26);
+  --serif: "Cormorant Garamond", Georgia, serif;
+  --body: "EB Garamond", Georgia, serif;
+  --mono: "Space Mono", monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--ink);
+  color: var(--bone);
+  font-family: var(--body);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--wax);
+  color: var(--bone);
+}
+
+/* Custom Animation Utility Classes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+@keyframes sunspin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.rays {
+  transform-origin: 100px 100px;
+  animation: sunspin 70s linear infinite;
+}
