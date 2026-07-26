@@ -46,7 +46,7 @@ export const DeskConcierge: React.FC<DeskConciergeProps> = ({ userType }) => {
         setTimeout(() => {
           setMessages([...newMessages, {
             sender: 'desk',
-            text: `[THE DESK MEMORANDUM // VERIFIED]\n\nRegarding your enquiry: "${text}"\n\nThe Desk has evaluated the corridor requirements under the 6-Pass Surveyor Protocol. For ${userType === 'domestic' ? 'Domestic Solo Travelers' : 'International Solo Travelers'}, all permits and host microtip channels are active. Coordinates, safehouses, and direct host transfers are held under seal.`
+            text: `[THE DESK MEMORANDUM // VERIFIED]\n\nRegarding your enquiry: "${text}"\n\nThe Desk has evaluated the corridor requirements under the 6-Pass Surveyor Protocol. For ${userType === 'domestic' ? 'Domestic Solo Travellers' : 'International Solo Travellers'}, all permits and host microtip channels are active. Coordinates, safehouses, and direct host transfers are held under seal.`
           }]);
         }, 800);
       }
@@ -54,7 +54,7 @@ export const DeskConcierge: React.FC<DeskConciergeProps> = ({ userType }) => {
       setTimeout(() => {
         setMessages([...newMessages, {
           sender: 'desk',
-          text: `[THE DESK MEMORANDUM // VERIFIED]\n\nRegarding your enquiry: "${text}"\n\nThe Desk has evaluated the corridor requirements under the 6-Pass Surveyor Protocol. For ${userType === 'domestic' ? 'Domestic Solo Travelers' : 'International Solo Travelers'}, all permits and host microtip channels are active. Coordinates, safehouses, and direct host transfers are held under seal.`
+          text: `[THE DESK MEMORANDUM // VERIFIED]\n\nRegarding your enquiry: "${text}"\n\nThe Desk has evaluated the corridor requirements under the 6-Pass Surveyor Protocol. For ${userType === 'domestic' ? 'Domestic Solo Travellers' : 'International Solo Travellers'}, all permits and host microtip channels are active. Coordinates, safehouses, and direct host transfers are held under seal.`
         }]);
       }, 800);
     } finally {

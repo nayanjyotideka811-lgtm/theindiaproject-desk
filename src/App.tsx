@@ -173,7 +173,7 @@ export function App() {
                     <span className="font-mono text-[10px] text-[#8fb892] uppercase tracking-widest">Safety Matrix</span>
                     <h3 className="font-serif text-2xl text-[#e9e3d6] my-2">Solo Travel Hub</h3>
                     <p className="text-sm font-serif text-[#a49d8d] leading-relaxed mb-4">
-                      Customized de-risking protocols for domestic & international solo travelers. 6-pass surveyor matrix, satellite mesh beacon, and emergency LZs.
+                      Customized de-risking protocols for domestic & international solo travellers. 6-pass surveyor matrix, satellite mesh beacon, and emergency LZs.
                     </p>
                     <div className="flex items-center gap-1 font-mono text-xs text-[#8fb892] font-bold">
                       Explore Protocols <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />

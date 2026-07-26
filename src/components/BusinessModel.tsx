@@ -112,7 +112,7 @@ export const BusinessModel: React.FC<BusinessModelProps> = ({ currency }) => {
           {/* Slider */}
           <div className="mb-8 font-serif">
             <div className="flex justify-between items-center text-sm text-[#e9e3d6] mb-2 font-mono">
-              <span>Active Solo Subscribers: <strong>{activeUsers.toLocaleString()} Travelers</strong></span>
+              <span>Active Solo Subscribers: <strong>{activeUsers.toLocaleString()} Travellers</strong></span>
               <span className="text-[#c2a15a]">65% Domestic / 35% International</span>
             </div>
             <input

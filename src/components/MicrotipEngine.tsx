@@ -149,7 +149,7 @@ export const MicrotipEngine: React.FC<MicrotipEngineProps> = ({ currency, userTy
             Core Business Module · Peer-to-Ground Protocol
           </div>
           <h2 className="font-serif text-3xl sm:text-5xl font-light text-[#e9e3d6] tracking-tight">
-            Frictionless Microtipping for Solo Travelers
+            Frictionless Microtipping for Solo Travellers
           </h2>
           <p className="mt-4 text-[#a49d8d] font-serif text-lg leading-relaxed">
             Directly empower remote indigenous hosts, boatmen, guides, and tea artisans in India's uncharted corridors. 

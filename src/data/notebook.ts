@@ -38,7 +38,7 @@ In conventional travel, when a traveler spends on an off-beat trip, over 80% is 
 Our microtipping model bypasses traditional intermediaries through direct peer-to-ground micro-transfers (voluntary direct gestures to local ground workers).
 
 - **100% Direct Payout**: Local recipients receive 100% of the microtip gesture without platform deductions.
-- **Micro-Friction Integration**: Travelers send voluntary gestures via 1-click UPI QR or tokenized card payment upon completing a micro-interaction (e.g. 15-minute tea break, photo guidance, river transit).
+- **Micro-Friction Integration**: Travellers send voluntary gestures via 1-click UPI QR or tokenized card payment upon completing a micro-interaction (e.g. 15-minute tea break, photo guidance, river transit).
 - **Voluntary Protocol Fee (5%)**: An optional 5% fee attached to the tip funds local QR badge maintenance, solar charging nodes, and community safety mesh.
 
 ### 3. Economic Multiplier Velocity
@@ -72,7 +72,7 @@ Money injected at the grassroots level cycles through rural food, education, and
     confidentiality: "RESTRICTED // OPERATIONAL GUIDELINES",
     summary: "Solo travellers face distinctly asymmetrical risk profiles depending on whether they travel domestically or internationally. This chapter details our 6-Pass Vetting Matrix.",
     contentMarkdown: `
-### 1. Asymmetrical Risk Profiles: Domestic vs. International Solo Travelers
+### 1. Asymmetrical Risk Profiles: Domestic vs. International Solo Travellers
 
 | Operational Parameter | Domestic Solo Traveler (India) | International Solo Traveler |
 | :--- | :--- | :--- |
@@ -158,7 +158,7 @@ The Desk does not advertise public hotel room prices, travel packages, or stay r
 - **Cultural Protocol**: Always walk clockwise around chortens and mani stone walls.
 
 #### Corridor Gamma: Dawki & Mawlynnong (Meghalaya)
-- **Cellular Mesh**: Strong 5G coverage along riverbank; international border roaming alerts near Bangladesh sector.
+- **Cellular Mesh**: Reliable 4G coverage along the riverbank; international roaming alerts trigger near the Bangladesh border sector.
 - **Microtip Acceptance**: Umngot boatmen rely heavily on seasonal gestures for boat hull eco-resin treatments.
 - **Cultural Protocol**: Matriarchal etiquette—address female hosts with 'Kong' (sister/mother).
 `
