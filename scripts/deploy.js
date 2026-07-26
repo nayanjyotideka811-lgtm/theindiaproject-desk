@@ -27,27 +27,50 @@ try {
     console.log("   ✓ Synced .htaccess to dist and root");
   }
 
-  // Step 3: Copy built dist index.html & assets to root so Hostinger root deployment works directly
-  console.log("\n📂 Step 3: Syncing production dist bundle to root for Hostinger root serving...");
-  const distIndexHtml = path.join(distDir, 'index.html');
-  const rootIndexHtml = path.join(rootDir, 'index.html');
-  if (fs.existsSync(distIndexHtml)) {
-    fs.copyFileSync(distIndexHtml, rootIndexHtml);
-    console.log("   ✓ Synced dist/index.html -> root index.html");
-  }
-
-  // Copy dist/assets to root assets directory
-  const distAssetsDir = path.join(distDir, 'assets');
+  // Step 3: Clean stale root assets, then copy fresh dist bundle to root
+  console.log("\n📂 Step 3: Cleaning stale root assets and syncing fresh production bundle...");
+  
   const rootAssetsDir = path.join(rootDir, 'assets');
+  // Remove old root assets directory entirely to avoid stale hash files
+  if (fs.existsSync(rootAssetsDir)) {
+    fs.rmSync(rootAssetsDir, { recursive: true, force: true });
+    console.log("   ✓ Removed stale root assets/ directory");
+  }
+  fs.mkdirSync(rootAssetsDir, { recursive: true });
+
+  // Copy fresh dist/assets to root/assets
+  const distAssetsDir = path.join(distDir, 'assets');
   if (fs.existsSync(distAssetsDir)) {
-    if (!fs.existsSync(rootAssetsDir)) {
-      fs.mkdirSync(rootAssetsDir, { recursive: true });
-    }
     const assetFiles = fs.readdirSync(distAssetsDir);
     for (const file of assetFiles) {
       fs.copyFileSync(path.join(distAssetsDir, file), path.join(rootAssetsDir, file));
     }
-    console.log("   ✓ Synced dist/assets -> root assets/");
+    console.log(`   ✓ Copied ${assetFiles.length} fresh asset files to root assets/`);
+  }
+
+  // Copy dist/index.html to root index.html (overwrites the source template)
+  const distIndexHtml = path.join(distDir, 'index.html');
+  const rootIndexHtml = path.join(rootDir, 'index.html');
+  if (fs.existsSync(distIndexHtml)) {
+    fs.copyFileSync(distIndexHtml, rootIndexHtml);
+    console.log("   ✓ Synced dist/index.html → root index.html");
+  }
+
+  // Verify: root index.html references the same JS file that exists in root assets/
+  const rootHtmlContent = fs.readFileSync(rootIndexHtml, 'utf-8');
+  const jsMatch = rootHtmlContent.match(/src="\.\/assets\/(index-[^"]+\.js)"/);
+  const cssMatch = rootHtmlContent.match(/href="\.\/assets\/(index-[^"]+\.css)"/);
+  const rootAssetFiles = fs.readdirSync(rootAssetsDir);
+  
+  if (jsMatch && rootAssetFiles.includes(jsMatch[1])) {
+    console.log(`   ✓ VERIFIED: root index.html → ${jsMatch[1]} exists in assets/`);
+  } else {
+    console.error(`   ❌ MISMATCH: root index.html references JS not found in assets/`);
+  }
+  if (cssMatch && rootAssetFiles.includes(cssMatch[1])) {
+    console.log(`   ✓ VERIFIED: root index.html → ${cssMatch[1]} exists in assets/`);
+  } else {
+    console.error(`   ❌ MISMATCH: root index.html references CSS not found in assets/`);
   }
 
   // Step 4: Git Commit and Push
@@ -55,7 +78,7 @@ try {
   execSync('git add .', { stdio: 'inherit' });
   
   try {
-    execSync('git commit -m "Deploy compiled production bundle to root for Hostinger live rendering"', { stdio: 'inherit' });
+    execSync('git commit -m "Fix: sync root index.html + assets with latest Vite build hashes"', { stdio: 'inherit' });
   } catch (e) {
     console.log("   (No new git changes to commit)");
   }
