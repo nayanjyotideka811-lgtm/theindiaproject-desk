@@ -1,0 +1,39 @@
+name: Automated Hostinger Deployment Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build Web Application
+        run: npm run build
+
+      - name: Copy .htaccess to Output
+        run: cp public/.htaccess dist/.htaccess || true
+
+      - name: Trigger Hostinger Git Webhook Deployment
+        run: |
+          echo "Triggering Hostinger Webhook deployment..."
+          curl -s -X POST "https://hpanel.hostinger.com/api/git/deploy/OCVI4P3mDvOsmfuPFSnTVxJhUNsqk3h29j7qqaxa89431d5a" || true
+
+      - name: Verify Live Domain Status
+        run: |
+          echo "Verifying live endpoint..."
+          curl -s -o /dev/null -w "%{http_code}" https://theindiaproject.world/ || true
