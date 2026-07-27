@@ -23,16 +23,13 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navItems = [
-    { id: 'microtipping', label: 'Microtip Engine', icon: DollarSign },
-    { id: 'solo-hub', label: 'Solo Hub', icon: ShieldCheck },
     { id: 'destinations', label: 'Corridors', icon: Compass },
-    { id: 'notebook', label: 'Access Notebook', icon: BookOpen },
-    { id: 'memo-gen', label: 'Route Memo', icon: FileText },
-    { id: 'scanner', label: 'Photo Matcher', icon: Camera },
-    { id: 'offline-queue', label: 'Offline Queue', icon: WifiOff },
-    { id: 'sustainability', label: 'Business Model', icon: Award },
+    { id: 'solo-hub', label: 'Solo Briefing', icon: ShieldCheck },
+    { id: 'microtipping', label: 'Host Gratuity', icon: DollarSign },
+    { id: 'notebook', label: 'Field Notebook', icon: BookOpen },
+    { id: 'scanner', label: 'Corridor Matcher', icon: Camera },
+    { id: 'memo-gen', label: 'Request Route Brief', icon: FileText },
     { id: 'concierge', label: 'Desk Concierge', icon: Sparkles },
-    { id: 'backoffice', label: 'Back Office', icon: Lock },
   ];
 
   return (
@@ -66,7 +63,7 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({
           </div>
 
           {/* Desktop Nav Links */}
-          <nav className="hidden xl:flex items-center gap-1 font-mono text-[11px] tracking-wider">
+          <nav className="hidden lg:flex items-center gap-1 font-mono text-[10.5px] tracking-wider">
             {navItems.map((item) => {
               const Icon = item.icon;
               const isActive = activeTab === item.id;
@@ -74,7 +71,7 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({
                 <button
                   key={item.id}
                   onClick={() => setActiveTab(item.id)}
-                  className={`flex items-center gap-1 px-2.5 py-1.5 rounded transition-all ${
+                  className={`flex items-center gap-1 px-2 py-1.5 rounded transition-all ${
                     isActive
                       ? 'text-[#c2a15a] bg-[#c2a15a]/10 border border-[#c2a15a]/30 font-bold'
                       : 'text-[#a49d8d] hover:text-[#e9e3d6] hover:bg-[#e9e3d6]/5'

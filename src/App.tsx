@@ -22,10 +22,27 @@ export function App() {
   const [prefilledHost, setPrefilledHost] = useState<LocalHost | null>(null);
   const [isVisitingCardOpen, setIsVisitingCardOpen] = useState<boolean>(false);
 
+  React.useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace('#', '');
+      if (hash) {
+        setActiveTab(hash);
+      }
+    };
+    handleHashChange();
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  const handleSetActiveTab = (tab: string) => {
+    setActiveTab(tab);
+    window.location.hash = tab;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const handleSelectHostToTip = (host: LocalHost) => {
     setPrefilledHost(host);
-    setActiveTab('microtipping');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    handleSetActiveTab('microtipping');
   };
 
   return (
@@ -34,7 +51,7 @@ export function App() {
       {/* Navigation Header */}
       <HeaderNav
         activeTab={activeTab}
-        setActiveTab={setActiveTab}
+        setActiveTab={handleSetActiveTab}
         currency={currency}
         setCurrency={setCurrency}
         userType={userType}
@@ -66,35 +83,35 @@ export function App() {
 
                     <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl font-light text-[#e9e3d6] leading-[1.08] tracking-tight">
                       Private Coordination & <br />
-                      <span className="italic text-[#c2a15a]">Microtipping Protocol</span> <br />
+                      <span className="italic text-[#c2a15a]">Host Microtipping</span> <br />
                       Across India.
                     </h1>
 
                     <p className="text-lg sm:text-xl font-serif text-[#a49d8d] leading-relaxed max-w-2xl">
-                      Empowering solo wanderers—both domestic and international—with direct zero-friction microtipping, 6-pass safety vetting, and access to 8 unscripted, new-found Indian corridors.
+                      Empowering solo wanderers—both domestic and international—with direct zero-friction host gratuity, 6-pass safety vetting, and access to 8 unscripted, new-found Indian corridors.
                     </p>
 
                     {/* Mode Status Pill */}
                     <div className="inline-flex items-center gap-3 bg-[#111114] border border-[#e9e3d6]/20 p-3 rounded text-xs font-mono">
-                      <span className="text-[#a49d8d]">Current Explorer Context:</span>
+                      <span className="text-[#a49d8d]">Explorer Context:</span>
                       <span className="text-[#c2a15a] font-bold uppercase">
-                        {userType === 'domestic' ? '🇮🇳 Domestic Explorer (INR ₹)' : '🌐 International Explorer (USD $)'}
+                        {userType === 'domestic' ? '🇮🇳 Domestic Wanderer (INR ₹)' : '🌐 International Wanderer (USD $)'}
                       </span>
                     </div>
 
                     {/* Action Buttons */}
                     <div className="flex flex-wrap items-center gap-4 pt-4">
                       <button
-                        onClick={() => setActiveTab('microtipping')}
+                        onClick={() => handleSetActiveTab('destinations')}
                         className="bg-[#c2a15a] hover:bg-[#b0904a] text-[#0b0b0c] font-mono text-xs uppercase tracking-widest font-bold py-3.5 px-6 rounded transition-all flex items-center gap-2 shadow-lg hover:shadow-xl"
                       >
-                        <QrCode className="w-4 h-4" /> Launch Microtip Dispatch
+                        <Compass className="w-4 h-4" /> Explore Uncharted Corridors
                       </button>
                       <button
-                        onClick={() => setActiveTab('notebook')}
+                        onClick={() => handleSetActiveTab('solo-hub')}
                         className="bg-[#111114] border border-[#e9e3d6]/30 hover:border-[#c2a15a] text-[#e9e3d6] font-mono text-xs uppercase tracking-widest py-3.5 px-6 rounded transition-all flex items-center gap-2"
                       >
-                        <BookOpen className="w-4 h-4 text-[#c2a15a]" /> Access Desk Notebook
+                        <ShieldCheck className="w-4 h-4 text-[#c2a15a]" /> Solo Safety Briefing
                       </button>
                     </div>
                   </div>

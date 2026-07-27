@@ -30,28 +30,33 @@ export const Footer: React.FC<FooterProps> = ({ onOpenVisitingCard, setActiveTab
           <div className="md:col-span-4 font-mono text-xs space-y-2">
             <div className="text-[10px] uppercase text-[#a49d8d] tracking-widest mb-3">Desk Navigation</div>
             <div>
-              <button onClick={() => setActiveTab('microtipping')} className="text-[#a49d8d] hover:text-[#c2a15a] transition-colors">
-                Microtipping Engine & Public Ledger
+              <button onClick={() => setActiveTab('destinations')} className="text-[#a49d8d] hover:text-[#c2a15a] transition-colors">
+                Uncharted Corridors (8 Vetted Regions)
               </button>
             </div>
             <div>
               <button onClick={() => setActiveTab('solo-hub')} className="text-[#a49d8d] hover:text-[#c2a15a] transition-colors">
-                Solo Travel Hub & 6-Pass Vetting
+                Solo Traveler 6-Pass Safety Briefing
               </button>
             </div>
             <div>
-              <button onClick={() => setActiveTab('destinations')} className="text-[#a49d8d] hover:text-[#c2a15a] transition-colors">
-                New-Found Destinations Matrix (8 Corridors)
+              <button onClick={() => setActiveTab('microtipping')} className="text-[#a49d8d] hover:text-[#c2a15a] transition-colors">
+                Direct Host Microtipping & Public Ledger
               </button>
             </div>
             <div>
               <button onClick={() => setActiveTab('notebook')} className="text-[#a49d8d] hover:text-[#c2a15a] transition-colors">
-                Access Notebook & Economic Velocity Formulas
+                Surveyor Field Notebook Intelligence
               </button>
             </div>
             <div>
-              <button onClick={() => setActiveTab('sustainability')} className="text-[#a49d8d] hover:text-[#c2a15a] transition-colors">
-                Business Sustainability & ARR Model
+              <button onClick={() => setActiveTab('memo-gen')} className="text-[#a49d8d] hover:text-[#c2a15a] transition-colors">
+                Request Sealed Route Case Brief
+              </button>
+            </div>
+            <div className="pt-2">
+              <button onClick={() => setActiveTab('backoffice')} className="text-[#a49d8d]/30 hover:text-[#c2a15a] text-[10px] uppercase tracking-wider transition-colors flex items-center gap-1">
+                🔒 Desk Operator Portal
               </button>
             </div>
           </div>
