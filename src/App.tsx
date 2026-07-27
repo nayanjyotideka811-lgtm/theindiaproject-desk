@@ -119,7 +119,7 @@ export function App() {
                     
                     {/* Iconic Rotating Glowing Sun Seal */}
                     <div className="my-4">
-                      <SunSealLogo size="xl" useGif={true} />
+                      <SunSealLogo size="xl" />
                     </div>
 
                     <div className="font-mono text-xs text-[#a49d8d] uppercase tracking-widest mt-4">

@@ -4,14 +4,12 @@ interface SunSealLogoProps {
   size?: 'sm' | 'md' | 'lg' | 'xl';
   showText?: boolean;
   className?: string;
-  useGif?: boolean;
 }
 
 export const SunSealLogo: React.FC<SunSealLogoProps> = ({
   size = 'md',
   showText = false,
   className = '',
-  useGif = false,
 }) => {
   const sizeClasses = {
     sm: 'w-9 h-9',
@@ -20,52 +18,29 @@ export const SunSealLogo: React.FC<SunSealLogoProps> = ({
     xl: 'w-48 h-48 sm:w-64 sm:h-64',
   };
 
-  if (useGif) {
-    return (
-      <div className={`relative flex items-center justify-center ${sizeClasses[size]} ${className}`}>
-        <img
-          src="/seal-rotating.gif"
-          alt="theindiaproject.world rotating glowing sun seal"
-          className="w-full h-full object-contain filter drop-shadow-[0_0_12px_rgba(194,161,90,0.4)]"
-        />
-      </div>
-    );
-  }
-
   return (
     <div className={`relative flex items-center justify-center ${sizeClasses[size]} ${className}`}>
-      {/* Outer ambient glow ring */}
-      <div className="absolute inset-0 rounded-full bg-[#c2a15a]/15 blur-md animate-pulse" />
+      {/* Subtle ambient gold radial glow */}
+      <div className="absolute inset-0 rounded-full bg-[#c2a15a]/10 blur-sm animate-pulse" />
       
+      {/* Exact Authentic Sun Seal SVG Graphics */}
       <svg
-        className="w-full h-full relative z-10 filter drop-shadow-[0_0_8px_rgba(194,161,90,0.35)]"
+        className="w-full h-full relative z-10 filter drop-shadow-[0_0_10px_rgba(194,161,90,0.4)]"
         viewBox="0 0 200 200"
-        aria-label="theindiaproject.world sun seal"
+        aria-label="theindiaproject.world rotating glowing sun seal"
       >
-        <defs>
-          <path id="sunCircPath" d="M100,100 m-66,0 a66,66 0 1,1 132,0 a66,66 0 1,1 -132,0" />
-        </defs>
+        {/* Outer Ring 1 */}
+        <circle cx="100" cy="100" r="88" fill="none" stroke="#8f7738" strokeWidth="3" />
         
-        {/* Outer static rings */}
-        <circle cx="100" cy="100" r="88" fill="none" stroke="#8f7738" strokeWidth="1.2" />
-        <circle cx="100" cy="100" r="82" fill="none" stroke="#c2a15a" strokeWidth="0.8" opacity="0.9" />
-        <circle cx="100" cy="100" r="60" fill="none" stroke="#c2a15a" strokeWidth="0.8" opacity="0.8" />
+        {/* Inner Ring 2 */}
+        <circle cx="100" cy="100" r="78" fill="none" stroke="#c2a15a" strokeWidth="1.5" />
         
-        {/* Rotating Circular Text */}
-        <g className="animate-[spin_70s_linear_infinite]" style={{ transformOrigin: '100px 100px' }}>
-          <text font-family="Space Mono, monospace" font-size="9" letter-spacing="3.2" fill="#c2a15a">
-            <textPath href="#sunCircPath" startOffset="0%">
-              · SURVEYED · SEALED · ASSIGNED · THEINDIAPROJECT·WORLD
-            </textPath>
-          </text>
-        </g>
-
         {/* Rotating 24 Sun Rays */}
         <g
-          className="rays animate-[spin_45s_linear_infinite]"
+          className="animate-[spin_70s_linear_infinite]"
           style={{ transformOrigin: '100px 100px' }}
           stroke="#c2a15a"
-          strokeWidth="2.4"
+          strokeWidth="2.5"
           strokeLinecap="round"
         >
           <line x1="160.0" y1="100.0" x2="182.0" y2="100.0" />
@@ -99,7 +74,7 @@ export const SunSealLogo: React.FC<SunSealLogoProps> = ({
       </svg>
 
       {showText && (
-        <span className="sr-only">theindiaproject.world rotating sun seal</span>
+        <span className="sr-only">theindiaproject.world rotating glowing sun seal</span>
       )}
     </div>
   );

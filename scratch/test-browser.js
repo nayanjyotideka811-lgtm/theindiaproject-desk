@@ -7,7 +7,7 @@ const logFile = path.join(process.cwd(), 'edge-console.log');
 
 try {
   console.log('Launching Edge headless against https://theindiaproject.world ...');
-  const out = execSync(`"${edgePath}" --headless --disable-gpu --enable-logging --v=1 --dump-dom https://theindiaproject.world`, {
+  const out = execSync(`"${edgePath}" --headless --disable-gpu --enable-logging --v=1 --dump-dom https://theindiaproject.world/?v=fresh${Date.now()}`, {
     encoding: 'utf8',
     timeout: 15000
   });
