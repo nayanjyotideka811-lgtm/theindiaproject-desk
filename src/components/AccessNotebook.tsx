@@ -119,7 +119,7 @@ export const AccessNotebook: React.FC = () => {
                   Theoretical Model & Preservation Formula
                 </div>
                 <div className="bg-[#0b0b0c] border border-[#e9e3d6]/20 p-6 rounded text-center font-mono text-lg text-[#e9e3d6] overflow-x-auto my-3">
-                  $$\mathbf{\{chapter.formula.latex\}}}$$
+                  {chapter.formula.latex}
                 </div>
                 <p className="text-xs text-[#a49d8d] font-serif italic mb-4">
                   {chapter.formula.description}
