@@ -103,6 +103,18 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({
               Desk Card
             </button>
 
+            {/* Direct Door to Back Office */}
+            <button
+              onClick={() => setActiveTab('backoffice')}
+              className={`text-[10px] font-mono tracking-widest uppercase px-2.5 py-1 rounded border transition-all shadow-sm flex items-center gap-1 ${
+                activeTab === 'backoffice'
+                  ? 'bg-[#c2a15a] text-[#0b0b0c] font-bold border-[#c2a15a]'
+                  : 'bg-[#111114] hover:bg-[#c2a15a]/20 border-[#c2a15a]/50 text-[#c2a15a]'
+              }`}
+            >
+              Back Office 🔒
+            </button>
+
             {/* Mobile Hamburger Toggle Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -138,6 +150,15 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({
                 </button>
               );
             })}
+            <button
+              onClick={() => {
+                setActiveTab('backoffice');
+                setMobileMenuOpen(false);
+              }}
+              className="w-full flex items-center gap-2 px-4 py-2.5 rounded transition-all text-left text-[#c2a15a] bg-[#c2a15a]/10 border border-[#c2a15a]/30 font-bold mt-2"
+            >
+              Back Office Door 🔒
+            </button>
           </div>
         )}
       </div>

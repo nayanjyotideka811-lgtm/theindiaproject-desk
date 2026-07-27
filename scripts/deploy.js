@@ -48,14 +48,29 @@ try {
     console.log(`   ✓ Copied ${assetFiles.length} fresh asset files to root assets/`);
   }
 
-  // Copy office.html to root index.html and dist/index.html
-  const officeHtml = path.join(rootDir, 'office.html');
+  // Copy dist/index.html to root index.html (overwrites the source template)
   const distIndexHtml = path.join(distDir, 'index.html');
   const rootIndexHtml = path.join(rootDir, 'index.html');
-  if (fs.existsSync(officeHtml)) {
-    fs.copyFileSync(officeHtml, rootIndexHtml);
-    fs.copyFileSync(officeHtml, distIndexHtml);
-    console.log("   ✓ Synced office.html → root index.html & dist/index.html");
+  if (fs.existsSync(distIndexHtml)) {
+    fs.copyFileSync(distIndexHtml, rootIndexHtml);
+    console.log("   ✓ Synced dist/index.html → root index.html");
+  }
+
+  // Verify: root index.html references the same JS file that exists in root assets/
+  const rootHtmlContent = fs.readFileSync(rootIndexHtml, 'utf-8');
+  const jsMatch = rootHtmlContent.match(/src="\/?(?:\.\/)?assets\/(index-[^"]+\.js)"/);
+  const cssMatch = rootHtmlContent.match(/href="\/?(?:\.\/)?assets\/(index-[^"]+\.css)"/);
+  const rootAssetFiles = fs.readdirSync(rootAssetsDir);
+  
+  if (jsMatch && rootAssetFiles.includes(jsMatch[1])) {
+    console.log(`   ✓ VERIFIED: root index.html → ${jsMatch[1]} exists in assets/`);
+  } else {
+    console.error(`   ❌ MISMATCH: root index.html references JS not found in assets/`);
+  }
+  if (cssMatch && rootAssetFiles.includes(cssMatch[1])) {
+    console.log(`   ✓ VERIFIED: root index.html → ${cssMatch[1]} exists in assets/`);
+  } else {
+    console.error(`   ❌ MISMATCH: root index.html references CSS not found in assets/`);
   }
 
   // Step 4: Git Commit and Push

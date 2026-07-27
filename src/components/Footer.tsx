@@ -55,8 +55,8 @@ export const Footer: React.FC<FooterProps> = ({ onOpenVisitingCard, setActiveTab
               </button>
             </div>
             <div className="pt-2">
-              <button onClick={() => setActiveTab('backoffice')} className="text-[#a49d8d]/30 hover:text-[#c2a15a] text-[10px] uppercase tracking-wider transition-colors flex items-center gap-1">
-                🔒 Desk Operator Portal
+              <button onClick={() => setActiveTab('backoffice')} className="text-[#c2a15a] hover:text-[#e9e3d6] text-[11px] uppercase tracking-wider transition-colors flex items-center gap-1 font-bold">
+                🔑 Back Office Door (Desk Operator)
               </button>
             </div>
           </div>
