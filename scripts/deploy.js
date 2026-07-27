@@ -75,6 +75,7 @@ try {
 
   // Step 4: Git Commit and Push
   console.log("\n🐙 Step 4: Synchronizing Git repository with GitHub main...");
+  execSync('git add -f assets/ index.html src/ public/', { stdio: 'inherit' });
   execSync('git add .', { stdio: 'inherit' });
   
   try {
