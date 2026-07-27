@@ -5,7 +5,7 @@ import { defineConfig } from 'vite';
 
 export default defineConfig(() => {
   return {
-    base: './', // Use relative base path for Hostinger & static hosting
+    base: '/', // Use absolute base path for domain root hosting
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {

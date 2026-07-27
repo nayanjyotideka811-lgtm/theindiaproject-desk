@@ -58,8 +58,8 @@ try {
 
   // Verify: root index.html references the same JS file that exists in root assets/
   const rootHtmlContent = fs.readFileSync(rootIndexHtml, 'utf-8');
-  const jsMatch = rootHtmlContent.match(/src="\.\/assets\/(index-[^"]+\.js)"/);
-  const cssMatch = rootHtmlContent.match(/href="\.\/assets\/(index-[^"]+\.css)"/);
+  const jsMatch = rootHtmlContent.match(/src="\/?(?:\.\/)?assets\/(index-[^"]+\.js)"/);
+  const cssMatch = rootHtmlContent.match(/href="\/?(?:\.\/)?assets\/(index-[^"]+\.css)"/);
   const rootAssetFiles = fs.readdirSync(rootAssetsDir);
   
   if (jsMatch && rootAssetFiles.includes(jsMatch[1])) {
