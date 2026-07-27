@@ -51,7 +51,7 @@ export const VisitingCardModal: React.FC<VisitingCardModalProps> = ({ isOpen, on
             
             {/* SVG Rotating Glowing Sun Seal */}
             <div className="mb-2">
-              <SunSealLogo size="md" />
+              <SunSealLogo size="md" idSuffix="card" />
             </div>
 
             <div className="font-mono text-xs tracking-[0.24em] text-[#e9e3d6] uppercase font-bold">

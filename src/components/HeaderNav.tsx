@@ -36,7 +36,7 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({
           
           {/* Brand Seal & Title */}
           <div className="flex items-center gap-3 sm:gap-4 cursor-pointer" onClick={() => { setActiveTab('hero'); setMobileMenuOpen(false); }}>
-            <SunSealLogo size="sm" />
+            <SunSealLogo size="sm" idSuffix="nav" />
             <div>
               <div className="font-mono text-xs tracking-[0.2em] text-[#e9e3d6] uppercase font-bold flex items-center gap-1">
                 theindiaproject<span className="text-[#c2a15a]">.world</span>
