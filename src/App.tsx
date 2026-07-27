@@ -47,7 +47,7 @@ export function App() {
 
   return (
     <div className="min-h-screen bg-[#0b0b0c] text-[#e9e3d6] flex flex-col font-serif selection:bg-[#7c2427] selection:text-[#e9e3d6]">
-      
+
       {/* Navigation Header */}
       <HeaderNav
         activeTab={activeTab}
@@ -59,19 +59,19 @@ export function App() {
 
       {/* Main Content View Switcher */}
       <main className="flex-1">
-        
+
         {/* HERO / OVERVIEW SECTION */}
         {(activeTab === 'hero' || activeTab === 'overview') && (
           <div>
             {/* Hero Section */}
             <section className="relative py-16 sm:py-24 overflow-hidden border-b border-[#e9e3d6]/15 bg-gradient-to-b from-[#0b0b0c] via-[#111114] to-[#0b0b0c]">
-              
+
               {/* Background Topo & Light Glow */}
               <div className="absolute inset-0 opacity-15 pointer-events-none bg-[radial-gradient(#c2a15a_1px,transparent_1px)] [background-size:24px_24px]" />
-              
+
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                  
+
                   {/* Left Column Text (7 Cols) */}
                   <div className="lg:col-span-7 space-y-6 text-left">
                     <div className="inline-flex items-center gap-2 border border-[#c2a15a]/40 bg-[#c2a15a]/10 px-3 py-1 rounded text-[10.5px] font-mono uppercase tracking-[0.22em] text-[#c2a15a]">
@@ -116,10 +116,10 @@ export function App() {
 
                   {/* Right Column Rotating Sun Seal Logo (5 Cols) */}
                   <div className="lg:col-span-5 flex flex-col items-center justify-center text-center">
-                    
+
                     {/* Iconic Rotating Glowing Sun Seal */}
                     <div className="my-4">
-                      <SunSealLogo size="xl" idSuffix="hero" />
+                      <SunSealLogo size="xl" />
                     </div>
 
                     <div className="font-mono text-xs text-[#a49d8d] uppercase tracking-widest mt-4">
@@ -135,9 +135,9 @@ export function App() {
             {/* Quick Feature Modules Highlights Grid (6 Cards) */}
             <section className="py-16 bg-[#0b0b0c] text-[#e9e3d6]">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  
+
                   {/* Module 1: Corridors */}
                   <div
                     onClick={() => handleSetActiveTab('destinations')}

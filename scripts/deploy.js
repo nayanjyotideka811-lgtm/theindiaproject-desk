@@ -15,71 +15,42 @@ const rootHtaccess = path.join(rootDir, '.htaccess');
 const HOSTINGER_WEBHOOK = "https://hpanel.hostinger.com/api/git/deploy/OCVI4P3mDvOsmfuPFSnTVxJhUNsqk3h29j7qqaxa89431d5a";
 
 try {
-  // Step 1: Run Vite Build
-  console.log("\n📦 Step 1: Building Vite production bundle...");
-  execSync('npx vite build', { stdio: 'inherit' });
+  // Step 1: Ensure dist directory exists
+  console.log("\n📦 Step 1: Syncing static HTML files to dist...");
+  if (!fs.existsSync(distDir)) {
+    fs.mkdirSync(distDir, { recursive: true });
+  }
+
+  // Ensure index.html and office.html are in dist
+  const rootIndexHtml = path.join(rootDir, 'index.html');
+  const distIndexHtml = path.join(distDir, 'index.html');
+  if (fs.existsSync(rootIndexHtml)) {
+    fs.copyFileSync(rootIndexHtml, distIndexHtml);
+    console.log("   ✓ Synced root index.html → dist/index.html");
+  }
+
+  const rootOfficeHtml = path.join(rootDir, 'office.html');
+  const distOfficeHtml = path.join(distDir, 'office.html');
+  if (fs.existsSync(rootOfficeHtml)) {
+    fs.copyFileSync(rootOfficeHtml, distOfficeHtml);
+    console.log("   ✓ Synced root office.html → dist/office.html");
+  }
 
   // Step 2: Ensure .htaccess is in dist and root
-  console.log("\n📄 Step 2: Verifying Hostinger .htaccess SPA routing...");
+  console.log("\n📄 Step 2: Verifying Hostinger .htaccess routing...");
   if (fs.existsSync(publicHtaccess)) {
     fs.copyFileSync(publicHtaccess, distHtaccess);
     fs.copyFileSync(publicHtaccess, rootHtaccess);
     console.log("   ✓ Synced .htaccess to dist and root");
   }
 
-  // Step 3: Clean stale root assets, then copy fresh dist bundle to root
-  console.log("\n📂 Step 3: Cleaning stale root assets and syncing fresh production bundle...");
-  
-  const rootAssetsDir = path.join(rootDir, 'assets');
-  // Remove old root assets directory entirely to avoid stale hash files
-  if (fs.existsSync(rootAssetsDir)) {
-    fs.rmSync(rootAssetsDir, { recursive: true, force: true });
-    console.log("   ✓ Removed stale root assets/ directory");
-  }
-  fs.mkdirSync(rootAssetsDir, { recursive: true });
-
-  // Copy fresh dist/assets to root/assets
-  const distAssetsDir = path.join(distDir, 'assets');
-  if (fs.existsSync(distAssetsDir)) {
-    const assetFiles = fs.readdirSync(distAssetsDir);
-    for (const file of assetFiles) {
-      fs.copyFileSync(path.join(distAssetsDir, file), path.join(rootAssetsDir, file));
-    }
-    console.log(`   ✓ Copied ${assetFiles.length} fresh asset files to root assets/`);
-  }
-
-  // Copy dist/index.html to root index.html (overwrites the source template)
-  const distIndexHtml = path.join(distDir, 'index.html');
-  const rootIndexHtml = path.join(rootDir, 'index.html');
-  if (fs.existsSync(distIndexHtml)) {
-    fs.copyFileSync(distIndexHtml, rootIndexHtml);
-    console.log("   ✓ Synced dist/index.html → root index.html");
-  }
-
-  // Verify: root index.html references the same JS file that exists in root assets/
-  const rootHtmlContent = fs.readFileSync(rootIndexHtml, 'utf-8');
-  const jsMatch = rootHtmlContent.match(/src="\/?(?:\.\/)?assets\/(index-[^"]+\.js)"/);
-  const cssMatch = rootHtmlContent.match(/href="\/?(?:\.\/)?assets\/(index-[^"]+\.css)"/);
-  const rootAssetFiles = fs.readdirSync(rootAssetsDir);
-  
-  if (jsMatch && rootAssetFiles.includes(jsMatch[1])) {
-    console.log(`   ✓ VERIFIED: root index.html → ${jsMatch[1]} exists in assets/`);
-  } else {
-    console.error(`   ❌ MISMATCH: root index.html references JS not found in assets/`);
-  }
-  if (cssMatch && rootAssetFiles.includes(cssMatch[1])) {
-    console.log(`   ✓ VERIFIED: root index.html → ${cssMatch[1]} exists in assets/`);
-  } else {
-    console.error(`   ❌ MISMATCH: root index.html references CSS not found in assets/`);
-  }
-
-  // Step 4: Git Commit and Push
-  console.log("\n🐙 Step 4: Synchronizing Git repository with GitHub main...");
-  execSync('git add -f assets/ index.html src/ public/', { stdio: 'inherit' });
+  // Step 3: Git Commit and Push
+  console.log("\n🐙 Step 3: Synchronizing Git repository with GitHub main...");
+  execSync('git add index.html office.html brand.html card.html legal.html social.html .htaccess scripts/ src/', { stdio: 'inherit' });
   execSync('git add .', { stdio: 'inherit' });
   
   try {
-    execSync('git commit -m "Fix: sync root index.html + assets with latest Vite build hashes"', { stdio: 'inherit' });
+    execSync('git commit -m "Deploy exact authentic homepage_source.html + office.html to live site"', { stdio: 'inherit' });
   } catch (e) {
     console.log("   (No new git changes to commit)");
   }
@@ -87,8 +58,8 @@ try {
   execSync('git push origin main', { stdio: 'inherit' });
   console.log("   ✓ Successfully pushed commit to GitHub origin/main");
 
-  // Step 5: Trigger Hostinger Deployment Webhook
-  console.log("\n⚡ Step 5: Triggering Hostinger Auto-Deployment Webhook...");
+  // Step 4: Trigger Hostinger Deployment Webhook
+  console.log("\n⚡ Step 4: Triggering Hostinger Auto-Deployment Webhook...");
   const response = await fetch(HOSTINGER_WEBHOOK, { method: 'POST' }).catch(() => null);
   if (response) {
     console.log(`   ✓ Webhook triggered. Response status: ${response.status}`);
@@ -96,8 +67,8 @@ try {
     console.log("   ✓ Webhook deployment signal dispatched.");
   }
 
-  // Step 6: Verify Live Endpoint
-  console.log("\n🌐 Step 6: Verifying live website status...");
+  // Step 5: Verify Live Endpoint
+  console.log("\n🌐 Step 5: Verifying live website status...");
   const liveCheck = await fetch("https://theindiaproject.world/").catch(() => null);
   if (liveCheck && liveCheck.ok) {
     console.log("   ✓ LIVE CHECK PASSED: https://theindiaproject.world/ returned HTTP 200 OK!");

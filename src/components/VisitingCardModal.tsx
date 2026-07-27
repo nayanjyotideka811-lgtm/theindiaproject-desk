@@ -44,14 +44,14 @@ export const VisitingCardModal: React.FC<VisitingCardModalProps> = ({ isOpen, on
 
         {/* Card Canvas Container */}
         <div className="flex flex-col items-center gap-6 my-4">
-          
+
           {/* Front Card */}
           <div className="w-full max-w-[480px] h-[270px] bg-[#0b0b0c] border border-[#e9e3d6]/20 p-6 flex flex-col items-center justify-center text-center relative overflow-hidden shadow-2xl">
             <div className="absolute inset-3 border border-[#e9e3d6]/10 pointer-events-none" />
-            
+
             {/* SVG Rotating Glowing Sun Seal */}
             <div className="mb-2">
-              <SunSealLogo size="md" idSuffix="card" />
+              <SunSealLogo size="md" />
             </div>
 
             <div className="font-mono text-xs tracking-[0.24em] text-[#e9e3d6] uppercase font-bold">
@@ -71,7 +71,7 @@ export const VisitingCardModal: React.FC<VisitingCardModalProps> = ({ isOpen, on
           {/* Reverse Card */}
           <div className="w-full max-w-[480px] h-[270px] bg-[#0b0b0c] border border-[#e9e3d6]/20 p-6 flex flex-col justify-between relative overflow-hidden shadow-2xl">
             <div className="absolute inset-3 border border-[#e9e3d6]/10 pointer-events-none" />
-            
+
             <div>
               <div className="font-serif text-lg text-[#e9e3d6] font-light leading-snug">
                 "We do not advertise stays or routes; <em className="text-[#c2a15a] italic">we assign them under seal.</em>"

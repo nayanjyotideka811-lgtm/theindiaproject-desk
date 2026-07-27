@@ -1,16 +1,857 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>theindiaproject.world — Private Coordination Across India</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
-    <script type="module" crossorigin src="/assets/index-C677Yz5Z.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-049hJupS.css">
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>theindiaproject.world — Private Coordination Across India</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<meta name="description" content="A private coordination desk that surveys, seals, and assigns routes across India. We do not advertise stays. We assign them." />
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TravelAgency",
+  "name": "theindiaproject.world",
+  "url": "https://theindiaproject.world",
+  "description": "A private coordination desk that surveys, seals, and assigns routes across India.",
+  "areaServed": { "@type": "Country", "name": "India" },
+  "knowsLanguage": ["en","fr","hi","es","de","ar"],
+  "sameAs": []
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+<style>
+  :root{
+    --ink:#0b0b0c;
+    --ink-2:#111114;
+    --ink-3:#17171b;
+    --bone:#e9e3d6;
+    --bone-dim:#a49d8d;
+    --bone-faint:#6f6a5e;
+    --gold:#c2a15a;
+    --gold-dim:#8f7738;
+    --wax:#7c2427;
+    --rule:rgba(233,227,214,0.14);
+    --rule-strong:rgba(233,227,214,0.28);
+    --serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+    --body:"EB Garamond",Georgia,serif;
+    --mono:"Space Mono",ui-monospace,"Courier New",monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--ink);
+    color:var(--bone);
+    font-family:var(--body);
+    font-size:18px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--wax);color:var(--bone)}
+  a{color:inherit;text-decoration:none}
+  .mono{font-family:var(--mono)}
+  .label{
+    font-family:var(--mono);
+    font-size:10.5px;
+    letter-spacing:.32em;
+    text-transform:uppercase;
+    color:var(--bone-dim);
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 40px}
+  section{position:relative}
+  .rule{height:1px;background:var(--rule);width:100%}
+
+  /* Header */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 40px;
+    background:linear-gradient(to bottom,rgba(11,11,12,.94),rgba(11,11,12,0));
+    backdrop-filter:blur(4px);
+  }
+  .brand{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--bone);display:flex;align-items:center;gap:11px;cursor:pointer}
+  .brand .wm{font-family:var(--mono)}
+  .brand b{color:var(--gold);font-weight:inherit}
+  .coords{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:var(--bone-faint);display:none}
+  @media(min-width:960px){.coords{display:block}}
+  nav.top{display:flex;align-items:center;gap:22px}
+  .langs{display:flex;gap:12px}
+  .langs button{
+    background:none;border:none;cursor:pointer;
+    font-family:var(--mono);font-size:11px;letter-spacing:.1em;
+    color:var(--bone-faint);padding:2px 0;transition:color .3s;
+  }
+  .langs button:hover{color:var(--bone-dim)}
+  .langs button.active{color:var(--gold)}
+  .nav-btn{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--bone);border-bottom:1px solid var(--gold-dim);padding-bottom:3px;transition:border-color .3s;cursor:pointer;
+  }
+  .nav-btn:hover{border-color:var(--gold)}
+
+  /* Hero */
+  .hero{
+    min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+    padding:140px 40px 80px;position:relative;overflow:hidden;
+  }
+  .contours{position:absolute;inset:0;z-index:0;opacity:.5;pointer-events:none}
+  .hero .wrap{position:relative;z-index:2;width:100%;padding:0}
+  .hero-kicker{margin-bottom:34px}
+  .hero h1{
+    font-family:var(--serif);font-weight:300;
+    font-size:clamp(2.5rem,6.2vw,5.4rem);line-height:1.06;letter-spacing:-.01em;
+    max-width:17ch;margin-bottom:30px;
+  }
+  .hero h1 em{font-style:italic;color:var(--gold)}
+  .hero-sub{font-family:var(--serif);font-weight:300;font-size:clamp(1.1rem,2.1vw,1.5rem);color:var(--bone-dim);max-width:46ch;font-style:italic;margin-bottom:46px}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:18px;align-items:center}
+  .seal-btn{
+    display:inline-flex;align-items:center;gap:14px;
+    background:none;border:1px solid var(--rule-strong);color:var(--bone);cursor:pointer;
+    font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+    padding:16px 26px;transition:all .35s;
+  }
+  .seal-btn:hover{border-color:var(--gold);color:#fff;background:rgba(194,161,90,.06)}
+  .ghost-btn{
+    font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--bone-dim);
+    border-bottom:1px solid transparent;padding-bottom:4px;transition:all .3s;cursor:pointer;background:none;border-top:none;border-left:none;border-right:none;
+  }
+  .ghost-btn:hover{color:var(--bone);border-bottom-color:var(--rule-strong)}
+  .hero-foot{position:absolute;left:40px;right:40px;bottom:34px;z-index:2;display:flex;justify-content:space-between;align-items:end}
+  .scrollcue{writing-mode:vertical-rl;font-family:var(--mono);font-size:10px;letter-spacing:.3em;color:var(--bone-faint);text-transform:uppercase}
+
+  /* Sunmark SVG */
+  .sunmark{display:inline-block;vertical-align:middle;overflow:visible}
+  .sunmark .rays{transform-origin:100px 100px;animation:sunspin 70s linear infinite}
+  @keyframes sunspin{to{transform:rotate(360deg)}}
+  .brand .sunmark{width:26px;height:26px;flex:0 0 auto}
+  .hero-sun{position:absolute;right:-8%;top:44%;transform:translateY(-50%);width:min(48vw,600px);height:min(48vw,600px);opacity:.14;z-index:1;pointer-events:none}
+  @media(max-width:760px){.hero-sun{opacity:.08;right:-30%}}
+
+  /* Section scaffold */
+  .band{padding:130px 0}
+  .sec-head{display:flex;gap:16px;align-items:baseline;margin-bottom:56px}
+  .sec-idx{font-family:var(--mono);font-size:11px;color:var(--gold-dim);letter-spacing:.2em}
+
+  /* Doctrine */
+  .doctrine .statement{font-family:var(--serif);font-weight:300;font-size:clamp(2rem,5vw,3.8rem);line-height:1.14;max-width:20ch;margin-bottom:40px}
+  .doctrine .statement em{font-style:italic;color:var(--gold)}
+  .doctrine .cols{display:grid;grid-template-columns:1fr;gap:34px;max-width:760px}
+  @media(min-width:760px){.doctrine .cols{grid-template-columns:1fr 1fr}}
+  .doctrine .cols p{color:var(--bone-dim);font-size:17px}
+
+  /* Six passes */
+  .passes{display:grid;grid-template-columns:1fr;border-top:1px solid var(--rule)}
+  @media(min-width:720px){.passes{grid-template-columns:1fr 1fr}}
+  .pass{
+    border-bottom:1px solid var(--rule);padding:34px 30px 34px 0;position:relative;
+    display:flex;gap:24px;align-items:flex-start;
+  }
+  @media(min-width:720px){.pass:nth-child(odd){padding-right:44px;border-right:1px solid var(--rule)}
+  .pass:nth-child(even){padding-left:44px}}
+  .pass .num{font-family:var(--mono);font-size:12px;color:var(--gold);letter-spacing:.1em;padding-top:6px;min-width:32px}
+  .pass .body h4{font-family:var(--serif);font-weight:500;font-size:1.5rem;margin-bottom:8px;letter-spacing:.005em}
+  .pass .body p{color:var(--bone-dim);font-size:15.5px;line-height:1.5}
+  .pass .stamp{
+    position:absolute;right:0;top:30px;font-family:var(--mono);font-size:9px;letter-spacing:.24em;
+    color:var(--wax);border:1px solid rgba(124,36,39,.55);padding:3px 7px;border-radius:2px;
+    transform:rotate(-7deg);opacity:0;transition:opacity .7s ease;text-transform:uppercase;
+  }
+  .pass.verified .stamp{opacity:1}
+
+  /* Atlas Interactive Corridors */
+  .atlas-row{
+    display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:center;
+    border-bottom:1px solid var(--rule);padding:26px 0;cursor:pointer;transition:all .35s;
+  }
+  .atlas-row:first-child{border-top:1px solid var(--rule)}
+  .atlas-row:hover{padding-left:14px;background:rgba(233,227,214,.02);border-bottom-color:var(--gold-dim)}
+  .atlas-row .rn{font-family:var(--mono);font-size:11px;color:var(--gold-dim)}
+  .atlas-row .rt{font-family:var(--serif);font-size:clamp(1.3rem,2.6vw,2rem);font-weight:300}
+  .atlas-row .rc{font-family:var(--mono);font-size:10.5px;color:var(--bone-faint);letter-spacing:.12em;text-align:right}
+
+  /* Destination Grid inside Atlas Modal */
+  .dest-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin-top:20px}
+  .dest-card{border:1px solid var(--rule);background:var(--ink);padding:18px;border-radius:2px;position:relative}
+  .dest-card h5{font-family:var(--serif);font-size:1.35rem;font-weight:400;margin-bottom:4px}
+  .dest-card .coords-tag{font-family:var(--mono);font-size:9px;color:var(--gold);letter-spacing:.15em;margin-bottom:8px;display:block}
+  .dest-card p{font-size:13px;color:var(--bone-dim);line-height:1.5}
+  .dest-card .season{font-family:var(--mono);font-size:8.5px;letter-spacing:.12em;color:var(--bone-faint);margin-top:10px;text-transform:uppercase}
+
+  /* Escalation */
+  .escalation{background:var(--ink-2)}
+  .esc-graph{width:100%;height:auto;margin-top:20px}
+  .esc-note{color:var(--bone-dim);max-width:52ch;margin-top:26px;font-size:16px}
+
+  /* Portfolios */
+  .ports{display:grid;grid-template-columns:1fr;gap:0;border-top:1px solid var(--rule)}
+  @media(min-width:640px){.ports{grid-template-columns:1fr 1fr}}
+  @media(min-width:980px){.ports{grid-template-columns:1fr 1fr 1fr 1fr}}
+  .port{
+    border-bottom:1px solid var(--rule);border-right:1px solid var(--rule);
+    padding:30px 24px;min-height:220px;display:flex;flex-direction:column;justify-content:space-between;
+    position:relative;overflow:hidden;cursor:pointer;
+  }
+  .port .pn{font-family:var(--mono);font-size:11px;color:var(--gold-dim)}
+  .port h5{font-family:var(--serif);font-weight:400;font-size:1.5rem;line-height:1.12;margin-top:auto}
+  .port .desc{
+    font-size:14px;color:var(--bone-dim);margin-top:12px;max-height:0;opacity:0;overflow:hidden;
+    transition:max-height .5s ease,opacity .4s ease,margin-top .4s;
+  }
+  .port:hover .desc,.port:focus-within .desc{max-height:140px;opacity:1}
+  .port .seal-mark{position:absolute;top:22px;right:22px;width:26px;height:26px;opacity:.5;transition:opacity .4s,transform .5s}
+  .port:hover .seal-mark{opacity:1;transform:rotate(20deg)}
+  .ports-note{margin-top:22px;color:var(--bone-faint);font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase}
+
+  /* Journal */
+  .journal{display:grid;grid-template-columns:1fr;gap:0;border-top:1px solid var(--rule)}
+  @media(min-width:820px){.journal{grid-template-columns:1fr 1fr 1fr}}
+  .jent{border-bottom:1px solid var(--rule);padding:32px 26px 40px 0;transition:padding-left .35s;cursor:pointer}
+  .jent:hover{padding-left:10px}
+  .jent .jk{color:var(--gold-dim)}
+  .jent h6{font-family:var(--serif);font-weight:400;font-size:1.4rem;margin:14px 0 10px}
+  .jent p{color:var(--bone-dim);font-size:15px}
+  .jent .more{display:inline-block;margin-top:18px;font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--bone-faint);text-transform:uppercase}
+
+  /* Media Reels */
+  .reels-grid{display:grid;grid-template-columns:1fr;gap:30px;margin-top:30px}
+  @media(min-width:760px){.reels-grid{grid-template-columns:1fr 1fr}}
+  .reel-card{border:1px solid var(--rule);background:var(--ink-2);padding:20px;position:relative}
+  .reel-card video{width:100%;height:auto;border:1px solid var(--rule-strong);background:#000}
+  .reel-card h4{font-family:var(--serif);font-size:1.4rem;margin-top:14px;font-weight:400}
+  .reel-card p{color:var(--bone-dim);font-size:14px;margin-top:6px}
+
+  /* Commission */
+  .commission{background:var(--ink-2)}
+  .comm-grid{display:grid;grid-template-columns:1fr;gap:60px}
+  @media(min-width:900px){.comm-grid{grid-template-columns:1fr 1fr}}
+  .comm-lead{font-family:var(--serif);font-weight:300;font-size:clamp(1.9rem,4vw,3rem);line-height:1.15}
+  .comm-lead em{font-style:italic;color:var(--gold)}
+  .comm-sub{color:var(--bone-dim);margin-top:22px;max-width:42ch}
+  .intents{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:26px}
+  .intent{
+    font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--bone-dim);
+    border:1px solid var(--rule);padding:11px 15px;cursor:pointer;transition:all .3s;background:none;
+  }
+  .intent:hover{border-color:var(--rule-strong);color:var(--bone)}
+  .intent.sel{border-color:var(--gold);color:var(--gold);background:rgba(194,161,90,.05)}
+  .field{margin-bottom:20px}
+  .field label{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--bone-faint);margin-bottom:9px}
+  .field input,.field textarea{
+    width:100%;background:transparent;border:none;border-bottom:1px solid var(--rule-strong);
+    color:var(--bone);font-family:var(--body);font-size:17px;padding:8px 0;
+  }
+  .field input:focus,.field textarea:focus{outline:none;border-bottom-color:var(--gold)}
+  .submit{
+    margin-top:12px;background:none;border:1px solid var(--gold-dim);color:var(--bone);cursor:pointer;
+    font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;padding:16px 30px;transition:all .35s;
+  }
+  .submit:hover{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+  .comm-notice{
+    font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--bone-dim);
+    margin-top:16px;line-height:1.6;border-top:1px solid var(--rule);padding-top:14px;
+  }
+
+  /* Trade desk */
+  .trade{border-top:1px solid var(--rule-strong)}
+  .trade-inner{display:grid;grid-template-columns:1fr;gap:40px;align-items:center}
+  @media(min-width:860px){.trade-inner{grid-template-columns:1.3fr 1fr}}
+  .trade h3{font-family:var(--serif);font-weight:300;font-size:clamp(1.6rem,3vw,2.4rem);line-height:1.15;margin:14px 0 18px}
+  .trade p{color:var(--bone-dim);max-width:48ch}
+  .trade-meta{display:flex;gap:40px;margin-top:30px}
+  .trade-meta .m .n{font-family:var(--serif);font-size:2.2rem;color:var(--gold)}
+  .trade-meta .m .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--bone-faint);margin-top:4px}
+  .trade-cta{border:1px solid var(--rule);padding:40px 34px}
+  .trade-cta .label{margin-bottom:14px;display:block}
+
+  /* Footer */
+  footer{border-top:1px solid var(--rule);padding:70px 0 50px}
+  .foot-grid{display:grid;grid-template-columns:1fr;gap:40px}
+  @media(min-width:760px){.foot-grid{grid-template-columns:2fr 1fr 1fr}}
+  .foot-brand .mark{font-family:var(--serif);font-size:1.6rem;font-weight:300}
+  .foot-brand p{color:var(--bone-faint);font-size:14px;margin-top:14px;max-width:34ch}
+  .foot-col h6{font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--bone-faint);margin-bottom:16px}
+  .foot-col a{display:block;color:var(--bone-dim);font-size:15px;padding:5px 0;transition:color .3s}
+  .foot-col a:hover{color:var(--bone)}
+  .foot-base{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;margin-top:56px;padding-top:26px;border-top:1px solid var(--rule)}
+  .foot-base p{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--bone-faint)}
+
+  /* Modal System */
+  .modal-overlay{
+    position:fixed;inset:0;background:rgba(6,6,7,.88);backdrop-filter:blur(6px);
+    display:none;align-items:center;justify-content:center;z-index:200;padding:24px;
+  }
+  .modal-overlay.on{display:flex}
+  .modal-box{
+    background:var(--ink-2);border:1px solid var(--rule-strong);max-width:880px;width:100%;
+    max-height:88vh;overflow-y:auto;padding:34px 40px;position:relative;
+  }
+  .modal-close{
+    position:absolute;top:20px;right:24px;background:none;border:none;
+    color:var(--bone-faint);font-size:24px;cursor:pointer;line-height:1;
+  }
+  .modal-close:hover{color:var(--gold)}
+  .modal-title{font-family:var(--serif);font-weight:300;font-size:2.2rem;margin-bottom:6px;color:var(--bone)}
+  .modal-sub{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:24px}
+
+  /* Microtipping & Solo Table */
+  .tip-table{width:100%;border-collapse:collapse;margin:20px 0}
+  .tip-table th{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--bone-faint);text-align:left;padding:10px 12px;border-bottom:1px solid var(--rule-strong)}
+  .tip-table td{padding:12px;border-bottom:1px solid var(--rule);font-size:14.5px;vertical-align:top}
+  .tip-badge{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:3px 7px;border:1px solid var(--gold-dim);color:var(--gold);border-radius:2px}
+
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity 1s ease,transform 1s ease}
+  .reveal.in{opacity:1;transform:none}
+  [dir="rtl"]{direction:rtl}
+</style>
+</head>
+<body>
+
+<!-- PUBLIC DESK WEBSITE -->
+<div id="public-site">
+  <header>
+    <div class="brand" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+      <svg class="sunmark" viewBox="0 0 200 200" aria-hidden="true">
+        <g class="rays" stroke="#c2a15a" stroke-width="3" stroke-linecap="round"><line x1="160.0" y1="100.0" x2="182.0" y2="100.0"/><line x1="158.0" y1="115.5" x2="171.5" y2="119.2"/><line x1="152.0" y1="130.0" x2="171.0" y2="141.0"/><line x1="142.4" y1="142.4" x2="152.3" y2="152.3"/><line x1="130.0" y1="152.0" x2="141.0" y2="171.0"/><line x1="115.5" y1="158.0" x2="119.2" y2="171.5"/><line x1="100.0" y1="160.0" x2="100.0" y2="182.0"/><line x1="84.5" y1="158.0" x2="80.8" y2="171.5"/><line x1="70.0" y1="152.0" x2="59.0" y2="171.0"/><line x1="57.6" y1="142.4" x2="47.7" y2="152.3"/><line x1="48.0" y1="130.0" x2="29.0" y2="141.0"/><line x1="42.0" y1="115.5" x2="28.5" y2="119.2"/><line x1="40.0" y1="100.0" x2="18.0" y2="100.0"/><line x1="42.0" y1="84.5" x2="28.5" y2="80.8"/><line x1="48.0" y1="70.0" x2="29.0" y2="59.0"/><line x1="57.6" y1="57.6" x2="47.7" y2="47.7"/><line x1="70.0" y1="48.0" x2="59.0" y2="29.0"/><line x1="84.5" y1="42.0" x2="80.8" y2="28.5"/><line x1="100.0" y1="40.0" x2="100.0" y2="18.0"/><line x1="115.5" y1="42.0" x2="119.2" y2="28.5"/><line x1="130.0" y1="48.0" x2="141.0" y2="29.0"/><line x1="142.4" y1="57.6" x2="152.3" y2="47.7"/><line x1="152.0" y1="70.0" x2="171.0" y2="59.0"/><line x1="158.0" y1="84.5" x2="171.5" y2="80.8"/></g>
+        <circle cx="100" cy="100" r="50" fill="none" stroke="#8f7738" stroke-width="2"/>
+        <circle cx="100" cy="100" r="42" fill="none" stroke="#c2a15a" stroke-width="2"/>
+        <circle cx="100" cy="100" r="11" fill="#c2a15a"/>
+      </svg>
+      <span class="wm">theindiaproject<b>.world</b></span>
+    </div>
+    <div class="coords mono" id="coords">LAT 8°–37° N · LON 68°–97° E</div>
+    <nav class="top">
+      <div class="langs" id="langs">
+        <button data-l="en" class="active">EN</button>
+        <button data-l="fr">FR</button>
+        <button data-l="hi">हिं</button>
+        <button data-l="es">ES</button>
+        <button data-l="de">DE</button>
+        <button data-l="ar">ع</button>
+      </div>
+      <a href="office.html" class="nav-btn" title="Access Dedicated Back Office Desk">Back Office Desk ↗</a>
+      <a href="#commission" class="nav-btn">Commission →</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <svg class="sunmark hero-sun" viewBox="0 0 200 200" aria-hidden="true">
+      <g class="rays" stroke="#c2a15a" stroke-width="1.4" stroke-linecap="round"><line x1="160.0" y1="100.0" x2="182.0" y2="100.0"/><line x1="158.0" y1="115.5" x2="171.5" y2="119.2"/><line x1="152.0" y1="130.0" x2="171.0" y2="141.0"/><line x1="142.4" y1="142.4" x2="152.3" y2="152.3"/><line x1="130.0" y1="152.0" x2="141.0" y2="171.0"/><line x1="115.5" y1="158.0" x2="119.2" y2="171.5"/><line x1="100.0" y1="160.0" x2="100.0" y2="182.0"/><line x1="84.5" y1="158.0" x2="80.8" y2="171.5"/><line x1="70.0" y1="152.0" x2="59.0" y2="171.0"/><line x1="57.6" y1="142.4" x2="47.7" y2="152.3"/><line x1="48.0" y1="130.0" x2="29.0" y2="141.0"/><line x1="42.0" y1="115.5" x2="28.5" y2="119.2"/><line x1="40.0" y1="100.0" x2="18.0" y2="100.0"/><line x1="42.0" y1="84.5" x2="28.5" y2="80.8"/><line x1="48.0" y1="70.0" x2="29.0" y2="59.0"/><line x1="57.6" y1="57.6" x2="47.7" y2="47.7"/><line x1="70.0" y1="48.0" x2="59.0" y2="29.0"/><line x1="84.5" y1="42.0" x2="80.8" y2="28.5"/><line x1="100.0" y1="40.0" x2="100.0" y2="18.0"/><line x1="115.5" y1="42.0" x2="119.2" y2="28.5"/><line x1="130.0" y1="48.0" x2="141.0" y2="29.0"/><line x1="142.4" y1="57.6" x2="152.3" y2="47.7"/><line x1="152.0" y1="70.0" x2="171.0" y2="59.0"/><line x1="158.0" y1="84.5" x2="171.5" y2="80.8"/></g>
+      <circle cx="100" cy="100" r="50" fill="none" stroke="#8f7738" stroke-width="1"/><circle cx="100" cy="100" r="42" fill="none" stroke="#c2a15a" stroke-width="1.2"/><circle cx="100" cy="100" r="9" fill="#c2a15a"/>
+    </svg>
+    <svg class="contours" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <g fill="none" stroke="#c2a15a" stroke-width="0.6" opacity="0.22">
+        <path d="M-50,720 C300,640 520,780 760,700 1000,620 1220,760 1500,680"/>
+        <path d="M-50,640 C300,560 540,700 780,620 1020,540 1240,680 1500,600"/>
+        <path d="M-50,560 C320,500 560,620 800,540 1040,460 1260,600 1500,520"/>
+        <path d="M-50,480 C340,430 580,540 820,470 1060,400 1280,520 1500,450"/>
+        <path d="M-50,400 C360,360 600,460 840,400 1080,340 1300,440 1500,390"/>
+      </g>
+    </svg>
+    <div class="wrap">
+      <div class="hero-kicker label">A Private Coordination Desk · Est. under seal</div>
+      <h1 id="heroLine">India is not a destination. It is a route — <em>surveyed, sealed, assigned.</em></h1>
+      <p class="hero-sub">For those who require the subcontinent handled in full, and discussed with no one.</p>
+      <div class="hero-actions">
+        <button class="seal-btn" onclick="document.getElementById('commission').scrollIntoView()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c2a15a" stroke-width="1.4"><circle cx="12" cy="12" r="9"/><path d="M8 12l2.5 2.5L16 9"/></svg>
+          Request an Assessment
+        </button>
+        <button class="ghost-btn" onclick="document.getElementById('doctrine').scrollIntoView()">Enter the Doctrine</button>
+        <button class="ghost-btn" onclick="openSoloModal()">Solo &amp; Microtipping Guide ↗</button>
+      </div>
+    </div>
+    <div class="hero-foot">
+      <div class="label">No. 001 / Sealed</div>
+      <div class="scrollcue">Scroll · Descend</div>
+    </div>
+  </section>
+
+  <!-- DOCTRINE -->
+  <section class="band doctrine" id="doctrine">
+    <div class="wrap">
+      <div class="sec-head reveal"><span class="sec-idx">I</span><span class="label">The Doctrine</span></div>
+      <p class="statement reveal">We do not advertise stays. <em>We assign them.</em></p>
+      <div class="cols">
+        <p class="reveal">Every coordinate is walked before it is offered. Nothing reaches you on a supplier's word — distance, terrain and timing are checked against our own matrix before a single leg is confirmed.</p>
+        <p class="reveal">The stays we assign are unlisted. Access is held through lineage and private agreement, never through public availability. What we hold, we do not publish. What we publish, we do not sell.</p>
+      </div>
+    </div>
+  </section>
+  <div class="wrap"><div class="rule"></div></div>
+
+  <!-- SIX PASSES -->
+  <section class="band" id="method">
+    <div class="wrap">
+      <div class="sec-head reveal"><span class="sec-idx">II</span><span class="label">The Method — Six Passes</span></div>
+      <p class="statement reveal" style="font-size:clamp(1.6rem,3.4vw,2.6rem);max-width:26ch;margin-bottom:50px">Six passes stand between a route and <em>your name on it.</em></p>
+      <div class="passes" id="passes">
+        <div class="pass"><div class="num">01</div><div class="body"><h4>The Surveyor's Audit</h4><p>Actual topography — not straight lines on a map. Gradient, turning radius and ground clearance, verified in person.</p></div><div class="stamp">Verified</div></div>
+        <div class="pass"><div class="num">02</div><div class="body"><h4>The Five-Hour Rule</h4><p>No driving leg exceeds five hours. Where terrain insists otherwise, the journey leaves the road — rail, rotor or wing.</p></div><div class="stamp">Verified</div></div>
+        <div class="pass"><div class="num">03</div><div class="body"><h4>The Contingency Stress-Test</h4><p>What fails first is identified, and answered, before you arrive. Every route carries its own second route.</p></div><div class="stamp">Verified</div></div>
+        <div class="pass"><div class="num">04</div><div class="body"><h4>The Permit &amp; Bureaucracy Check</h4><p>Inner Line and Protected Area requirements cleared in advance for domestic and foreign passports. The frontier is not closed — it is coordinated.</p></div><div class="stamp">Verified</div></div>
+        <div class="pass"><div class="num">05</div><div class="body"><h4>The Client Interrogation</h4><p>Every question a guest could raise, answered before it is asked. Nothing is left to the day itself.</p></div><div class="stamp">Verified</div></div>
+        <div class="pass"><div class="num">06</div><div class="body"><h4>Fact &amp; Source Verification</h4><p>Nothing confirmed on assumption. Everything confirmed at source. This is the discipline you never see.</p></div><div class="stamp">Verified</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE ATLAS CORRIDORS & DESTINATIONS -->
+  <section class="band" id="atlas">
+    <div class="wrap">
+      <div class="sec-head reveal"><span class="sec-idx">III</span><span class="label">The Atlas — 4 Surveyed Corridors &amp; 40 Destinations</span></div>
+      <p class="statement reveal" style="font-size:clamp(1.6rem,3.4vw,2.4rem);margin-bottom:30px">Select a corridor to inspect its <em>surveyed destinations.</em></p>
+      
+      <div class="reveal">
+        <div class="atlas-row" onclick="openCorridorModal('rajputana')">
+          <span class="rn">01</span>
+          <span class="rt">The Royal Rajputana Route</span>
+          <span class="rc">27°N · 10 Destinations · Desert Forts &amp; Marble →</span>
+        </div>
+        <div class="atlas-row" onclick="openCorridorModal('high_altitude')">
+          <span class="rn">02</span>
+          <span class="rt">The High-Altitude Sanctuary</span>
+          <span class="rc">34°N · 10 Destinations · Ladakh &amp; The Roof →</span>
+        </div>
+        <div class="atlas-row" onclick="openCorridorModal('southern_spice')">
+          <span class="rn">03</span>
+          <span class="rt">Deccan &amp; Southern Spice Trail</span>
+          <span class="rc">11°N · 10 Destinations · Backwater &amp; Plantation →</span>
+        </div>
+        <div class="atlas-row" onclick="openCorridorModal('cloud_forest')">
+          <span class="rn">04</span>
+          <span class="rt">The Sacred East &amp; Cloud Forest</span>
+          <span class="rc">26°N · 10 Destinations · Frontier &amp; Rain →</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ESCALATION -->
+  <section class="band escalation" id="escalation">
+    <div class="wrap">
+      <div class="sec-head reveal"><span class="sec-idx">IV</span><span class="label">The Ascent — Escalation Protocol</span></div>
+      <p class="statement reveal" style="font-size:clamp(1.6rem,3.4vw,2.5rem);max-width:24ch">Every route climbs. The pinnacle is <em>held for the end.</em></p>
+      <svg class="esc-graph reveal" viewBox="0 0 1100 300" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <line x1="40" y1="260" x2="1060" y2="260" stroke="rgba(233,227,214,0.18)" stroke-width="1"/>
+        <polyline points="60,240 300,205 540,165 780,110 1000,40" fill="none" stroke="#c2a15a" stroke-width="1.4"/>
+        <g font-family="'Space Mono',monospace" font-size="11" fill="#a49d8d" letter-spacing="1">
+          <circle cx="60" cy="240" r="3.5" fill="#7c2427"/><text x="60" y="285" text-anchor="middle">IMMERSION</text>
+          <circle cx="300" cy="205" r="3.5" fill="#8f7738"/><text x="300" y="285" text-anchor="middle">CULTURE</text>
+          <circle cx="540" cy="165" r="3.5" fill="#8f7738"/><text x="540" y="285" text-anchor="middle">SECLUSION</text>
+          <circle cx="780" cy="110" r="3.5" fill="#c2a15a"/><text x="780" y="285" text-anchor="middle">RARITY</text>
+          <circle cx="1000" cy="40" r="5" fill="#c2a15a"/><text x="1000" y="285" text-anchor="middle" fill="#c2a15a">THE PINNACLE</text>
+        </g>
+        <text x="1000" y="28" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="15" fill="#e9e3d6" font-style="italic">final 24–48 hrs</text>
+      </svg>
+      <p class="esc-note reveal">A route begins in the culturally rich and the immersive. It rises — tier by tier, never falling back — and reserves the absolute summit of the assignment for the closing hours, so the journey ends not with departure, but with elevation.</p>
+    </div>
+  </section>
+
+  <!-- PORTFOLIOS -->
+  <section class="band" id="portfolios">
+    <div class="wrap">
+      <div class="sec-head reveal"><span class="sec-idx">V</span><span class="label">The Portfolios — Eight, Sealed</span></div>
+      <div class="ports reveal">
+        <div class="port" tabindex="0"><span class="pn">i</span><div><h5>The Master Portfolio</h5><div class="desc">The full instrument. Nothing withheld, nothing standard.</div></div><svg class="seal-mark" viewBox="0 0 24 24" fill="none" stroke="#c2a15a" stroke-width="1"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/></svg></div>
+        <div class="port" tabindex="0"><span class="pn">ii</span><div><h5>Commemorative Isolation</h5><div class="desc">A single occasion, sealed off from the world entirely.</div></div><svg class="seal-mark" viewBox="0 0 24 24" fill="none" stroke="#c2a15a" stroke-width="1"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/></svg></div>
+        <div class="port" tabindex="0" onclick="openSoloModal()"><span class="pn">iii</span><div><h5>The Solo Wanderlust Collection</h5><div class="desc">One traveller, complete discretion &amp; microtipping protocol. Click for details →</div></div><svg class="seal-mark" viewBox="0 0 24 24" fill="none" stroke="#c2a15a" stroke-width="1"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/></svg></div>
+        <div class="port" tabindex="0"><span class="pn">iv</span><div><h5>Conscious Luxury</h5><div class="desc">Provenance verified. Every stay answerable for its ground.</div></div><svg class="seal-mark" viewBox="0 0 24 24" fill="none" stroke="#c2a15a" stroke-width="1"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/></svg></div>
+        <div class="port" tabindex="0"><span class="pn">v</span><div><h5>Holistic Health &amp; Lifestyle</h5><div class="desc">Leave heavier. Return lighter. Restoration, coordinated.</div></div><svg class="seal-mark" viewBox="0 0 24 24" fill="none" stroke="#c2a15a" stroke-width="1"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/></svg></div>
+        <div class="port" tabindex="0"><span class="pn">vi</span><div><h5>The Domestic Traveller Collection</h5><div class="desc">The subcontinent, for those who already know it well.</div></div><svg class="seal-mark" viewBox="0 0 24 24" fill="none" stroke="#c2a15a" stroke-width="1"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/></svg></div>
+        <div class="port" tabindex="0"><span class="pn">vii</span><div><h5>Tribal Heritage &amp; Frontier Circuit</h5><div class="desc">Where fences do not exist and access is arranged.</div></div><svg class="seal-mark" viewBox="0 0 24 24" fill="none" stroke="#c2a15a" stroke-width="1"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/></svg></div>
+        <div class="port" tabindex="0"><span class="pn">viii</span><div><h5>The Seamless Transit Network</h5><div class="desc">Rail, rotor and wing — the road refused where it must be.</div></div><svg class="seal-mark" viewBox="0 0 24 24" fill="none" stroke="#c2a15a" stroke-width="1"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/></svg></div>
+      </div>
+      <p class="ports-note reveal">Each portfolio is opened only on commission. Contents are disclosed under seal.</p>
+    </div>
+  </section>
+
+  <!-- JOURNAL -->
+  <section class="band" id="journal">
+    <div class="wrap">
+      <div class="sec-head reveal"><span class="sec-idx">VI</span><span class="label">The Journal — Field Notes</span></div>
+      <div class="journal reveal">
+        <div class="jent"><span class="jk label">Timing</span><h6>The Season No One Books</h6><p>Dismantling the October–March myth. Why the monsoon in Kerala and high summer in Ladakh are India's most exclusive windows.</p><span class="more">Read the note →</span></div>
+        <div class="jent"><span class="jk label">Wilderness</span><h6>The Reserves We Hold</h6><p>Where the predator and the herdsman share the slope — and how access is arranged where fences do not exist.</p><span class="more">Read the note →</span></div>
+        <div class="jent"><span class="jk label">Access</span><h6>The Permit Pipeline</h6><p>Inner Line and Protected Area clearances for domestic &amp; foreign passports. The frontier is not closed. It is coordinated.</p><span class="more">Read the note →</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MEDIA REELS -->
+  <section class="band" id="reels" style="background:var(--ink-2)">
+    <div class="wrap">
+      <div class="sec-head reveal"><span class="sec-idx">VII</span><span class="label">Brand Cinema — Visual Atmosphere</span></div>
+      <p class="statement reveal" style="font-size:clamp(1.6rem,3.4vw,2.4rem);max-width:24ch">The ground in motion. <em>Sealed previews.</em></p>
+      <div class="reels-grid reveal">
+        <div class="reel-card">
+          <video controls poster="" preload="metadata">
+            <source src="brand_intro_reel.mp4" type="video/mp4">
+            Your browser does not support HTML5 video.
+          </video>
+          <h4>The Brand Identity Reel</h4>
+          <p>A cinematic introduction to the coordination desk and our subcontinent matrix.</p>
+        </div>
+        <div class="reel-card">
+          <video controls poster="" preload="metadata">
+            <source src="rajputana_route_reel.mp4" type="video/mp4">
+            Your browser does not support HTML5 video.
+          </video>
+          <h4>The Royal Rajputana Route (27°N)</h4>
+          <p>Desert fortresses, marble sanctuaries, and granite monolith tracking.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMISSION -->
+  <section class="band commission" id="commission">
+    <div class="wrap">
+      <div class="comm-grid">
+        <div>
+          <div class="sec-head reveal"><span class="sec-idx">VIII</span><span class="label">The Commission Desk</span></div>
+          <p class="comm-lead reveal">A limited number of commissions are accepted each season. Begin with a single question. <em>Why now?</em></p>
+          <p class="comm-sub reveal">No financial payment or obligation is requested on reaching out. Your intent is held in confidence under seal and read by one desk only.</p>
+          <div class="comm-notice reveal">
+            <strong>NO UPFRONT FEES OR PAYMENTS:</strong> We do not ask for any payments upon reaching out to us. All correspondence is conducted via formal, unadorned black-and-white executive email memos.
+          </div>
+        </div>
+        <form class="reveal" onsubmit="return sealForm(event)">
+          <div class="field">
+            <label>The shape of it</label>
+            <div class="intents" id="intents">
+              <button type="button" class="intent">A weekend, the two of us</button>
+              <button type="button" class="intent">Time the family will keep</button>
+              <button type="button" class="intent">To mark an occasion</button>
+              <button type="button" class="intent">To disappear entirely (Solo)</button>
+              <button type="button" class="intent">To go where few are permitted</button>
+              <button type="button" class="intent">To restore body and mind</button>
+            </div>
+          </div>
+          <div class="field"><label>Name</label><input type="text" required placeholder="—" /></div>
+          <div class="field"><label>A line of contact (Email)</label><input type="email" required placeholder="name@correspondence.com" /></div>
+          <div class="field"><label>Why now?</label><textarea rows="2" placeholder="One sentence is enough."></textarea></div>
+          <button class="submit" type="submit" id="submitBtn">Begin the Assessment →</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRADE DESK -->
+  <section class="band trade" id="trade">
+    <div class="wrap trade-inner">
+      <div class="reveal">
+        <span class="label">Front 02 · The White-Label Trade Desk</span>
+        <h3>For the designer and the concierge who cannot afford to be wrong about the ground.</h3>
+        <p>We do not sell you a destination. We sell you structural safety — control over permits, terrain and contingency across the subcontinent, delivered under your own name.</p>
+        <div class="trade-meta">
+          <div class="m"><div class="n">24h</div><div class="l">SLA on trade enquiry</div></div>
+          <div class="m"><div class="n">100%</div><div class="l">Routes audited six times</div></div>
+          <div class="m"><div class="n">NDA</div><div class="l">Credentials on request</div></div>
+        </div>
+      </div>
+      <div class="trade-cta reveal">
+        <span class="label">Open a Trade File</span>
+        <p style="color:var(--bone-dim);font-size:15px;margin-bottom:22px">Boutique travel designers and private concierges in the US, UK and France. Applications reviewed individually.</p>
+        <button class="submit" style="width:100%" onclick="document.getElementById('commission').scrollIntoView()">Apply to the Desk →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="wrap">
+      <div class="foot-grid">
+        <div class="foot-brand">
+          <div class="mark">theindiaproject.world</div>
+          <p>A private coordination desk. Surveyed, sealed, assigned. Discussed with no one.</p>
+        </div>
+        <div class="foot-col">
+          <h6>The House</h6>
+          <a href="#doctrine">Doctrine</a>
+          <a href="#method">The Method</a>
+          <a href="#atlas">The Atlas</a>
+          <a href="#portfolios">Portfolios</a>
+          <a href="#journal">Journal</a>
+        </div>
+        <div class="foot-col">
+          <h6>Correspondence</h6>
+          <a href="#commission">Commission a Route</a>
+          <a href="#trade">Trade Desk</a>
+          <a href="office.html">Back Office Portal ↗</a>
+        </div>
+      </div>
+      <div class="foot-base">
+        <p>© 2026 theindiaproject.world · All rights reserved.</p>
+        <p>Marks &amp; method protected under the Indian Copyright Act, 1957.</p>
+        <p>EN · FR · हिं · ES · DE · ع</p>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- SOLO TRAVELLING & MICROTIPPING INTERACTIVE MODAL -->
+<div class="modal-overlay" id="soloModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeSoloModal()">×</button>
+    <div class="modal-title">Portfolio iii: The Solo Wanderlust Collection</div>
+    <div class="modal-sub">One Traveller · Whole Apparatus · Complete Discretion &amp; Microtipping Protocol</div>
+    
+    <p style="color:var(--bone-dim);font-size:16px;line-height:1.7;margin-bottom:20px">
+      Designed specifically for independent solo travellers who require unhindered mobility, complete personal discretion, and full administrative safety across India's remote corridors.
+    </p>
+
+    <h4 style="font-family:var(--serif);font-size:1.4rem;color:var(--gold);margin-top:24px;margin-bottom:10px">Interactive Microtipping Protocol &amp; Financial Allocation Matrix</h4>
+    <p style="color:var(--bone-dim);font-size:14.5px;margin-bottom:14px">
+      In India, discreet microtipping (<em>baksheesh</em>) is a vital cultural bridge that establishes local rapport and rewards high-quality personal guidance. Below is our desk's calibrated daily gratuity model:
+    </p>
+
+    <table class="tip-table">
+      <thead>
+        <tr>
+          <th>Service Category</th>
+          <th>Recommended Tip (₹)</th>
+          <th>Daily Impact (₹)</th>
+          <th>Discretion Protocol</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Local Tracker / Guide</strong></td>
+          <td>₹500 / day</td>
+          <td>₹500</td>
+          <td><span class="tip-badge">End of Day</span></td>
+        </tr>
+        <tr>
+          <td><strong>Private Chauffeur</strong></td>
+          <td>₹450 / day</td>
+          <td>₹450</td>
+          <td><span class="tip-badge">Daily Envelope</span></td>
+        </tr>
+        <tr>
+          <td><strong>Restaurant Waitstaff</strong></td>
+          <td>7–10% of bill</td>
+          <td>₹300</td>
+          <td><span class="tip-badge">Bill Payment</span></td>
+        </tr>
+        <tr>
+          <td><strong>Housekeeping Staff</strong></td>
+          <td>₹100 / night</td>
+          <td>₹100</td>
+          <td><span class="tip-badge">Central Box</span></td>
+        </tr>
+        <tr>
+          <td><strong>Hotel Bellboy / Porter</strong></td>
+          <td>₹50 / bag</td>
+          <td>₹100</td>
+          <td><span class="tip-badge">Immediate</span></td>
+        </tr>
+        <tr>
+          <td><strong>Transit Round-up</strong></td>
+          <td>₹20–50 margin</td>
+          <td>₹50</td>
+          <td><span class="tip-badge">Immediate / UPI</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="background:var(--ink);border:1px solid var(--rule);padding:18px;margin-top:20px">
+      <div style="font-family:var(--mono);font-size:11px;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;margin-bottom:8px">International Travellers Cash-Kit Note</div>
+      <p style="font-size:14px;color:var(--bone-dim);line-height:1.6">
+        Foreign nationals are advised to carry a physical <strong>Cash-Kit</strong> in small-denomination currency notes (₹20, ₹50, ₹100). For seamless contactless micro-gratuities, our desk pre-configures <strong>UPI One World</strong> prepaid digital wallets linked directly to international passports upon airport arrival.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- CORRIDOR & DESTINATION DRAWER MODAL -->
+<div class="modal-overlay" id="corridorModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeCorridorModal()">×</button>
+    <div class="modal-title" id="corrModalTitle">Corridor Title</div>
+    <div class="modal-sub" id="corrModalSub">Latitude &amp; Theme</div>
+    
+    <p style="color:var(--bone-dim);font-size:15.5px;line-height:1.7;margin-bottom:20px" id="corrModalDesc"></p>
+
+    <h4 style="font-family:var(--serif);font-size:1.4rem;color:var(--gold);margin-top:20px;margin-bottom:12px">10 Surveyed Destinations in this Corridor</h4>
+    
+    <div class="dest-grid" id="corrDestGrid"></div>
+  </div>
+</div>
+
+<script>
+  // --- Corridor Data Repository ---
+  var CORRIDORS = {
+    rajputana: {
+      title: "The Royal Rajputana Route",
+      sub: "27°N · Desert Forts & Marble Palaces",
+      desc: "Corridor covering desert fortresses, marble sanctuaries, and granite monolith tracking across Rajasthan at latitude 27°N.",
+      destinations: [
+        { name: "Jaipur", state: "Rajasthan", lat: "26.91°N", lon: "75.78°E", desc: "Pink City, Amer Fort & Rajput royal heritage.", season: "October to March" },
+        { name: "Udaipur", state: "Rajasthan", lat: "24.58°N", lon: "73.71°E", desc: "Lake Pichola marble palaces & Mewar art.", season: "October to March" },
+        { name: "Jodhpur", state: "Rajasthan", lat: "26.23°N", lon: "73.02°E", desc: "Mehrangarh Fort 400ft cliff & indigo town.", season: "October to March" },
+        { name: "Jaisalmer", state: "Rajasthan", lat: "26.91°N", lon: "70.90°E", desc: "Golden sandstone fort deep within Thar desert.", season: "October to March" },
+        { name: "Ranthambore", state: "Rajasthan", lat: "26.01°N", lon: "76.50°E", desc: "Bengal tiger sanctuary & 10th-century UNESCO fort.", season: "October to April" },
+        { name: "Pushkar", state: "Rajasthan", lat: "26.48°N", lon: "74.55°E", desc: "Sacred Lake, Brahma Temple & 52 bathing ghats.", season: "October to March" },
+        { name: "Bikaner", state: "Rajasthan", lat: "28.02°N", lon: "73.31°E", desc: "Junagarh Fort red sandstone & carved havelis.", season: "October to March" },
+        { name: "Narlai", state: "Rajasthan", lat: "25.32°N", lon: "73.23°E", desc: "Rawla Narlai & granite monolith leopard tracking.", season: "October to March" },
+        { name: "Chhatrasagar", state: "Rajasthan", lat: "26.31°N", lon: "74.05°E", desc: "Dam reservoir oasis tents & 200+ bird species.", season: "October to March" },
+        { name: "Rohet", state: "Rajasthan", lat: "25.95°N", lon: "73.12°E", desc: "Rohet Garh & Bishnoi eco-preservation safaris.", season: "October to March" }
+      ]
+    },
+    high_altitude: {
+      title: "The High-Altitude Sanctuary",
+      sub: "34°N · Ladakh & The Trans-Himalayan Roof",
+      desc: "Corridor spanning high mountain passes (Khardung La, Sela Pass), Buddhist monasteries, and high-altitude rain shadow deserts at 34°N.",
+      destinations: [
+        { name: "Leh", state: "Ladakh", lat: "34.15°N", lon: "77.57°E", desc: "Capital of Ladakh, Leh Palace & Tsemo Gompa (11,500 ft).", season: "May to October" },
+        { name: "Nubra Valley", state: "Ladakh", lat: "34.58°N", lon: "77.56°E", desc: "Shyok River, Hunder sand dunes & Bactrian camels.", season: "May to September" },
+        { name: "Pangong Tso", state: "Ladakh", lat: "33.75°N", lon: "78.66°E", desc: "Turquoise endorheic lake bordering Tibet (14,270 ft).", season: "June to September" },
+        { name: "Hemis", state: "Ladakh", lat: "33.91°N", lon: "77.70°E", desc: "17th-century monastery & snow leopard tracking sanctuary.", season: "Year-Round (Winter for Leopards)" },
+        { name: "Zanskar Valley", state: "Ladakh", lat: "33.48°N", lon: "76.88°E", desc: "Glacial river canyon passage & Padum plateau.", season: "June to September" },
+        { name: "Hanle", state: "Ladakh", lat: "32.77°N", lon: "78.97°E", desc: "Dark Sky Reserve & Indian Astronomical Observatory.", season: "May to October" },
+        { name: "Tso Moriri", state: "Ladakh", lat: "32.90°N", lon: "78.31°E", desc: "High brackish lake & Changpa nomadic cashmere grounds.", season: "June to September" },
+        { name: "Dah Hanu", state: "Ladakh", lat: "34.47°N", lon: "76.53°E", desc: "Drokpa / Brokpa Aryan cultural heritage enclave.", season: "May to October" },
+        { name: "Diskit", state: "Ladakh", lat: "34.55°N", lon: "77.56°E", desc: "14th-century monastery & 106ft Maitreya Buddha statue.", season: "May to September" },
+        { name: "Alchi", state: "Ladakh", lat: "34.22°N", lon: "77.17°E", desc: "11th-century Himalayan wall-painting monastic complex.", season: "May to October" }
+      ]
+    },
+    southern_spice: {
+      title: "Deccan & Southern Spice Trail",
+      sub: "11°N · Backwaters, Tea Estates & Coast",
+      desc: "Corridor encompassing Western Ghats tea plantations, silent backwater canals, and ancient boulder ruins across South India at 11°N.",
+      destinations: [
+        { name: "Fort Kochi", state: "Kerala", lat: "9.96°N", lon: "76.24°E", desc: "Historic spice port, Chinese fishing nets & art heritage.", season: "September to March" },
+        { name: "Alleppey (Alappuzha)", state: "Kerala", lat: "9.49°N", lon: "76.33°E", desc: "Vembanad backwaters & silent river navigation.", season: "August to March" },
+        { name: "Munnar", state: "Kerala", lat: "10.08°N", lon: "77.06°E", desc: "High Western Ghats tea estates & Anamudi peak.", season: "September to May" },
+        { name: "Wayanad", state: "Kerala", lat: "11.68°N", lon: "76.13°E", desc: "Rainforest sanctuary, Edakkal caves & spice estates.", season: "September to May" },
+        { name: "Coorg (Kodagu)", state: "Karnataka", lat: "12.42°N", lon: "75.73°E", desc: "Coffee plantation wilderness & Western Ghats ridges.", season: "October to April" },
+        { name: "Kabini", state: "Karnataka", lat: "11.91°N", lon: "76.27°E", desc: "Nagarhole reserve & black panther forest corridor.", season: "October to May" },
+        { name: "Hampi", state: "Karnataka", lat: "15.33°N", lon: "76.46°E", desc: "UNESCO Vijayanagara boulder ruins & Tungabhadra river.", season: "October to March" },
+        { name: "Chettinad", state: "Tamil Nadu", lat: "10.16°N", lon: "78.78°E", desc: "Nattukottai merchant mansions & spiced culinary heritage.", season: "October to March" },
+        { name: "Bekal", state: "Kerala", lat: "12.39°N", lon: "75.03°E", desc: "17th-century coastal keyhole fort & palm beaches.", season: "October to March" },
+        { name: "Kumarakom", state: "Kerala", lat: "9.61°N", lon: "76.43°E", desc: "Vembanad bird sanctuary & Ayurvedic restoration.", season: "September to March" }
+      ]
+    },
+    cloud_forest: {
+      title: "The Sacred East & Cloud Forest",
+      sub: "26°N · Living Root Bridges & Mist",
+      desc: "Frontier corridor covering Meghalaya's rain forests, Arunachal Pradesh monasteries, and Assam floodplains at 26°N.",
+      destinations: [
+        { name: "Cherrapunji (Sohra)", state: "Meghalaya", lat: "25.27°N", lon: "91.73°E", desc: "Living root bridges, waterfalls & monsoon canyon mist.", season: "October to May" },
+        { name: "Shillong", state: "Meghalaya", lat: "25.57°N", lon: "91.88°E", desc: "Khasi Hills capital, pine forests & waterfall trails.", season: "October to May" },
+        { name: "Kaziranga", state: "Assam", lat: "26.57°N", lon: "93.17°E", desc: "UNESCO Brahmaputra floodplains & one-horned rhinos.", season: "November to April" },
+        { name: "Majuli Island", state: "Assam", lat: "26.95°N", lon: "94.16°E", desc: "World's largest river island & Neo-Vaishnavite satras.", season: "October to March" },
+        { name: "Tawang", state: "Arunachal Pradesh", lat: "27.58°N", lon: "91.86°E", desc: "300-year-old high monastery & Sela Pass (13,700 ft).", season: "April to October" },
+        { name: "Dirang", state: "Arunachal Pradesh", lat: "27.35°N", lon: "92.23°E", desc: "Monpa valley, kiwi orchards & hot water springs.", season: "March to November" },
+        { name: "Ziro Valley", state: "Arunachal Pradesh", lat: "27.54°N", lon: "93.83°E", desc: "Apatani pine plateau, UNESCO paddy-fish culture.", season: "March to October" },
+        { name: "Gangtok", state: "Sikkim", lat: "27.33°N", lon: "88.61°E", desc: "Kanchenjunga views, Rumtek monastery & orchid ridges.", season: "October to May" },
+        { name: "Kalimpong", state: "West Bengal", lat: "27.06°N", lon: "88.47°E", desc: "Teesta river canyon, Himalayan nurseries & estate views.", season: "October to May" },
+        { name: "Dawki", state: "Meghalaya", lat: "25.18°N", lon: "92.01°E", desc: "Crystal clear Umngot River & Bangladesh border frontier.", season: "October to April" }
+      ]
+    }
+  };
+
+  // --- Modal Controllers ---
+  function openCorridorModal(key){
+    var c = CORRIDORS[key];
+    if(!c) return;
+    document.getElementById('corrModalTitle').textContent = c.title;
+    document.getElementById('corrModalSub').textContent = c.sub;
+    document.getElementById('corrModalDesc').textContent = c.desc;
+    
+    var grid = document.getElementById('corrDestGrid');
+    grid.innerHTML = '';
+    c.destinations.forEach(function(d){
+      var html = '<div class="dest-card">' +
+        '<h5>' + d.name + '</h5>' +
+        '<span class="coords-tag">LAT ' + d.lat + ' · LON ' + d.lon + '</span>' +
+        '<p>' + d.desc + '</p>' +
+        '<div class="season">Best Window: ' + d.season + '</div>' +
+        '</div>';
+      grid.innerHTML += html;
+    });
+    
+    document.getElementById('corridorModal').classList.add('on');
+  }
+
+  function closeCorridorModal(){ document.getElementById('corridorModal').classList.remove('on'); }
+  function openSoloModal(){ document.getElementById('soloModal').classList.add('on'); }
+  function closeSoloModal(){ document.getElementById('soloModal').classList.remove('on'); }
+
+  // --- Coordinate Ticker ---
+  (function(){
+    var el=document.getElementById('coords');
+    var t=0;
+    setInterval(function(){
+      t+=1;
+      var flick=(Math.sin(t/3)*3+68).toFixed(2);
+      el.textContent="LAT 8°–37° N · LON "+flick+"°–97° E";
+    },1400);
+  })();
+
+  // --- Multilingual Switcher ---
+  var HERO={
+    en:{t:'India is not a destination. It is a route — <em>surveyed, sealed, assigned.</em>',dir:'ltr'},
+    fr:{t:"L'Inde n'est pas une destination. C'est un itinéraire — <em>relevé, scellé, assigné.</em>",dir:'ltr'},
+    hi:{t:'भारत कोई गंतव्य नहीं। यह एक मार्ग है — <em>सर्वेक्षित, मुद्रांकित, नियत।</em>',dir:'ltr'},
+    es:{t:'La India no es un destino. Es una ruta — <em>trazada, sellada, asignada.</em>',dir:'ltr'},
+    de:{t:'Indien ist kein Reiseziel. Es ist eine Route — <em>vermessen, versiegelt, zugewiesen.</em>',dir:'ltr'},
+    ar:{t:'الهند ليست وجهةً، بل مسارٌ — <em>مُسِحَ، وخُتِمَ، وخُصِّص.</em>',dir:'rtl'}
+  };
+  var heroLine=document.getElementById('heroLine');
+  document.querySelectorAll('#langs button').forEach(function(b){
+    b.addEventListener('click',function(){
+      document.querySelectorAll('#langs button').forEach(function(x){x.classList.remove('active')});
+      b.classList.add('active');
+      var d=HERO[b.dataset.l];
+      heroLine.style.opacity=0;
+      setTimeout(function(){
+        heroLine.innerHTML=d.t;
+        heroLine.setAttribute('dir',d.dir);
+        heroLine.style.opacity=1;
+      },260);
+    });
+  });
+
+  // --- Intent Chips ---
+  document.querySelectorAll('#intents .intent').forEach(function(c){
+    c.addEventListener('click',function(){c.classList.toggle('sel')});
+  });
+
+  // --- Zero Fee Form Submission ---
+  function sealForm(e){
+    e.preventDefault();
+    var b=document.getElementById('submitBtn');
+    b.textContent='Sealed. Formal Black & White Email Memo Will Follow.';
+    b.style.borderColor='#c2a15a';b.style.color='#c2a15a';
+    return false;
+  }
+
+  // --- Scroll Reveal ---
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(en){ if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);} });
+  },{threshold:.14});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
+
+  // --- Six Passes Stamping ---
+  var pio=new IntersectionObserver(function(es){
+    es.forEach(function(en){
+      if(en.isIntersecting){
+        var passes=Array.prototype.slice.call(document.querySelectorAll('#passes .pass'));
+        passes.forEach(function(p,i){ setTimeout(function(){p.classList.add('verified')}, 260*i); });
+        pio.disconnect();
+      }
+    });
+  },{threshold:.2});
+  var pn=document.getElementById('passes'); if(pn){pio.observe(pn);}
+</script>
+</body>
 </html>

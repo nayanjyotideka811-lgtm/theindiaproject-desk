@@ -33,10 +33,10 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({
     <header className="sticky top-0 z-50 bg-[#0b0b0c]/95 backdrop-blur-md border-b border-[#e9e3d6]/15 transition-all">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          
+
           {/* Brand Seal & Title */}
           <div className="flex items-center gap-3 sm:gap-4 cursor-pointer" onClick={() => { setActiveTab('hero'); setMobileMenuOpen(false); }}>
-            <SunSealLogo size="sm" idSuffix="nav" />
+            <SunSealLogo size="sm" />
             <div>
               <div className="font-mono text-xs tracking-[0.2em] text-[#e9e3d6] uppercase font-bold flex items-center gap-1">
                 theindiaproject<span className="text-[#c2a15a]">.world</span>
@@ -56,11 +56,10 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({
                 <button
                   key={item.id}
                   onClick={() => setActiveTab(item.id)}
-                  className={`flex items-center gap-1 px-2.5 py-1.5 rounded transition-all ${
-                    isActive
+                  className={`flex items-center gap-1 px-2.5 py-1.5 rounded transition-all ${isActive
                       ? 'text-[#c2a15a] bg-[#c2a15a]/10 border border-[#c2a15a]/30 font-bold'
                       : 'text-[#a49d8d] hover:text-[#e9e3d6] hover:bg-[#e9e3d6]/5'
-                  }`}
+                    }`}
                 >
                   <Icon className="w-3 h-3" />
                   {item.label}
@@ -75,21 +74,19 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({
             <div className="bg-[#111114] border border-[#e9e3d6]/20 p-0.5 rounded flex items-center font-mono text-[10px]">
               <button
                 onClick={() => setUserType('domestic')}
-                className={`px-2 py-1 rounded transition-all ${
-                  userType === 'domestic'
+                className={`px-2 py-1 rounded transition-all ${userType === 'domestic'
                     ? 'bg-[#c2a15a] text-[#0b0b0c] font-bold'
                     : 'text-[#a49d8d] hover:text-[#e9e3d6]'
-                }`}
+                  }`}
               >
                 🇮🇳 Domestic
               </button>
               <button
                 onClick={() => setUserType('international')}
-                className={`px-2 py-1 rounded transition-all ${
-                  userType === 'international'
+                className={`px-2 py-1 rounded transition-all ${userType === 'international'
                     ? 'bg-[#c2a15a] text-[#0b0b0c] font-bold'
                     : 'text-[#a49d8d] hover:text-[#e9e3d6]'
-                }`}
+                  }`}
               >
                 🌐 Int'l
               </button>
@@ -106,11 +103,10 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({
             {/* Direct Door to Back Office */}
             <button
               onClick={() => setActiveTab('backoffice')}
-              className={`text-[10px] font-mono tracking-widest uppercase px-2.5 py-1 rounded border transition-all shadow-sm flex items-center gap-1 ${
-                activeTab === 'backoffice'
+              className={`text-[10px] font-mono tracking-widest uppercase px-2.5 py-1 rounded border transition-all shadow-sm flex items-center gap-1 ${activeTab === 'backoffice'
                   ? 'bg-[#c2a15a] text-[#0b0b0c] font-bold border-[#c2a15a]'
                   : 'bg-[#111114] hover:bg-[#c2a15a]/20 border-[#c2a15a]/50 text-[#c2a15a]'
-              }`}
+                }`}
             >
               Back Office 🔒
             </button>
@@ -139,11 +135,10 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({
                     setActiveTab(item.id);
                     setMobileMenuOpen(false);
                   }}
-                  className={`w-full flex items-center gap-2 px-4 py-2.5 rounded transition-all text-left ${
-                    isActive
+                  className={`w-full flex items-center gap-2 px-4 py-2.5 rounded transition-all text-left ${isActive
                       ? 'text-[#c2a15a] bg-[#c2a15a]/10 border border-[#c2a15a]/30 font-bold'
                       : 'text-[#a49d8d] hover:text-[#e9e3d6] hover:bg-[#e9e3d6]/5'
-                  }`}
+                    }`}
                 >
                   <Icon className="w-4 h-4 text-[#c2a15a]" />
                   {item.label}
