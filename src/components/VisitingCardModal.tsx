@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { X, Download, Copy, Check } from 'lucide-react';
+import { SunSealLogo } from './SunSealLogo';
 
 interface VisitingCardModalProps {
   isOpen: boolean;
@@ -12,14 +13,14 @@ export const VisitingCardModal: React.FC<VisitingCardModalProps> = ({ isOpen, on
   if (!isOpen) return null;
 
   const handleCopyText = () => {
-    const cardText = `theindiaproject.world — A Private Coordination Desk & Microtipping Protocol\nSURVEYED · SEALED · ASSIGNED\nLAT 8°–37° N · LON 68°–97° E\nContact: contact@theindiaproject.world`;
+    const cardText = `theindiaproject.world — A Private Coordination Desk\nSURVEYED · SEALED · ASSIGNED\nLAT 8°–37° N · LON 68°–97° E\nContact: contact@theindiaproject.world`;
     navigator.clipboard.writeText(cardText);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
 
   const handleDownloadVcf = () => {
-    const vcard = `BEGIN:VCARD\nVERSION:3.0\nN:Desk;The;;;\nFN:The Desk — theindiaproject.world\nORG:theindiaproject.world\nTITLE:Private Coordination Desk & Microtipping Protocol\nEMAIL:contact@theindiaproject.world\nURL:https://theindiaproject.world\nNOTE:Surveyed, sealed, assigned.\nEND:VCARD`;
+    const vcard = `BEGIN:VCARD\nVERSION:3.0\nN:Desk;The;;;\nFN:The Desk — theindiaproject.world\nORG:theindiaproject.world\nTITLE:Private Coordination Desk\nEMAIL:contact@theindiaproject.world\nURL:https://theindiaproject.world\nNOTE:Surveyed, sealed, assigned.\nEND:VCARD`;
     const blob = new Blob([vcard], { type: 'text/vcard' });
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
@@ -48,19 +49,9 @@ export const VisitingCardModal: React.FC<VisitingCardModalProps> = ({ isOpen, on
           <div className="w-full max-w-[480px] h-[270px] bg-[#0b0b0c] border border-[#e9e3d6]/20 p-6 flex flex-col items-center justify-center text-center relative overflow-hidden shadow-2xl">
             <div className="absolute inset-3 border border-[#e9e3d6]/10 pointer-events-none" />
             
-            {/* SVG Seal */}
-            <div className="w-16 h-16 mb-2">
-              <svg viewBox="0 0 200 200" className="w-full h-full animate-[spin_80s_linear_infinite]">
-                <circle cx="100" cy="100" r="88" fill="none" stroke="#8f7738" strokeWidth="1.4" />
-                <circle cx="100" cy="100" r="80" fill="none" stroke="#c2a15a" strokeWidth="0.8" />
-                <g stroke="#c2a15a" strokeWidth="2.5" strokeLinecap="round">
-                  <line x1="160" y1="100" x2="182" y2="100" />
-                  <line x1="100" y1="160" x2="100" y2="182" />
-                  <line x1="40" y1="100" x2="18" y2="100" />
-                  <line x1="100" y1="40" x2="100" y2="18" />
-                </g>
-                <circle cx="100" cy="100" r="11" fill="#c2a15a" />
-              </svg>
+            {/* SVG Rotating Glowing Sun Seal */}
+            <div className="mb-2">
+              <SunSealLogo size="md" useGif={true} />
             </div>
 
             <div className="font-mono text-xs tracking-[0.24em] text-[#e9e3d6] uppercase font-bold">
@@ -70,7 +61,7 @@ export const VisitingCardModal: React.FC<VisitingCardModalProps> = ({ isOpen, on
               A Private Coordination Desk
             </div>
             <div className="font-mono text-[9px] text-[#c2a15a] tracking-widest uppercase mt-1">
-              surveyed · sealed · assigned · microtipped
+              surveyed · sealed · assigned
             </div>
             <div className="absolute bottom-4 font-mono text-[8px] text-[#a49d8d] tracking-widest">
               LAT 8°–37° N · LON 68°–97° E
@@ -86,7 +77,7 @@ export const VisitingCardModal: React.FC<VisitingCardModalProps> = ({ isOpen, on
                 "We do not advertise stays or routes; <em className="text-[#c2a15a] italic">we assign them under seal.</em>"
               </div>
               <div className="font-serif text-xs text-[#a49d8d] italic mt-1">
-                Zero-friction microtipping direct to local Indian ground hosts.
+                Direct verified ground host support across Indian corridors.
               </div>
             </div>
 

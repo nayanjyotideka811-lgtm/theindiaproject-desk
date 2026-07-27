@@ -3,11 +3,10 @@ import { NEW_FOUND_DESTINATIONS, Destination, LocalHost } from '../data/destinat
 import { Camera, Sparkles, MapPin, CheckCircle2, HeartHandshake, RefreshCw, Upload } from 'lucide-react';
 
 interface ImageScannerProps {
-  currency: 'INR' | 'USD';
-  onSelectHostToTip: (host: LocalHost) => void;
+  onSelectHostToConnect: (host: LocalHost) => void;
 }
 
-export const ImageScanner: React.FC<ImageScannerProps> = ({ currency, onSelectHostToTip }) => {
+export const ImageScanner: React.FC<ImageScannerProps> = ({ onSelectHostToConnect }) => {
   const [selectedSample, setSelectedSample] = useState<string>('/nagaland-tribal-heritage.jpg');
   const [isAnalyzing, setIsAnalyzing] = useState<boolean>(false);
   const [analysisResult, setAnalysisResult] = useState<{
@@ -155,11 +154,11 @@ export const ImageScanner: React.FC<ImageScannerProps> = ({ currency, onSelectHo
                           <div className="text-[10px] text-[#a49d8d] font-serif">{host.role} · {host.location}</div>
                         </div>
                         <button
-                          onClick={() => onSelectHostToTip(host)}
+                          onClick={() => onSelectHostToConnect(host)}
                           className="bg-[#c2a15a] hover:bg-[#b0904a] text-[#0b0b0c] font-mono text-[10px] uppercase tracking-wider px-3 py-1.5 rounded font-bold transition-all flex items-center gap-1"
                         >
                           <HeartHandshake className="w-3.5 h-3.5" />
-                          Tip {currency === 'INR' ? `₹${host.suggestedTipInr}` : `$${host.suggestedTipUsd}`}
+                          Connect Host
                         </button>
                       </div>
                     ))}

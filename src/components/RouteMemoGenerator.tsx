@@ -4,10 +4,9 @@ import { FileText, ShieldCheck, Download, Copy, Check, Lock, RefreshCw, Compass,
 
 interface RouteMemoGeneratorProps {
   userType: 'domestic' | 'international';
-  currency: 'INR' | 'USD';
 }
 
-export const RouteMemoGenerator: React.FC<RouteMemoGeneratorProps> = ({ userType, currency }) => {
+export const RouteMemoGenerator: React.FC<RouteMemoGeneratorProps> = ({ userType }) => {
   const [travellerName, setTravellerName] = useState<string>('Anonymized Solo Traveller');
   const [originCity, setOriginCity] = useState<string>(userType === 'domestic' ? 'Mumbai, India' : 'Zurich, Switzerland');
   const [selectedDestId, setSelectedDestId] = useState<string>(NEW_FOUND_DESTINATIONS[0].id);

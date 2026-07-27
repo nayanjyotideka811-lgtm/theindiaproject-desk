@@ -78,13 +78,13 @@ export const SoloTravelHub: React.FC<SoloTravelHubProps> = ({ userType, setUserT
             <div className="flex items-center justify-between border-b border-[#e9e3d6]/15 pb-4 mb-4">
               <h3 className="font-serif text-2xl text-[#e9e3d6]">🇮🇳 Domestic Solo Explorer Protocol</h3>
               <span className="font-mono text-[10px] text-[#c2a15a] uppercase border border-[#c2a15a]/40 px-2 py-0.5 rounded">
-                INR (₹) Direct UPI
+                Verified Domestic Pass
               </span>
             </div>
             <ul className="space-y-3 font-serif text-sm text-[#a49d8d]">
               <li className="flex items-start gap-2">
                 <CheckCircle2 className="w-4 h-4 text-[#8fb892] mt-0.5 flex-shrink-0" />
-                <span><strong className="text-[#e9e3d6]">Instant UPI Microtipping:</strong> 1-click GPay/PhonePe direct to local tea artisans, boatmen, and homestays.</span>
+                <span><strong className="text-[#e9e3d6]">Direct Ground Host Network:</strong> Direct contact & coordination with local tea artisans, boatmen, and village homestays.</span>
               </li>
               <li className="flex items-start gap-2">
                 <CheckCircle2 className="w-4 h-4 text-[#8fb892] mt-0.5 flex-shrink-0" />
@@ -110,13 +110,13 @@ export const SoloTravelHub: React.FC<SoloTravelHubProps> = ({ userType, setUserT
             <div className="flex items-center justify-between border-b border-[#e9e3d6]/15 pb-4 mb-4">
               <h3 className="font-serif text-2xl text-[#e9e3d6]">🌐 International Solo Explorer Protocol</h3>
               <span className="font-mono text-[10px] text-[#c2a15a] uppercase border border-[#c2a15a]/40 px-2 py-0.5 rounded">
-                Multi-Currency Card
+                Verified International Pass
               </span>
             </div>
             <ul className="space-y-3 font-serif text-sm text-[#a49d8d]">
               <li className="flex items-start gap-2">
                 <CheckCircle2 className="w-4 h-4 text-[#8fb892] mt-0.5 flex-shrink-0" />
-                <span><strong className="text-[#e9e3d6]">Card-to-UPI FX Bridge:</strong> Seamless microtipping in USD ($) or EUR (€) converted instantly to host UPI without high bank fees.</span>
+                <span><strong className="text-[#e9e3d6]">Direct Host Support Relay:</strong> Direct international communication and resource gesture coordination for local village hosts.</span>
               </li>
               <li className="flex items-start gap-2">
                 <CheckCircle2 className="w-4 h-4 text-[#8fb892] mt-0.5 flex-shrink-0" />

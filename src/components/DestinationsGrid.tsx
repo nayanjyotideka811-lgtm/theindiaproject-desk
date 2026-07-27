@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import { NEW_FOUND_DESTINATIONS, Destination, LocalHost } from '../data/destinations';
-import { MapPin, Compass, ShieldCheck, HeartHandshake, Filter, ArrowUpRight, Award, Layers, EyeOff } from 'lucide-react';
+import { NEW_FOUND_DESTINATIONS, LocalHost } from '../data/destinations';
+import { MapPin, Compass, HeartHandshake, EyeOff } from 'lucide-react';
 
 interface DestinationsGridProps {
-  currency: 'INR' | 'USD';
-  onSelectHostToTip: (host: LocalHost) => void;
+  onSelectHostToConnect: (host: LocalHost) => void;
 }
 
-export const DestinationsGrid: React.FC<DestinationsGridProps> = ({ currency, onSelectHostToTip }) => {
+export const DestinationsGrid: React.FC<DestinationsGridProps> = ({ onSelectHostToConnect }) => {
   const [selectedRegionFilter, setSelectedRegionFilter] = useState<string>('ALL');
 
   const regions = ['ALL', 'Sacred East / Frontier', 'High-Altitude Trans-Himalaya', 'Northern Borderland', 'Khasi Hills Corridor', 'Western Ghats Rainforest', 'Royal Rajputana Frontier'];
@@ -24,7 +23,7 @@ export const DestinationsGrid: React.FC<DestinationsGridProps> = ({ currency, on
         <div className="bg-[#111114] border border-[#7c2427]/50 p-4 rounded mb-10 text-center flex items-center justify-center gap-3">
           <EyeOff className="w-5 h-5 text-[#c2a15a] flex-shrink-0" />
           <div className="text-xs font-mono text-[#e9e3d6] uppercase tracking-wider">
-            <strong>Desk Policy Doctrine:</strong> Stays are assigned privately under seal. We never publicly list, advertise, or confirm hotel names or room prices.
+            <strong>Desk Policy Doctrine:</strong> Stays and exact route coordinates are assigned privately under seal. We do not publicly advertise stays or commercial package pricing.
           </div>
         </div>
 
@@ -39,7 +38,7 @@ export const DestinationsGrid: React.FC<DestinationsGridProps> = ({ currency, on
           </h2>
           <p className="mt-4 text-[#a49d8d] font-serif text-lg leading-relaxed">
             Hand-surveyed off-beat corridors across India for solo wanderers. 
-            Integrated with local host microtipping profiles and 6-pass safety vetting logs.
+            Integrated with local verified host profiles and 6-pass safety vetting logs.
           </p>
         </div>
 
@@ -119,11 +118,11 @@ export const DestinationsGrid: React.FC<DestinationsGridProps> = ({ currency, on
                   </div>
                 </div>
 
-                {/* Local Hosts Microtip Section */}
+                {/* Local Hosts Section */}
                 <div className="pt-4 border-t border-[#e9e3d6]/15">
                   <div className="font-mono text-[10px] text-[#a49d8d] uppercase tracking-widest mb-2 flex items-center justify-between">
                     <span>Verified Local Hosts ({dest.hosts.length})</span>
-                    <span className="text-[#c2a15a]">0% Fee Payout</span>
+                    <span className="text-[#c2a15a]">Ground Network</span>
                   </div>
 
                   <div className="space-y-2">
@@ -134,11 +133,11 @@ export const DestinationsGrid: React.FC<DestinationsGridProps> = ({ currency, on
                           <div className="text-[10px] text-[#a49d8d] font-serif">{host.role}</div>
                         </div>
                         <button
-                          onClick={() => onSelectHostToTip(host)}
+                          onClick={() => onSelectHostToConnect(host)}
                           className="bg-[#c2a15a]/10 hover:bg-[#c2a15a] text-[#c2a15a] hover:text-[#0b0b0c] border border-[#c2a15a]/40 font-mono text-[10px] uppercase tracking-wider px-2.5 py-1 rounded transition-all flex items-center gap-1"
                         >
                           <HeartHandshake className="w-3 h-3" />
-                          Tip {currency === 'INR' ? `₹${host.suggestedTipInr}` : `$${host.suggestedTipUsd}`}
+                          Connect Host
                         </button>
                       </div>
                     ))}

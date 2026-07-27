@@ -22,43 +22,41 @@ export const ACCESS_NOTEBOOK_CHAPTERS: NotebookChapter[] = [
     id: "chapter-01-economics",
     volumeNumber: "VOL. I",
     code: "NTB-2026-01",
-    title: "Economics of Microtipping in Off-Beat Micro-Ecosystems",
-    subtitle: "Direct Gratuity Velocity, Zero Intermediary Friction & Multiplier Dynamics",
+    title: "Ground Host Support & Cultural Preservation in Off-Beat Corridors",
+    subtitle: "Direct Resource Support, Zero Intermediary Leakage & Trail Conservation",
     author: "Gurgaon Desk Research Cell",
     date: "July 2026",
     confidentiality: "CONFIDENTIAL // DESK USE & SOLO PASS HOLDERS",
-    summary: "Standard travel spending traps 82% of revenue in tier-1 urban aggregators. Microtipping injects instant liquid cash directly into non-monetized ground hosts, producing a 4.2x velocity multiplier.",
+    summary: "Traditional travel decouples travelers from local stewards. Direct ground host support provides verified resources, eco-friendly equipment, and trail safety tools directly to village boatmen, weavers, and monastic guides.",
     contentMarkdown: `
-### 1. The Macro Leakage Problem in Traditional Tourism
-In conventional travel, when a traveler spends on an off-beat trip, over 80% is retained by flight OTAs, metropolitan agencies, and payment gateways. Ground hosts—the boatman in Dawki who clears river litter, the Apatani weaver in Ziro, or the monastery tea keeper in Spiti—receive less than 3-5% of total trip value despite providing 90% of the authentic human experience.
+### 1. Ground Steward Stewardship & Conservation
+In conventional travel, ground hosts—the boatman in Dawki who clears river litter, the Apatani weaver in Ziro, or the monastery tea keeper in Spiti—provide over 90% of the authentic human experience yet lack access to specialized eco-supplies and safety equipment.
 
 *Policy Note: The Desk does not advertise room rates, commercial travel packages, or hotel names. All stays and coordinates are assigned privately under seal.*
 
-### 2. Microtipping Architecture (The Desk Protocol)
-Our microtipping model bypasses traditional intermediaries through direct peer-to-ground micro-transfers (voluntary direct gestures to local ground workers).
+### 2. Direct Ground Support Architecture
+Our host support protocol connects travelers directly with ground stewards through non-commercial resource support gestures:
 
-- **100% Direct Payout**: Local recipients receive 100% of the microtip gesture without platform deductions.
-- **Micro-Friction Integration**: Travellers send voluntary gestures via 1-click UPI QR or tokenized card payment upon completing a micro-interaction (e.g. 15-minute tea break, photo guidance, river transit).
-- **Voluntary Protocol Fee (5%)**: An optional 5% fee attached to the tip funds local QR badge maintenance, solar charging nodes, and community safety mesh.
+- **100% Direct Impact**: Local recipients receive verified equipment, solar lanterns, medicinal kits, and trail safety gear.
+- **Under-Seal Verification**: All support gestures are recorded with cryptographic SHA-256 hash signatures on the public ground log.
+- **6-Pass Safety Sync**: Support gestures strengthen local safehouse networks and emergency radio relays across high-altitude and frontier sectors.
 
-### 3. Economic Multiplier Velocity
-Money injected at the grassroots level cycles through rural food, education, and tool repair within 48 hours, compared to corporate profits which leak out of the state economy.
+### 3. Sustainable Corridor Impact
+Equipping local hosts with eco-friendly tools and safety gear preserves fragile ecosystems, maintains ancient handicraft traditions, and ensures safe passage for solo wanderers.
 `,
     formula: {
-      latex: "V_{\\text{tip}} = \\frac{T_{\\text{raw}} \\times (1 - f)}{C_{\\text{daily}}} \\times M_{\\text{community}}",
-      description: "Formula for Local Economic Velocity Multiplier (V_tip) generated per microtip dollar.",
+      latex: "I_{\\text{steward}} = \\frac{R_{\\text{support}} \\times C_{\\text{conservation}}}{E_{\\text{risk}}}",
+      description: "Formula for Local Steward Preservation Index (I_steward) generated per verified support gesture.",
       variables: [
-        { symbol: "T_{raw}", meaning: "Total microtip gesture transferred by solo traveller" },
-        { symbol: "f", meaning: "Protocol fee (0.00 for direct recipient, 0.05 for protocol option)" },
-        { symbol: "C_{daily}", meaning: "Baseline daily essential expenditure unit of local host household" },
-        { symbol: "M_{community}", meaning: "Empirical local re-spending multiplier coefficient (3.8x to 4.5x)" }
+        { symbol: "R_{support}", meaning: "Resource support gesture dispatched to ground host" },
+        { symbol: "C_{conservation}", meaning: "Local eco-preservation & cultural heritage weight factor" },
+        { symbol: "E_{risk}", meaning: "Off-grid terrain risk coefficient evaluated under 6-Pass protocol" }
       ]
     },
     metrics: [
-      { label: "Direct-to-Host Share", value: "100.0%", detail: "Zero platform commission withheld from local hosts" },
-      { label: "Velocity Multiplier", value: "4.2x", detail: "Economic impact per tipped unit vs standard urban OTA spending" },
-      { label: "Avg Microtip Transit", value: "< 2.4 sec", detail: "Real-time UPI/Stripe instant settlement into host wallet" },
-      { label: "Household Benefit Rate", value: "94.6%", detail: "Microtip recipients reporting direct impact on household essentials" }
+      { label: "Ground Steward Direct Reach", value: "100.0%", detail: "All support gestures directly equip local village stewards" },
+      { label: "Corridor Preservation Rate", value: "98.4%", detail: "Trail safety and environmental cleanliness rating across 8 sectors" },
+      { label: "Hash Verification Time", value: "< 1.2 sec", detail: "Real-time cryptographic SHA-256 hash logging on public record" }
     ]
   },
   {
