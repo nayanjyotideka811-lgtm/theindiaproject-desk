@@ -169,7 +169,7 @@
     </form>
 
     <div style="margin-top:22px;padding-top:16px;border-top:1px solid rgba(233,227,214,0.12);font-family:'Space Mono',monospace;font-size:9.5px;color:#6f6a5e;display:flex;justify-content:space-between">
-      <span>Master Pass: <b style="color:#c2a15a">2026</b></span>
+      <span>Master Pass: <b style="color:#c2a15a">Deka@2026</b></span>
       <a href="javascript:void(0)" onclick="promptSetPasscode()" style="color:#a49d8d;text-decoration:underline">Change Key</a>
     </div>
   </div>
@@ -689,7 +689,11 @@ document.getElementById("modal").addEventListener("click",function(e){if(e.targe
 function val(id){var e=document.getElementById(id);return e?e.value:"";}
 
 /* ---------- SECURITY DESK LOCK PROTOCOL ---------- */
-var MASTER_PASS = localStorage.getItem("tip_master_pass") || "2026";
+var MASTER_PASS = localStorage.getItem("tip_master_pass") || "Deka@2026";
+if (MASTER_PASS === "2026") {
+  MASTER_PASS = "Deka@2026";
+  localStorage.setItem("tip_master_pass", "Deka@2026");
+}
 var lockAttempts = 0;
 
 function checkDeskLock(){
