@@ -7,17 +7,89 @@
 <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 <meta name="description" content="A private coordination desk that surveys, seals, and assigns routes across India. We do not advertise stays. We assign them." />
 
-<!-- Structured Data -->
+<meta name="keywords" content="Luxury Travel India, Private Coordination Desk, UHNW Travel India, Family Office Travel, White Label Concierge India, Rajasthan Desert Forts 27N, High Altitude Ladakh Permits, Kerala Backwater Routes, Sikkim Cloud Forest, Unlisted Luxury Stays India" />
+<link rel="canonical" href="https://theindiaproject.world/" />
+
+<!-- Multilingual Alternate hreflang -->
+<link rel="alternate" hreflang="en" href="https://theindiaproject.world/" />
+<link rel="alternate" hreflang="fr" href="https://theindiaproject.world/?lang=fr" />
+<link rel="alternate" hreflang="hi" href="https://theindiaproject.world/?lang=hi" />
+<link rel="alternate" hreflang="es" href="https://theindiaproject.world/?lang=es" />
+<link rel="alternate" hreflang="de" href="https://theindiaproject.world/?lang=de" />
+<link rel="alternate" hreflang="ar" href="https://theindiaproject.world/?lang=ar" />
+
+<!-- OpenGraph Social Sharing -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="theindiaproject.world" />
+<meta property="og:title" content="theindiaproject.world — Private Coordination Across India" />
+<meta property="og:description" content="A private coordination desk that surveys, seals, and assigns routes across India. We do not advertise stays. We assign them." />
+<meta property="og:url" content="https://theindiaproject.world/" />
+<meta property="og:image" content="https://theindiaproject.world/rajasthan-jewelled-hand.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+
+<!-- Twitter Cards -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="theindiaproject.world — Private Coordination Across India" />
+<meta name="twitter:description" content="Surveyed, sealed, assigned routes across Rajasthan, Ladakh, Kerala, and Sikkim (27°N)." />
+<meta name="twitter:image" content="https://theindiaproject.world/rajasthan-jewelled-hand.jpg" />
+
+<!-- Rich Structured Data JSON-LD Graph -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "TravelAgency",
-  "name": "theindiaproject.world",
-  "url": "https://theindiaproject.world",
-  "description": "A private coordination desk that surveys, seals, and assigns routes across India.",
-  "areaServed": { "@type": "Country", "name": "India" },
-  "knowsLanguage": ["en","fr","hi","es","de","ar"],
-  "sameAs": []
+  "@graph": [
+    {
+      "@type": "TravelAgency",
+      "@id": "https://theindiaproject.world/#agency",
+      "name": "theindiaproject.world",
+      "url": "https://theindiaproject.world",
+      "logo": "https://theindiaproject.world/favicon.svg",
+      "image": "https://theindiaproject.world/rajasthan-jewelled-hand.jpg",
+      "description": "A private coordination desk that surveys, seals, and assigns luxury routes across India (27°N).",
+      "telephone": "+91-000-000-0000",
+      "email": "contact@theindiaproject.world",
+      "areaServed": {
+        "@type": "Country",
+        "name": "India"
+      },
+      "knowsLanguage": ["en", "fr", "hi", "es", "de", "ar"],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Surveyed All-India Travel Corridors",
+        "itemListElement": [
+          {
+            "@type": "OfferCatalog",
+            "name": "The Royal Rajputana Route (27°N)",
+            "description": "Desert fortresses, marble sanctuaries, and granite monolith tracking across Jaipur, Jodhpur, Udaipur, Jaisalmer, Nagaur, Ranthambore, Bikaner, Mandawa, Rohet, Pushkar."
+          },
+          {
+            "@type": "OfferCatalog",
+            "name": "High-Altitude Ladakh & Himalayan Corridor",
+            "description": "Monastic quiet, high-altitude passes, Protected Area Permits across Leh, Nubra Valley, Pangong Tso, Hemis, Alchi, Shey, Zanskar, Kargil, Thiksey, Diskit."
+          },
+          {
+            "@type": "OfferCatalog",
+            "name": "Southern Spice & Western Ghats Corridor",
+            "description": "Backwater quiet, heritage spice estates across Fort Kochi, Kumarakom, Alleppey, Munnar, Wayanad, Periyar, Chettinad, Hampi, Coorg, Bekal."
+          },
+          {
+            "@type": "OfferCatalog",
+            "name": "Sacred East & Cloud Forest Corridor (27°N)",
+            "description": "Unscripted tribal heritage & cloud forest logistics across Gangtok, Pelling, Kalimpong, Darjeeling, Tawang, Ziro, Cherrapunji, Kaziranga, Majuli, Shillong."
+          }
+        ]
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://theindiaproject.world/#website",
+      "url": "https://theindiaproject.world",
+      "name": "theindiaproject.world",
+      "description": "Private Coordination Desk Across India",
+      "publisher": { "@id": "https://theindiaproject.world/#agency" }
+    }
+  ]
 }
 </script>
 
@@ -309,6 +381,31 @@
   .reveal{opacity:0;transform:translateY(22px);transition:opacity 1s ease,transform 1s ease}
   .reveal.in{opacity:1;transform:none}
   [dir="rtl"]{direction:rtl}
+
+  /* Mobile Viewport Fit & Touch Precision Sweep */
+  html, body { max-width: 100vw; overflow-x: hidden; }
+  
+  @media (max-width: 768px) {
+    header { padding: 12px 18px; }
+    .nav-actions { gap: 8px; flex-wrap: wrap; }
+    .seal-btn, .lang-select, .ghost-btn { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
+    .band { padding: 50px 0; }
+    .atlas-row { grid-template-columns: auto 1fr; gap: 12px; padding: 18px 0; }
+    .atlas-row .rc { grid-column: 1 / -1; text-align: left; margin-top: 4px; }
+    .modal-box { padding: 24px 18px; max-height: 90vh; }
+    .modal-close { min-width: 44px; min-height: 44px; display: flex; align-items: center; justify-content: center; top: 12px; right: 14px; }
+    .comm-grid { grid-template-columns: 1fr; gap: 30px; }
+    .trade-meta { flex-wrap: wrap; gap: 20px; }
+    .intent { min-height: 44px; display: inline-flex; align-items: center; }
+  }
+
+  @media (max-width: 480px) {
+    .wrap { padding: 0 16px; }
+    .statement { font-size: clamp(1.6rem, 7.5vw, 2.4rem) !important; }
+    .dest-grid { grid-template-columns: 1fr; }
+    .tip-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .esc-node-btn circle { r: 20px !important; }
+  }
 </style>
 </head>
 <body>
