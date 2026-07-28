@@ -151,44 +151,119 @@
     </div>
   </div>
 
-  <!-- CAPTIONS -->
+  <!-- ALGORITHM CAMPAIGN STUDIO & TRAFFIC INFLOW GENERATOR -->
   <div class="block">
-    <div class="btitle">03 · Launch Copy — ready to paste</div>
+    <div class="btitle">04 · Social Algorithm Campaign Studio &amp; Traffic Inflow Engine</div>
+    <p style="color:var(--bone-dim);font-size:15px;margin-bottom:24px;line-height:1.6">
+      Master-level algorithm execution for Instagram Reels, X Threads, and Facebook Communities. Designed to maximize bookmark velocity, watch-through retention, and high-intent visitor inflows to <strong>theindiaproject.world</strong>.
+    </p>
 
-    <div class="copy">
-      <h4>Launch — the announcement</h4>
-      <div class="plat">Instagram · Facebook</div>
-      <p>India is not a destination. It is a route — surveyed, sealed, assigned.
+    <div style="background:var(--ink-2);border:1px solid var(--rule-strong);padding:28px 32px;border-radius:2px;margin-bottom:28px">
+      <h3 style="font-family:var(--serif);font-size:1.8rem;color:var(--gold);margin-bottom:14px;font-weight:300">Campaign UTM Inflow Link Generator</h3>
+      
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-bottom:20px">
+        <div>
+          <label class="label" style="display:block;margin-bottom:6px">Target Platform</label>
+          <select id="utmPlat" onchange="generateUtmLink()" style="width:100%;background:var(--ink);border:1px solid var(--rule-strong);color:var(--bone);padding:10px;font-family:var(--mono);font-size:12px">
+            <option value="instagram">Instagram (Reels / Bio / Story)</option>
+            <option value="twitter">X / Twitter (Thread / Reply)</option>
+            <option value="facebook">Facebook (Group / Community)</option>
+            <option value="linkedin">LinkedIn (White-Label Trade)</option>
+          </select>
+        </div>
+        <div>
+          <label class="label" style="display:block;margin-bottom:6px">Campaign Pillar</label>
+          <select id="utmPillar" onchange="generateUtmLink()" style="width:100%;background:var(--ink);border:1px solid var(--rule-strong);color:var(--bone);padding:10px;font-family:var(--mono);font-size:12px">
+            <option value="unlisted_india">01 · Unlisted India (27°N Corridors)</option>
+            <option value="structural_safety">02 · Structural Safety &amp; 6-Pass Audit</option>
+            <option value="trade_concierge">03 · White-Label Trade Desk</option>
+            <option value="solo_steward">04 · Solo Wanderlust &amp; Microtipping</option>
+          </select>
+        </div>
+        <div>
+          <label class="label" style="display:block;margin-bottom:6px">Destination Page</label>
+          <select id="utmPage" onchange="generateUtmLink()" style="width:100%;background:var(--ink);border:1px solid var(--rule-strong);color:var(--bone);padding:10px;font-family:var(--mono);font-size:12px">
+            <option value="/">Guest Landing Page (theindiaproject.world/)</option>
+            <option value="/#commission">Commission Desk (theindiaproject.world/#commission)</option>
+            <option value="/#trade">Trade Desk (theindiaproject.world/#trade)</option>
+            <option value="/brand.html">Brand Cinema (theindiaproject.world/brand.html)</option>
+          </select>
+        </div>
+      </div>
 
-theindiaproject.world is a private coordination service for those who require the subcontinent handled in full, and discussed with no one. We do not advertise stays. We assign them.
+      <div style="background:var(--ink);border:1px solid var(--gold-dim);padding:16px;margin-bottom:16px;border-radius:2px">
+        <div class="label" style="color:var(--gold);margin-bottom:6px">Generated Algorithmic Inflow URL</div>
+        <div id="utmOutputUrl" style="font-family:var(--mono);font-size:13px;color:var(--bone);word-break:break-all">https://theindiaproject.world/?utm_source=instagram&amp;utm_medium=reel&amp;utm_campaign=unlisted_india</div>
+      </div>
 
-Six passes stand between a route and your name on it. The rest is silence.
-
-Applications, by commission only. Link in bio.</p>
-      <div class="tags">#PrivateTravel #India #BespokeTravel #theindiaproject #SealedRoutes #LuxuryTravelDesign</div>
+      <button onclick="copyUtmUrl()" style="background:var(--gold);color:var(--ink);border:none;padding:10px 20px;font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;font-weight:700">
+        COPY INFLOW URL 🔗
+      </button>
     </div>
 
-    <div class="copy">
-      <h4>Launch — the trade note</h4>
-      <div class="plat">LinkedIn</div>
-      <p>We are opening a limited number of white-label files.
+    <!-- REEL & THREAD HOOK COMPOSER -->
+    <div style="background:var(--ink-2);border:1px solid var(--rule-strong);padding:28px 32px;border-radius:2px">
+      <h3 style="font-family:var(--serif);font-size:1.8rem;color:var(--gold);margin-bottom:14px;font-weight:300">Algorithmic Hook &amp; Thread Generator</h3>
+      
+      <div style="display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap">
+        <button onclick="generateHook('ig_reel')" style="background:var(--ink);border:1px solid var(--gold-dim);color:var(--bone);padding:8px 16px;font-family:var(--mono);font-size:10.5px;cursor:pointer">Instagram Reel (0-3s Hook)</button>
+        <button onclick="generateHook('x_thread')" style="background:var(--ink);border:1px solid var(--gold-dim);color:var(--bone);padding:8px 16px;font-family:var(--mono);font-size:10.5px;cursor:pointer">X Viral Thread Architecture</button>
+        <button onclick="generateHook('fb_story')" style="background:var(--ink);border:1px solid var(--gold-dim);color:var(--bone);padding:8px 16px;font-family:var(--mono);font-size:10.5px;cursor:pointer">Facebook Long-Form Story</button>
+      </div>
 
-theindiaproject.world coordinates routes across India that most itineraries cannot safely promise — high-altitude sanctuaries, frontier permits, seamless transit where the road runs out. For boutique travel designers and private concierges, we deliver one thing above all: structural safety, under your own name.
-
-Every route is audited six times before a client's name touches it. Credentials shared under NDA.
-
-Enquiries answered within 24 hours. theindiaproject.world</p>
-      <div class="tags">#TravelTrade #LuxuryTravel #DMC #India #TravelAdvisors #WhiteLabel</div>
-    </div>
-
-    <div class="copy">
-      <h4>The doctrine post</h4>
-      <div class="plat">Instagram · caption for the quote tile</div>
-      <p>Access is held through lineage and private agreement — never through availability. What we hold, we do not publish. What we publish, we do not sell.
-
-Why now?</p>
-      <div class="tags">#Discretion #PrivateTravel #India #theindiaproject</div>
+      <div id="hookOutputBox" style="background:var(--ink);border:1px solid var(--rule-strong);padding:20px;font-family:var(--body);font-size:15px;line-height:1.7;color:var(--bone);white-space:pre-wrap">Select an algorithmic format above to generate high-retention content hooks.</div>
     </div>
   </div>
+
+  <script>
+    function generateUtmLink() {
+      var plat = document.getElementById("utmPlat").value;
+      var pillar = document.getElementById("utmPillar").value;
+      var page = document.getElementById("utmPage").value;
+      
+      var base = "https://theindiaproject.world" + page;
+      var sep = base.includes("?") ? "&" : "?";
+      var url = base + sep + "utm_source=" + plat + "&utm_medium=" + (plat === "instagram" ? "reel" : plat === "twitter" ? "thread" : "post") + "&utm_campaign=" + pillar;
+      document.getElementById("utmOutputUrl").textContent = url;
+    }
+
+    function copyUtmUrl() {
+      var txt = document.getElementById("utmOutputUrl").textContent;
+      navigator.clipboard && navigator.clipboard.writeText(txt);
+      alert("Inflow URL copied to clipboard!");
+    }
+
+    function generateHook(type) {
+      var box = document.getElementById("hookOutputBox");
+      if (type === "ig_reel") {
+        box.textContent = "🎬 INSTAGRAM REEL (0–3 SEC VIRAL HOOK)\n\n" +
+          "[TEXT OVERLAY - 0-3s]: \"Why UHNW travelers in India never book advertised luxury hotels.\"\n" +
+          "[VISUAL]: Drone ridge sweep over desert fort (27°N) -> Cut to Maharana private wing door.\n\n" +
+          "[CAPTION]: Most itineraries in India peak early on Day 2, leaving you to experience travel fatigue during departure.\n\n" +
+          "We enforce a Monotonic Ascent Curve. The most unlisted, secluded stay is reserved for the final 48 hours.\n\n" +
+          "✓ 6-Pass Ground Audits\n" +
+          "✓ 5-Hour Road Limit\n" +
+          "✓ 0.0% Mark-up Friction\n\n" +
+          "Unseal an executive memo via the link in bio.\n\n" +
+          "#LuxuryTravelIndia #PrivateDesk #theindiaproject #UnlistedIndia #Rajputana";
+      } else if (type === "x_thread") {
+        box.textContent = "🧵 X (TWITTER) VIRAL THREAD ARCHITECTURE\n\n" +
+          "1/7 Most luxury itineraries across India fail for one reason: departure fatigue.\n\n" +
+          "Here is how our private coordination desk structures routes that peak in the final 48 hours: 🧵👇\n\n" +
+          "2/7 Standard travel peaks on Day 2. The guest spends Days 5-7 fighting traffic and airport fatigue. We enforce a strict Monotonic Ascent Curve. Every leg rises in tier.\n\n" +
+          "3/7 The 5-Hour Rule: No road transfer exceeds 4.5 hours. Where terrain expands, private rotor & fixed-wing charters take over.\n\n" +
+          "4/7 Unlisted Access: Stays are never published on open commercial markets. Access is held through lineage and private agreement.\n\n" +
+          "5/7 The 6-Pass Audit: Every property, driver, and permit is verified in person by a house surveyor before your wheels touch tarmac.\n\n" +
+          "6/7 Read full operational details & request an executive dossier:\n\n" +
+          "7/7 [LINK IN REPLY TO AVOID ALGORITHMIC PENALTY]: https://theindiaproject.world/?utm_source=twitter&utm_medium=thread&utm_campaign=unlisted_india";
+      } else if (type === "fb_story") {
+        box.textContent = "📘 FACEBOOK COMMUNITY LONG-FORM STORY\n\n" +
+          "Title: Structural Safety Across India — For Concierges & Designers Who Cannot Afford to Be Wrong.\n\n" +
+          "When coordinating time across the subcontinent, promises made on a supplier's word are where itineraries break.\n\n" +
+          "theindiaproject.world acts as an unadorned ground coordination desk for private concierges and family offices. We clear Protected Area Permits, survey every mountain leg, and hold local secondary vehicles on call.\n\n" +
+          "Learn how to open a white-label trade file with a 24h SLA guarantee: https://theindiaproject.world/trade?utm_source=facebook&utm_medium=group";
+      }
+    }
+  </script>
 </body>
 </html>
