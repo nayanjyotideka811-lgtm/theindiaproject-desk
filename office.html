@@ -497,18 +497,119 @@ function openTpl(i){
     '<div class="grid2">'+fields+'</div>'+
     '<div class="memo-out" id="memoOut">'+esc(t.body)+'</div>'+
     '<div class="row" style="margin-top:14px"><button class="btn gold sm" onclick="copyMemo()">Copy memo</button><button class="btn sm" onclick="memoToDraft()">Send to Correspondence</button></div>');
+/* ---------- Vibrant Palette Presets ---------- */
+var PALETTES = {
+  gold: { name: "👑 Royal Gold & Obsidian", bg: "#0b0b0c", cardBg: "#111114", text: "#e9e3d6", sub: "#a49d8d", accent: "#c2a15a", accentDim: "#8f7738", wax: "#7c2427", border: "#8f7738" },
+  emerald: { name: "💚 Vibrant Emerald (27°N Cloud)", bg: "#04120a", cardBg: "#081c12", text: "#e3f9ed", sub: "#83cba2", accent: "#00e676", accentDim: "#00b0ff", wax: "#00796b", border: "#00e676" },
+  sapphire: { name: "💙 Sapphire & Azure Coast", bg: "#030c18", cardBg: "#07172b", text: "#e1f5fe", sub: "#81d4fa", accent: "#00b0ff", accentDim: "#ffd700", wax: "#0288d1", border: "#00b0ff" },
+  terracotta: { name: "❤️ Terracotta & Sunset Flame", bg: "#140404", cardBg: "#210808", text: "#fbe9e7", sub: "#ffab91", accent: "#ff3d00", accentDim: "#ffab00", wax: "#d50000", border: "#ff3d00" },
+  amethyst: { name: "💜 Amethyst Imperial UHNW", bg: "#100318", cardBg: "#1b0728", text: "#f3e5f5", sub: "#ce93d8", accent: "#d500f9", accentDim: "#ffd700", wax: "#aa00ff", border: "#d500f9" }
+};
+window.__curPalette = "gold";
+
+function openTpl(i){
+  var t=TEMPLATES[i];
+  var fields=t.fields.map(function(f){
+    return '<div class="field"><label>'+f+'</label><input data-f="'+f+'" oninput="mergeTpl('+i+')" placeholder="'+f+'"></div>';
+  }).join("");
+  
+  var palOptions = Object.keys(PALETTES).map(function(k){
+    return '<option value="'+k+'" '+(k==="gold"?"selected":"")+'>'+PALETTES[k].name+'</option>';
+  }).join("");
+
+  modal('<button class="close-x" onclick="closeModal()">×</button>'+
+    '<div class="cat lbl" style="color:var(--gold-dim)">Visual Dossier Studio</div>'+
+    '<h3>'+esc(t.name)+'</h3>'+
+    '<div class="grid2">'+fields+'</div>'+
+    
+    '<div class="field" style="margin-top:8px">'+
+      '<label style="color:var(--gold)">Vibrant Dossier Color Palette &amp; Visual Theme</label>'+
+      '<select id="palSelect" onchange="changePalette('+i+', this.value)">'+palOptions+'</select>'+
+    '</div>'+
+
+    <!-- Visual Dossier Render Card -->
+    '<div id="visualDossierBox" style="margin-top:14px;transition:all .3s"></div>'+
+    '<div style="display:none" id="memoOut"></div>'+
+    
+    '<div class="row" style="margin-top:18px">'+
+      '<button class="btn gold sm" onclick="copyMemo()">Copy Plain Text Memo</button>'+
+      '<button class="btn sm" onclick="copyVisualHtml()">Copy Visual HTML Card</button>'+
+      '<button class="btn sm" onclick="printDossierCard()">Print / Export PDF 🖨️</button>'+
+      '<button class="btn sm" onclick="memoToDraft()">Send to Correspondence</button>'+
+    '</div>');
   window.__tpl=i;
+  mergeTpl(i);
 }
+
+function changePalette(tplIdx, palKey){
+  window.__curPalette = palKey || "gold";
+  mergeTpl(tplIdx);
+}
+
 function mergeTpl(i){
-  var t=TEMPLATES[i];var out=t.body;
+  var t = TEMPLATES[i];
+  var out = t.body;
   document.querySelectorAll("#modalBox input[data-f]").forEach(function(inp){
-    var v=inp.value||("{{"+inp.dataset.f+"}}");
-    out=out.split("{{"+inp.dataset.f+"}}").join(v);
+    var v = inp.value || ("{{" + inp.dataset.f + "}}");
+    out = out.split("{{" + inp.dataset.f + "}}").join(v);
   });
-  document.getElementById("memoOut").textContent=out;
+  document.getElementById("memoOut").textContent = out;
+
+  // Render Visual Dossier Card with Vibrant Palette & Logos
+  var p = PALETTES[window.__curPalette] || PALETTES.gold;
+  var box = document.getElementById("visualDossierBox");
+  if(box){
+    box.innerHTML = '<div id="printTargetCard" style="background:'+p.cardBg+';border:1px solid '+p.border+';padding:28px 30px;color:'+p.text+';font-family:var(--body);position:relative;box-shadow:0 12px 40px rgba(0,0,0,0.5);border-radius:2px">' +
+      '<div style="display:flex;justify-content:space-between;align-items:flex-start;border-bottom:1px solid '+p.border+';padding-bottom:16px;margin-bottom:20px">' +
+        '<div style="display:flex;gap:14px;align-items:center">' +
+          '<svg viewBox="0 0 200 200" style="width:48px;height:48px">' +
+            '<circle cx="100" cy="100" r="88" fill="none" stroke="'+p.accentDim+'" stroke-width="3"/>' +
+            '<circle cx="100" cy="100" r="78" fill="none" stroke="'+p.accent+'" stroke-width="1.5"/>' +
+            '<g class="rays" stroke="'+p.accent+'" stroke-width="2.5" stroke-linecap="round"><line x1="160.0" y1="100.0" x2="182.0" y2="100.0"/><line x1="158.0" y1="115.5" x2="171.5" y2="119.2"/><line x1="152.0" y1="130.0" x2="171.0" y2="141.0"/><line x1="142.4" y1="142.4" x2="152.3" y2="152.3"/><line x1="130.0" y1="152.0" x2="141.0" y2="171.0"/><line x1="115.5" y1="158.0" x2="119.2" y2="171.5"/><line x1="100.0" y1="160.0" x2="100.0" y2="182.0"/><line x1="84.5" y1="158.0" x2="80.8" y2="171.5"/><line x1="70.0" y1="152.0" x2="59.0" y2="171.0"/><line x1="57.6" y1="142.4" x2="47.7" y2="152.3"/><line x1="48.0" y1="130.0" x2="29.0" y2="141.0"/><line x1="42.0" y1="115.5" x2="28.5" y2="119.2"/><line x1="40.0" y1="100.0" x2="18.0" y2="100.0"/><line x1="42.0" y1="84.5" x2="28.5" y2="80.8"/><line x1="48.0" y1="70.0" x2="29.0" y2="59.0"/><line x1="57.6" y1="57.6" x2="47.7" y2="47.7"/><line x1="70.0" y1="48.0" x2="59.0" y2="29.0"/><line x1="84.5" y1="42.0" x2="80.8" y2="28.5"/><line x1="100.0" y1="40.0" x2="100.0" y2="18.0"/><line x1="115.5" y1="42.0" x2="119.2" y2="28.5"/><line x1="130.0" y1="48.0" x2="141.0" y2="29.0"/><line x1="142.4" y1="57.6" x2="152.3" y2="47.7"/><line x1="152.0" y1="70.0" x2="171.0" y2="59.0"/><line x1="158.0" y1="84.5" x2="171.5" y2="80.8"/></g><circle cx="100" cy="100" r="11" fill="'+p.accent+'"/>' +
+          '</svg>' +
+          '<div>' +
+            '<div style="font-family:var(--mono);font-size:9.5px;letter-spacing:.25em;color:'+p.accent+';text-transform:uppercase">THEINDIAPROJECT.WORLD</div>' +
+            '<h4 style="font-family:var(--serif);font-size:1.5rem;color:'+p.text+';font-weight:300;margin-top:2px">'+esc(t.name)+'</h4>' +
+          '</div>' +
+        '</div>' +
+        '<div style="text-align:right">' +
+          '<div style="font-family:var(--mono);font-size:9px;letter-spacing:.18em;color:'+p.wax+';border:1px solid '+p.wax+';padding:4px 8px;text-transform:uppercase;border-radius:2px">SURVEYED · SEALED · ASSIGNED</div>' +
+          '<div style="font-family:var(--mono);font-size:8.5px;color:'+p.sub+';margin-top:6px;letter-spacing:.1em">27°N · LAT 8°–37° N</div>' +
+        '</div>' +
+      '</div>' +
+      
+      '<div style="white-space:pre-wrap;font-size:15px;line-height:1.7;color:'+p.text+';font-family:var(--body)">' + esc(out) + '</div>' +
+      
+      '<div style="margin-top:20px;padding-top:14px;border-top:1px solid '+p.border+';display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:9px;color:'+p.sub+'">' +
+        '<span>CONFIDENTIAL &amp; UNADORNED DOSSIER MEMO</span>' +
+        '<span style="color:'+p.accent+'">theindiaproject.world</span>' +
+      '</div>' +
+    '</div>';
+  }
 }
-function copyMemo(){navigator.clipboard&&navigator.clipboard.writeText(document.getElementById("memoOut").textContent);toast("Memo copied");}
-function memoToDraft(){db.drafts.push({to:"",sub:TEMPLATES[window.__tpl].name,lang:"EN",body:document.getElementById("memoOut").textContent});save("drafts",db.drafts);closeModal();toast("Saved to Correspondence");renderDrafts();}
+
+function copyMemo(){
+  navigator.clipboard&&navigator.clipboard.writeText(document.getElementById("memoOut").textContent);
+  toast("Plain text memo copied");
+}
+
+function copyVisualHtml(){
+  var box = document.getElementById("visualDossierBox");
+  if(box && navigator.clipboard){
+    navigator.clipboard.writeText(box.innerHTML);
+    toast("Visual HTML Card copied to clipboard");
+  }
+}
+
+function printDossierCard(){
+  var card = document.getElementById("printTargetCard");
+  if(!card) return;
+  var win = window.open("", "_blank", "width=850,height=1000");
+  win.document.write('<html><head><title>Sealed Executive Dossier</title><style>body{background:#0b0b0c;color:#e9e3d6;font-family:Georgia,serif;padding:40px;display:flex;justify-content:center}@media print{body{background:#fff;color:#000}}</style></head><body>' + card.outerHTML + '</body></html>');
+  win.document.close();
+  win.focus();
+  setTimeout(function(){ win.print(); }, 400);
+}
 
 /* ---------- drafts ---------- */
 var GREET={EN:"Your enquiry has been received and is held in confidence.",FR:"Votre demande a bien été reçue et conservée en toute confidentialité.","हिं":"आपका अनुरोध प्राप्त कर लिया गया है और उसे पूर्ण गोपनीयता में रखा गया है।",ES:"Su solicitud ha sido recibida y se conserva con total discreción.",DE:"Ihre Anfrage ist eingegangen und wird vertraulich behandelt.","ع":"لقد تم استلام استفساركم، وهو محفوظ لدينا بكل سرية."};
