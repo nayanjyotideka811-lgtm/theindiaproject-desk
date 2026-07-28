@@ -438,20 +438,105 @@
   <section class="band escalation" id="escalation">
     <div class="wrap">
       <div class="sec-head reveal"><span class="sec-idx">IV</span><span class="label">The Ascent — Escalation Protocol</span></div>
-      <p class="statement reveal" style="font-size:clamp(1.6rem,3.4vw,2.5rem);max-width:24ch">Every route climbs. The pinnacle is <em>held for the end.</em></p>
-      <svg class="esc-graph reveal" viewBox="0 0 1100 300" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <p class="statement reveal" style="font-size:clamp(1.6rem,3.4vw,2.5rem);max-width:26ch">Every route climbs. The pinnacle is <em>held for the end.</em></p>
+      
+      <!-- Interactive Graph Header Control -->
+      <div class="reveal" style="margin-bottom:24px;display:flex;align-items:center;justify-between;flex-wrap:wrap;gap:12px;border-bottom:1px solid var(--rule);padding-bottom:14px">
+        <span class="label" style="color:var(--gold)">Interactive Escalation Curve · Click any node to unseal protocol details</span>
+        <button class="seal-btn" style="font-size:10px;padding:8px 14px;border-color:var(--gold);color:var(--gold)" onclick="openPinnacleModal('pinnacle')">
+          What is the Pinnacle &amp; Final 24–48 Hours? ↗
+        </button>
+      </div>
+
+      <svg class="esc-graph reveal" viewBox="0 0 1100 320" preserveAspectRatio="xMidYMid meet" aria-label="Escalation Protocol Graph">
+        <defs>
+          <filter id="glow-gold" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="4" result="blur" />
+            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+          </filter>
+          <linearGradient id="curve-grad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#c2a15a" stop-opacity="0.25"/>
+            <stop offset="100%" stop-color="#0b0b0c" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        
+        <!-- Grid Axis Lines -->
         <line x1="40" y1="260" x2="1060" y2="260" stroke="rgba(233,227,214,0.18)" stroke-width="1"/>
-        <polyline points="60,240 300,205 540,165 780,110 1000,40" fill="none" stroke="#c2a15a" stroke-width="1.4"/>
-        <g font-family="'Space Mono',monospace" font-size="11" fill="#a49d8d" letter-spacing="1">
-          <circle cx="60" cy="240" r="3.5" fill="#7c2427"/><text x="60" y="285" text-anchor="middle">IMMERSION</text>
-          <circle cx="300" cy="205" r="3.5" fill="#8f7738"/><text x="300" y="285" text-anchor="middle">CULTURE</text>
-          <circle cx="540" cy="165" r="3.5" fill="#8f7738"/><text x="540" y="285" text-anchor="middle">SECLUSION</text>
-          <circle cx="780" cy="110" r="3.5" fill="#c2a15a"/><text x="780" y="285" text-anchor="middle">RARITY</text>
-          <circle cx="1000" cy="40" r="5" fill="#c2a15a"/><text x="1000" y="285" text-anchor="middle" fill="#c2a15a">THE PINNACLE</text>
+        <line x1="40" y1="200" x2="1060" y2="200" stroke="rgba(233,227,214,0.06)" stroke-width="1" stroke-dasharray="4 4"/>
+        <line x1="40" y1="140" x2="1060" y2="140" stroke="rgba(233,227,214,0.06)" stroke-width="1" stroke-dasharray="4 4"/>
+        <line x1="40" y1="80" x2="1060" y2="80" stroke="rgba(233,227,214,0.06)" stroke-width="1" stroke-dasharray="4 4"/>
+
+        <!-- Filled Gradient Under Escalation Curve -->
+        <polygon points="60,240 300,205 540,165 780,110 1000,40 1000,260 60,260" fill="url(#curve-grad)"/>
+
+        <!-- Main Escalation Polyline -->
+        <polyline points="60,240 300,205 540,165 780,110 1000,40" fill="none" stroke="#c2a15a" stroke-width="2.2" stroke-linecap="round"/>
+
+        <!-- Node 1: Immersion -->
+        <g class="esc-node-btn" onclick="selectAscentStage('immersion')" style="cursor:pointer">
+          <circle cx="60" cy="240" r="16" fill="transparent"/>
+          <circle cx="60" cy="240" r="4.5" fill="#7c2427"/>
+          <text x="60" y="285" text-anchor="middle" font-family="'Space Mono',monospace" font-size="11" fill="#e9e3d6" letter-spacing="1">01 · IMMERSION</text>
+          <text x="60" y="304" text-anchor="middle" font-family="'Space Mono',monospace" font-size="9" fill="#a49d8d">Leg 01–02 · Local Ground</text>
         </g>
-        <text x="1000" y="28" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="15" fill="#e9e3d6" font-style="italic">final 24–48 hrs</text>
+
+        <!-- Node 2: Culture -->
+        <g class="esc-node-btn" onclick="selectAscentStage('culture')" style="cursor:pointer">
+          <circle cx="300" cy="205" r="16" fill="transparent"/>
+          <circle cx="300" cy="205" r="4.5" fill="#8f7738"/>
+          <text x="300" y="285" text-anchor="middle" font-family="'Space Mono',monospace" font-size="11" fill="#e9e3d6" letter-spacing="1">02 · CULTURE</text>
+          <text x="300" y="304" text-anchor="middle" font-family="'Space Mono',monospace" font-size="9" fill="#a49d8d">Leg 03–04 · Lineage Stays</text>
+        </g>
+
+        <!-- Node 3: Seclusion -->
+        <g class="esc-node-btn" onclick="selectAscentStage('seclusion')" style="cursor:pointer">
+          <circle cx="540" cy="165" r="16" fill="transparent"/>
+          <circle cx="540" cy="165" r="4.5" fill="#8f7738"/>
+          <text x="540" y="285" text-anchor="middle" font-family="'Space Mono',monospace" font-size="11" fill="#e9e3d6" letter-spacing="1">03 · SECLUSION</text>
+          <text x="540" y="304" text-anchor="middle" font-family="'Space Mono',monospace" font-size="9" fill="#a49d8d">Leg 05–06 · Off-Grid Zero Distraction</text>
+        </g>
+
+        <!-- Node 4: Rarity -->
+        <g class="esc-node-btn" onclick="selectAscentStage('rarity')" style="cursor:pointer">
+          <circle cx="780" cy="110" r="16" fill="transparent"/>
+          <circle cx="780" cy="110" r="5.5" fill="#c2a15a"/>
+          <text x="780" y="285" text-anchor="middle" font-family="'Space Mono',monospace" font-size="11" fill="#e9e3d6" letter-spacing="1">04 · RARITY</text>
+          <text x="780" y="304" text-anchor="middle" font-family="'Space Mono',monospace" font-size="9" fill="#a49d8d">Penultimate · Unlisted Access</text>
+        </g>
+
+        <!-- Node 5: THE PINNACLE (Final 24–48 Hours) -->
+        <g class="esc-node-btn pinnacle-target" onclick="openPinnacleModal('pinnacle')" style="cursor:pointer">
+          <!-- Animated Pulsing Outer Ring -->
+          <circle cx="1000" cy="40" r="22" fill="rgba(194,161,90,0.18)" stroke="#c2a15a" stroke-width="0.8" opacity="0.8">
+            <animate attributeName="r" values="16;26;16" dur="3s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0.9;0.3;0.9" dur="3s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="1000" cy="40" r="8" fill="#c2a15a" filter="url(#glow-gold)"/>
+          <text x="1000" y="285" text-anchor="middle" font-family="'Space Mono',monospace" font-size="12" fill="#c2a15a" font-weight="700" letter-spacing="1.2">05 · THE PINNACLE ↗</text>
+          <text x="1000" y="304" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="15" fill="#e9e3d6" font-style="italic">final 24–48 hrs · unsealed peak</text>
+          <text x="1000" y="20" text-anchor="middle" font-family="'Space Mono',monospace" font-size="9" fill="#c2a15a" letter-spacing="1.5" text-transform="uppercase">CLICK TO UNSEAL PROTOCOL</text>
+        </g>
       </svg>
-      <p class="esc-note reveal">A route begins in the culturally rich and the immersive. It rises — tier by tier, never falling back — and reserves the absolute summit of the assignment for the closing hours, so the journey ends not with departure, but with elevation.</p>
+
+      <!-- Dynamic Ascent Stage Detail Inspection Box -->
+      <div id="ascentStageCard" class="reveal" style="background:var(--ink-2);border:1px solid var(--gold-dim);padding:28px 32px;margin-top:24px;border-radius:2px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:14px;margin-bottom:12px">
+          <div>
+            <span class="label" id="astLabel" style="color:var(--gold)">Stage 05 · Final 24–48 Hours</span>
+            <h4 id="astTitle" style="font-family:var(--serif);font-size:1.9rem;font-weight:300;color:var(--bone);margin-top:4px">The Pinnacle: Monotonic Climax &amp; Unlisted Memory Anchorage</h4>
+          </div>
+          <button class="seal-btn" style="padding:10px 20px;font-size:10.5px;border-color:var(--gold);color:#fff" onclick="openPinnacleModal('pinnacle')">
+            Unseal Full Pinnacle Protocol ↗
+          </button>
+        </div>
+        <p id="astDesc" style="color:var(--bone-dim);font-size:16px;line-height:1.7;max-width:78ch">
+          The route reaches its maximum privacy, exclusivity, and sensory elevation in the final 24 to 48 hours. By holding unlisted royal sanctuaries, rotor ridge transits, or private island estates for the very end, departure fatigue is replaced with permanent memory anchorage.
+        </p>
+      </div>
+
+      <p class="esc-note reveal" style="margin-top:20px">
+        A route begins in the culturally rich and the immersive. It rises — tier by tier, never falling back — and reserves the absolute summit of the assignment for the closing hours, so the journey ends not with departure fatigue, but with elevation.
+      </p>
     </div>
   </section>
 
@@ -671,22 +756,124 @@
   </div>
 </div>
 
-<!-- CORRIDOR & DESTINATION DRAWER MODAL -->
-<div class="modal-overlay" id="corridorModal">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeCorridorModal()">×</button>
-    <div class="modal-title" id="corrModalTitle">Corridor Title</div>
-    <div class="modal-sub" id="corrModalSub">Latitude &amp; Theme</div>
+<!-- PINNACLE & ASCENT ESCALATION PROTOCOL MODAL -->
+<div class="modal-overlay" id="pinnacleModal">
+  <div class="modal-box" style="max-width:920px">
+    <button class="modal-close" onclick="closePinnacleModal()">×</button>
+    <div class="modal-title" style="color:var(--bone)">The Ascent Protocol: The Pinnacle &amp; Final 24–48 Hours</div>
+    <div class="modal-sub">Why the Final 24 to 48 Hours of Every Route are Held Under Separate Seal</div>
     
-    <p style="color:var(--bone-dim);font-size:15.5px;line-height:1.7;margin-bottom:20px" id="corrModalDesc"></p>
+    <div class="grid2" style="grid-template-columns:1fr;gap:20px;margin-bottom:24px">
+      <div style="background:var(--ink);border:1px solid var(--gold-dim);padding:24px;border-radius:2px">
+        <h4 style="font-family:var(--serif);font-size:1.5rem;color:var(--gold);margin-bottom:10px">1. What is "The Concept of Pinnacle"?</h4>
+        <p style="font-size:15px;color:var(--bone-dim);line-height:1.7">
+          In standard commercial travel, itineraries peak early on Day 2 or Day 3. The guest is then subjected to diminishing excitement, long return transfers, and departure fatigue.
+        </p>
+        <p style="font-size:15px;color:var(--bone-dim);line-height:1.7;margin-top:12px">
+          <em>theindiaproject.world</em> enforces a strict <strong>Monotonic Ascent Curve</strong>. A route never falls back. The most unlisted, secluded, and sensory elevated experience—a private Maharana fort wing, a high-altitude helicopter ridge drop, or an off-grid river sanctuary—is reserved exclusively for <strong>The Pinnacle</strong>.
+        </p>
+      </div>
 
-    <h4 style="font-family:var(--serif);font-size:1.4rem;color:var(--gold);margin-top:20px;margin-bottom:12px">10 Surveyed Destinations in this Corridor</h4>
-    
-    <div class="dest-grid" id="corrDestGrid"></div>
+      <div style="background:var(--ink);border:1px solid var(--rule-strong);padding:24px;border-radius:2px">
+        <h4 style="font-family:var(--serif);font-size:1.5rem;color:var(--gold);margin-bottom:10px">2. Why the "Final 24–48 Hours"?</h4>
+        <ul style="list-style:none;font-size:15px;color:var(--bone-dim);line-height:1.7">
+          <li style="padding:8px 0;border-bottom:1px solid var(--rule)">
+            <strong style="color:var(--bone)">• Zero Departure Fatigue:</strong> Guests transition directly from the summit experience to their homeward flight, feeling elevated rather than exhausted.
+          </li>
+          <li style="padding:8px 0;border-bottom:1px solid var(--rule)">
+            <strong style="color:var(--bone)">• Peak-End Memory Anchorage:</strong> Cognitive psychology proves human memory evaluates an entire journey based on its peak intensity and its final moments.
+          </li>
+          <li style="padding:8px 0;">
+            <strong style="color:var(--bone)">• Unsealed Only on Ground:</strong> The Pinnacle stay is never published on public proposals or manifests; its particulars are unsealed 24 hours prior to arrival.
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Interactive Ascent Stage Selector inside Modal -->
+    <h4 style="font-family:var(--serif);font-size:1.35rem;color:var(--bone);margin-bottom:12px">Inspect the 5 Stages of the Escalation Curve</h4>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px" id="pinnacleTabs">
+      <button class="intent" onclick="showPinnacleStage('immersion')">01 · Immersion</button>
+      <button class="intent" onclick="showPinnacleStage('culture')">02 · Culture</button>
+      <button class="intent" onclick="showPinnacleStage('seclusion')">03 · Seclusion</button>
+      <button class="intent" onclick="showPinnacleStage('rarity')">04 · Rarity</button>
+      <button class="intent sel" onclick="showPinnacleStage('pinnacle')">05 · The Pinnacle (Final 24–48h)</button>
+    </div>
+
+    <div id="pinnacleStageDetail" style="background:var(--ink);border:1px solid var(--gold-dim);padding:24px;border-radius:2px">
+      <!-- Populated via showPinnacleStage() -->
+    </div>
   </div>
 </div>
 
 <script>
+  // --- Ascent Escalation Protocol Data ---
+  var ASCENT_STAGES = {
+    immersion: {
+      label: "Stage 01 · Leg 01–02",
+      title: "Ground Orientation & Terrain Immersion",
+      desc: "The journey begins on solid ground with comfortable private transfers, local terrain introduction, and cultural acclimation. Nothing is rushed; the baseline tempo is established without fatigue."
+    },
+    culture: {
+      label: "Stage 02 · Leg 03–04",
+      title: "Lineage Heritage & Living History",
+      desc: "Access opens to historic lineage properties, private havelis, and authentic regional culinary traditions. Distance per leg is strictly audited under the 5-Hour Rule."
+    },
+    seclusion: {
+      label: "Stage 03 · Leg 05–06",
+      title: "Off-Grid Seclusion & Wilderness Quiet",
+      desc: "Crowds and urban noise disappear. The route enters high-altitude sanctuaries, private tea estates, or desert wilderness where privacy and quiet are absolute."
+    },
+    rarity: {
+      label: "Stage 04 · Penultimate Peak",
+      title: "Unlisted Access & Special Authorisations",
+      desc: "Restricted frontier permits, private wildlife tracker access, or bespoke rail/rotor transits come into play. The anticipation for the summit builds."
+    },
+    pinnacle: {
+      label: "Stage 05 · Final 24–48 Hours",
+      title: "The Pinnacle: Monotonic Climax & Unlisted Memory Anchorage",
+      desc: "The final 24 to 48 hours hold the crown of the route—an unlisted royal sanctuary wing, private island estate, or high-altitude ridge drop. Departure fatigue is replaced with permanent sensory elevation."
+    }
+  };
+
+  function selectAscentStage(key) {
+    var s = ASCENT_STAGES[key] || ASCENT_STAGES.pinnacle;
+    var card = document.getElementById('ascentStageCard');
+    if (card) {
+      document.getElementById('astLabel').textContent = s.label;
+      document.getElementById('astTitle').textContent = s.title;
+      document.getElementById('astDesc').textContent = s.desc;
+      card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }
+
+  function openPinnacleModal(key) {
+    showPinnacleStage(key || 'pinnacle');
+    document.getElementById('pinnacleModal').classList.add('on');
+  }
+
+  function closePinnacleModal() {
+    document.getElementById('pinnacleModal').classList.remove('on');
+  }
+
+  function showPinnacleStage(key) {
+    var s = ASCENT_STAGES[key] || ASCENT_STAGES.pinnacle;
+    var container = document.getElementById('pinnacleStageDetail');
+    if (container) {
+      container.innerHTML = '<div style="font-family:var(--mono);font-size:10.5px;color:var(--gold);letter-spacing:.2em;text-transform:uppercase;margin-bottom:6px">' + s.label + '</div>' +
+        '<h4 style="font-family:var(--serif);font-size:1.6rem;color:var(--bone);font-weight:300;margin-bottom:10px">' + s.title + '</h4>' +
+        '<p style="color:var(--bone-dim);font-size:15px;line-height:1.75">' + s.desc + '</p>';
+    }
+    
+    // Highlight selected tab button
+    var btns = document.querySelectorAll('#pinnacleTabs button');
+    btns.forEach(function(b) { b.classList.remove('sel'); });
+    var stageKeys = ['immersion', 'culture', 'seclusion', 'rarity', 'pinnacle'];
+    var idx = stageKeys.indexOf(key);
+    if (idx !== -1 && btns[idx]) {
+      btns[idx].classList.add('sel');
+    }
+  }
   // --- Corridor Data Repository ---
   var CORRIDORS = {
     rajputana: {
