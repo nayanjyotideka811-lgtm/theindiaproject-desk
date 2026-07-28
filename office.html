@@ -135,6 +135,46 @@
 </style>
 </head>
 <body>
+<!-- AUTHORIZED OPERATOR SECURITY LOCK OVERLAY -->
+<div id="lockOverlay" style="position:fixed;inset:0;background:#0b0b0c;z-index:99999;display:flex;align-items:center;justify-content:center;padding:24px;color:#e9e3d6">
+  <div style="max-width:440px;width:100%;background:#111114;border:1px solid #c2a15a;padding:38px 32px;text-align:center;box-shadow:0 24px 80px rgba(0,0,0,0.92);border-radius:2px">
+    
+    <!-- Rotating Brand Sunmark Logo -->
+    <div style="margin-bottom:20px;display:flex;justify-content:center">
+      <svg viewBox="0 0 200 200" style="width:60px;height:60px">
+        <circle cx="100" cy="100" r="88" fill="none" stroke="#8f7738" stroke-width="3"/>
+        <circle cx="100" cy="100" r="78" fill="none" stroke="#c2a15a" stroke-width="1.5"/>
+        <g class="rays" stroke="#c2a15a" stroke-width="2.5" stroke-linecap="round"><line x1="160.0" y1="100.0" x2="182.0" y2="100.0"/><line x1="158.0" y1="115.5" x2="171.5" y2="119.2"/><line x1="152.0" y1="130.0" x2="171.0" y2="141.0"/><line x1="142.4" y1="142.4" x2="152.3" y2="152.3"/><line x1="130.0" y1="152.0" x2="141.0" y2="171.0"/><line x1="115.5" y1="158.0" x2="119.2" y2="171.5"/><line x1="100.0" y1="160.0" x2="100.0" y2="182.0"/><line x1="84.5" y1="158.0" x2="80.8" y2="171.5"/><line x1="70.0" y1="152.0" x2="59.0" y2="171.0"/><line x1="57.6" y1="142.4" x2="47.7" y2="152.3"/><line x1="48.0" y1="130.0" x2="29.0" y2="141.0"/><line x1="42.0" y1="115.5" x2="28.5" y2="119.2"/><line x1="40.0" y1="100.0" x2="18.0" y2="100.0"/><line x1="42.0" y1="84.5" x2="28.5" y2="80.8"/><line x1="48.0" y1="70.0" x2="29.0" y2="59.0"/><line x1="57.6" y1="57.6" x2="47.7" y2="47.7"/><line x1="70.0" y1="48.0" x2="59.0" y2="29.0"/><line x1="84.5" y1="42.0" x2="80.8" y2="28.5"/><line x1="100.0" y1="40.0" x2="100.0" y2="18.0"/><line x1="115.5" y1="42.0" x2="119.2" y2="28.5"/><line x1="130.0" y1="48.0" x2="141.0" y2="29.0"/><line x1="142.4" y1="57.6" x2="152.3" y2="47.7"/><line x1="152.0" y1="70.0" x2="171.0" y2="59.0"/><line x1="158.0" y1="84.5" x2="171.5" y2="80.8"/></g><circle cx="100" cy="100" r="11" fill="#c2a15a"/>
+      </svg>
+    </div>
+
+    <div style="font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:.28em;text-transform:uppercase;color:#c2a15a;margin-bottom:8px">THEINDIAPROJECT.WORLD</div>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:2.1rem;color:#e9e3d6;margin-bottom:8px">Back Office Desk Locked</h2>
+    <p style="font-size:14px;color:#a49d8d;line-height:1.55;margin-bottom:24px">
+      Restricted portal. Access permitted only to the master operator under secret passkey.
+    </p>
+
+    <!-- Passcode Form -->
+    <form onsubmit="unlockBackOffice(event)" style="display:flex;flex-direction:column;gap:14px">
+      <div>
+        <input type="password" id="lockPassInput" placeholder="Enter Operator Passcode" maxlength="16" autofocus
+               style="width:100%;background:#0b0b0c;border:1px solid #8f7738;color:#e9e3d6;font-family:'Space Mono',monospace;font-size:16px;text-align:center;letter-spacing:.3em;padding:12px;border-radius:2px;outline:none" />
+      </div>
+
+      <div id="lockErrorMsg" style="font-family:'Space Mono',monospace;font-size:10.5px;color:#c97b7e;min-height:16px;display:none"></div>
+
+      <button type="submit" class="btn gold" style="width:100%;padding:12px;font-size:11px;letter-spacing:.2em;background:#c2a15a;color:#0b0b0c;border-color:#c2a15a;font-weight:700">
+        UNSEAL BACK OFFICE DESK 🔒
+      </button>
+    </form>
+
+    <div style="margin-top:22px;padding-top:16px;border-top:1px solid rgba(233,227,214,0.12);font-family:'Space Mono',monospace;font-size:9.5px;color:#6f6a5e;display:flex;justify-content:space-between">
+      <span>Master Pass: <b style="color:#c2a15a">2026</b></span>
+      <a href="javascript:void(0)" onclick="promptSetPasscode()" style="color:#a49d8d;text-decoration:underline">Change Key</a>
+    </div>
+  </div>
+</div>
+
 <div class="app">
   <!-- SIDEBAR -->
   <aside>
@@ -159,7 +199,10 @@
     </nav>
     <div class="side-foot">
       <div class="coords" id="coords">LAT 8°–37° N · LON 68°–97° E</div>
-      <div class="coords" style="margin-top:8px" id="savestate">Storage: checking…</div>
+      <div class="coords" style="margin-top:6px" id="savestate">Storage: checking…</div>
+      <button class="btn gold sm" style="width:100%;margin-top:14px;font-size:9px" onclick="lockDesk()">
+        🔒 Lock Desk
+      </button>
     </div>
   </aside>
 
@@ -544,9 +587,87 @@ function closeModal(){document.getElementById("modal").classList.remove("on");}
 document.getElementById("modal").addEventListener("click",function(e){if(e.target===this)closeModal();});
 function val(id){var e=document.getElementById(id);return e?e.value:"";}
 
+/* ---------- SECURITY DESK LOCK PROTOCOL ---------- */
+var MASTER_PASS = localStorage.getItem("tip_master_pass") || "2026";
+var lockAttempts = 0;
+
+function checkDeskLock(){
+  var isUnlocked = sessionStorage.getItem("tip_desk_unlocked");
+  var overlay = document.getElementById("lockOverlay");
+  if(isUnlocked === "true"){
+    if(overlay) overlay.style.display = "none";
+  } else {
+    if(overlay) {
+      overlay.style.display = "flex";
+      setTimeout(function(){
+        var inp = document.getElementById("lockPassInput");
+        if(inp) inp.focus();
+      }, 100);
+    }
+  }
+}
+
+function unlockBackOffice(e){
+  if(e) e.preventDefault();
+  var input = document.getElementById("lockPassInput");
+  var err = document.getElementById("lockErrorMsg");
+  var val = input ? input.value.trim() : "";
+
+  if(val === MASTER_PASS){
+    sessionStorage.setItem("tip_desk_unlocked", "true");
+    document.getElementById("lockOverlay").style.display = "none";
+    if(err) err.style.display = "none";
+    if(input) input.value = "";
+    lockAttempts = 0;
+  } else {
+    lockAttempts++;
+    if(err){
+      err.style.display = "block";
+      if(lockAttempts >= 3){
+        err.textContent = "UNAUTHORIZED ACCESS DENIED. COVENANT SEALED.";
+        if(input) input.disabled = true;
+        setTimeout(function(){
+          if(input) input.disabled = false;
+          lockAttempts = 0;
+          err.style.display = "none";
+        }, 15000);
+      } else {
+        err.textContent = "INVALID PASSKEY (" + (3 - lockAttempts) + " ATTEMPTS REMAINING)";
+      }
+    }
+  }
+}
+
+function lockDesk(){
+  sessionStorage.removeItem("tip_desk_unlocked");
+  var overlay = document.getElementById("lockOverlay");
+  if(overlay){
+    overlay.style.display = "flex";
+    var input = document.getElementById("lockPassInput");
+    if(input){ input.value = ""; input.focus(); }
+  }
+}
+
+function promptSetPasscode(){
+  var cur = prompt("Enter current Master Passcode:");
+  if(cur === MASTER_PASS){
+    var next = prompt("Enter NEW Operator Master Passcode (min 4 characters):");
+    if(next && next.length >= 4){
+      localStorage.setItem("tip_master_pass", next);
+      MASTER_PASS = next;
+      alert("Master Passcode updated successfully! Keep this key confidential.");
+    } else {
+      alert("Passcode must be at least 4 characters.");
+    }
+  } else {
+    alert("Incorrect current passcode.");
+  }
+}
+
 /* ---------- init ---------- */
 document.getElementById("c-name").value=db.card.name;document.getElementById("c-role").value=db.card.role;document.getElementById("c-mail").value=db.card.mail;
 renderCard();renderOverview();renderComms();renderTemplates();renderDrafts();renderNetwork();renderLedger();renderLegal();
+checkDeskLock();
 </script>
 </body>
 </html>
